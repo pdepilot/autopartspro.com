@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <title>Find a store | Autoparts Pro</title>
+    <link rel="stylesheet" href="CSS/fds.css">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
+    <style>
+        * {
+            padding: 0%;
+            margin: 0%;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f3f3f3;
+        }
+
+
+        /* fonts families */
+        @font-face {
+            font-family: 'joy';
+            src: url(../font/InterTight-BlackItalic.ttf);
+        }
+
+        @font-face {
+            font-family: 'heroh1';
+            src: url(../font/Licorice-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'h3s';
+            src: url(../font/Agbalumo-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'body';
+            src: url(../font/Michroma-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'heads';
+            src: url(../font/ElsieSwashCaps-Black.ttf);
+        }
+
+        /* pre-navbar */
+        #prenav {
+            background-color: rgb(94, 176, 248);
+            padding-right: 30px;
+        }
+
+        @media (max-width: 798px) {
+            #prenav {
+                text-align: center;
+            }
+        }
+
+        .prenavlink {
+            text-align: end;
+            padding: 7px;
+        }
+
+        .prenavlink a {
+            text-decoration: none;
+            color: black;
+            font-family: 'joy';
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .prenavlink .user {
+            font-size: 20px;
+        }
+
+        .prenavlink a:hover {
+            color: gray;
+        }
+
+        .prenavlink i {
+            font-size: 5px;
+            padding: 10px;
+            color: black;
+        }
+
+        /* navbar */
+
+        .nav-heart,
+        .cart-icon {
+            position: relative;
+        }
+
+        .favorites-count,
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 20px;
+            padding: 0px 5px;
+            font-size: 10px;
+        }
+
+        nav {
+            background-color: #1248f8;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'joy';
+        }
+
+        .nav-links a:hover {
+            color: #964b00;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin: 0 20px;
+
+        }
+
+        .search-bar1 {
+            padding: 5px 15px;
+            border-radius: 20px;
+            background-color: rgb(223, 223, 223);
+            border: none;
+            outline: none;
+            width: 200px;
+            font-family: 'joy';
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: black;
+            font-size: 23px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #964b00;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: black;
+            border-radius: 3px;
+        }
+
+        .navactive.active {
+            font-weight: bold;
+            color: #964b00;
+        }
+
+        @media (max-width: 930px) {
+            .search-bar1 {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 930px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .search-container {
+                display: none;
+                width: 100%;
+                margin: 15px 0;
+            }
+
+            .search-container.active {
+                display: flex;
+            }
+
+            .nav-icons {
+                display: none;
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+                gap: 30px;
+            }
+
+            .nav-icons.active {
+                display: flex;
+            }
+
+            .logo-container {
+                order: 1;
+            }
+
+            .menu-toggle {
+                order: 2;
+            }
+
+            .nav-links {
+                order: 3;
+            }
+
+            .search-container {
+                order: 4;
+            }
+
+            .nav-icons {
+                order: 5;
+            }
+        }
+
+
+
+        /* end of responsivenavbar */
+
+
+        /* Store Locator Container */
+        .store-locator-container {
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .store-locator-header {
+            padding: 30px 20px;
+            border-bottom: 1px solid #eaeaea;
+            background: linear-gradient(to bottom, rgba(243, 243, 243, 0) 80%, rgba(243, 243, 243, 1) 100%);
+        }
+
+        .store-locator-header h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-family: 'body';
+            color: #000;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 0 15px;
+            min-width: 300px;
+            background-color: rgb(223, 223, 223);
+        }
+
+        .search-box i {
+            color: #666;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 12px 0;
+            outline: none;
+            font-size: 16px;
+            background-color: transparent;
+            font-family: 'joy';
+        }
+
+        #search-btn {
+            background-color: #000000;
+            color: white;
+            border: 1px solid #964b00;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'joy';
+            margin-left: 10px;
+        }
+
+        #search-btn:hover {
+            box-shadow: inset 120px 0 0 white;
+            color: #964b00;
+        }
+
+        #use-location-btn {
+            background-color: #000000;
+            border: 1px solid #964b00;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+            font-family: 'joy';
+        }
+
+        #use-location-btn:hover {
+            box-shadow: inset 120px 0 0 white;
+            color: #964b00;
+        }
+
+        /* Content Layout */
+        .store-locator-content {
+            display: flex;
+            min-height: 500px;
+        }
+
+        .store-list-container {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #eaeaea;
+            max-width: 400px;
+            overflow-y: auto;
+        }
+
+        .store-map-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Store List Header */
+        .store-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .store-list-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            font-family: 'body';
+            color: #000;
+        }
+
+        .filter-options select {
+            padding: 8px 15px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            background-color: white;
+            cursor: pointer;
+            font-family: 'joy';
+            transition: 0.3s;
+        }
+
+        .filter-options select:hover {
+            border-color: #964b00;
+        }
+
+        /* Store List Items */
+        .store-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .store-item {
+            padding: 20px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .store-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            border-color: #964b00;
+        }
+
+        .store-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-family: 'body';
+            color: #000;
+        }
+
+        .store-address {
+            color: #666;
+            margin-bottom: 5px;
+            font-family: 'joy';
+            font-size: 14px;
+        }
+
+        .store-distance {
+            color: #964b00;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-family: 'joy';
+        }
+
+        .store-info {
+            margin: 15px 0;
+            color: #666;
+        }
+
+        .store-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'joy';
+            font-size: 14px;
+        }
+
+        .view-details-btn {
+            background-color: #000000;
+            border: 1px solid #964b00;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+            font-family: 'joy';
+        }
+
+        .view-details-btn:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.50);
+            background-color: #964b00;
+        }
+
+        /* Map Styles */
+        #map {
+            flex: 1;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 20px;
+        }
+
+        #map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .map-actions {
+            padding: 20px;
+            text-align: center;
+        }
+
+        #get-directions-btn {
+            background-color: #000;
+            color: white;
+            border: 1px solid #964b00;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-family: 'joy';
+        }
+
+        #get-directions-btn:hover:not(:disabled) {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.50);
+            background-color: #964b00;
+        }
+
+        #get-directions-btn:disabled {
+            background-color: #ccc;
+            border-color: #999;
+            cursor: not-allowed;
+        }
+
+
+        /* footer section */
+        .ft-container {
+            display: flex;
+            width: 95%;
+            margin: 20px auto;
+            gap: 30px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .ft-icons a {
+            color: black;
+            text-decoration: none;
+        }
+
+        footer h5 {
+            margin-bottom: 15px;
+            font-family: 'body';
+            color: #000;
+        }
+
+        .ft-icons i {
+            font-size: 20px;
+            margin: 3px;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 30px;
+            transition: 0.5s;
+            width: 45px;
+            height: 45px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ft-icons i:hover {
+            transform: translateY(-5px);
+            background-color: #964b00;
+            color: white;
+        }
+
+        .ft-content2 i {
+            font-size: 20px;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
+        .ft-content3 a {
+            text-decoration: none;
+            color: black;
+            font-family: 'joy';
+            font-size: 14px;
+            line-height: 1.8;
+            transition: 0.3s;
+        }
+
+        .ft-content3 a:hover {
+            color: #964b00;
+            text-decoration: underline;
+        }
+
+        .ft-content3 ul {
+            list-style: none;
+        }
+
+        .ft-content4 .inp1 {
+            margin: 10px 0;
+            padding: 10px 15px;
+            font-size: 15px;
+            border-radius: 30px;
+            border: 1px solid black;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'joy';
+        }
+
+        .ft-content4 .inp2 {
+            font-size: 14px;
+            height: 40px;
+            border-radius: 30px;
+            padding: 0 20px;
+            color: white;
+            border: 1px solid black;
+            background-color: #000000;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'joy';
+            width: 100%;
+        }
+
+        .ft-content4 .inp2:hover {
+            background-color: #964b00;
+        }
+
+        .last {
+            text-align: center;
+            font-size: 13px;
+            color: #333;
+            padding-top: 20px;
+            font-family: 'joy';
+        }
+
+        footer {
+            padding: 50px 5% 30px;
+            background: linear-gradient(to bottom, #1b1b1b, #1248f8 20%);
+        }
+
+        .ft-content1,
+        .ft-content2,
+        .ft-content3,
+        .ft-content4 {
+            margin-top: 20px;
+        }
+
+        .ft-content1 p {
+            font-family: 'joy';
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .ft-content2 p {
+            font-family: 'joy';
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .ft-content4 h6 {
+            font-family: 'joy';
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        /* resposiveness */
+
+        @media (max-width: 768px) {
+            .store-locator-content {
+                flex-direction: column;
+            }
+
+            .store-list-container {
+                max-width: none;
+                border-right: none;
+                border-bottom: 1px solid #eaeaea;
+            }
+
+            #map {
+                height: 300px;
+                margin: 0 10px;
+            }
+
+            .ft-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .ft-content2 p {
+                justify-content: center;
+            }
+
+            .search-box {
+                min-width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .store-locator-header .search-container {
+                flex-direction: column;
+            }
+
+            #search-btn,
+            #use-location-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .store-locator-header h1 {
+                font-size: 24px;
+            }
+
+            .store-item {
+                padding: 15px;
+            }
+
+            .store-item h3 {
+                font-size: 16px;
+            }
+
+            nav {
+                padding: 10px 15px;
+            }
+
+            .store-list-container,
+            .store-map-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- pre nav -->
+    <header id="prenav">
+        <div class="prenavlink">
+            <a href="/fds.html" class="navactive active">Find a store</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Help</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Join us</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="/signin.html">signin</a>
+        </div>
+    </header>
+
+
+    <!-- navbar -->
+    <nav>
+        <div class="logo-container">
+            <a href="/index.html"><img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" width="100PX" alt="Autoparts Pro Logo" class="logo"></a>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="">New Arrivals</a></li>
+            <li><a href="/men.html">Engine Parts</a></li>
+            <li><a href="">Lighting</a></li>
+            <li><a href="">Brakes</a></li>
+            <li><a href="">Suspension</a></li>
+        </ul>
+
+        <div class="search-container" id="search-container1">
+            <input type="text" placeholder="Search auto parts..." class="search-bar1">
+        </div>
+
+        <div class="nav-icons" id="nav-icons">
+            <div class="nav-heart">
+                <a href="/favourite.html"><i class="fa-regular fa-heart nav-icon"></i></a>
+                <span class="favorites-count">0</span>
+            </div>
+            <div class="cart-icon">
+                <a href="/checkout.html"><i class="fa-solid fa-bag-shopping nav-icon"></i></a>
+                <span class="cart-badge">0</span>
+            </div>
+            <a href="/user.html"><i class="fa-regular fa-circle-user nav-icon"></i></a>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+  
+    <!-- store locator -->
+    <div class="store-locator-container">
+        <div class="store-locator-header">
+            <h1>Find Our Auto Parts Store</h1>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="location-search" placeholder="Enter city, state or zip code">
+                    <button id="search-btn">Search</button>
+                </div>
+                <button id="use-location-btn">
+                    <i class="fas fa-location-arrow"></i> Use My Location
+                </button>
+            </div>
+        </div>
+
+        <div class="store-locator-content">
+            <div class="store-list-container">
+                <div class="store-list-header">
+                    <h2>Auto Parts Stores Near You</h2>
+                    <div class="filter-options">
+                        <select id="distance-filter">
+                            <option value="5">Within 5 miles</option>
+                            <option value="10">Within 10 miles</option>
+                            <option value="25">Within 25 miles</option>
+                            <option value="50">Within 50 miles</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="store-list">
+
+                    <div class="store-item">
+                        <h3>Autoparts Pro Main Store</h3>
+                        <p class="store-address">43 Okigwe Road, Owerri, Imo State</p>
+                        <p class="store-distance">0.5 miles away</p>
+                        <div class="store-info">
+                            <p><i class="far fa-clock"></i> Mon-Fri: 8AM-7PM, Sat: 9AM-5PM, Sun: 10AM-4PM</p>
+                            <p><i class="fas fa-phone"></i> (+234) 9069 960720</p>
+                            <p><i class="fas fa-wrench"></i> On-site Installation Available</p>
+                        </div>
+                        <button class="view-details-btn">View Details</button>
+                    </div>
+
+                    <div class="store-item">
+                        <h3>Autoparts Pro Lagos Branch</h3>
+                        <p class="store-address">285 Oshodi Apapa Express Way, Lagos</p>
+                        <p class="store-distance">45 miles away</p>
+                        <div class="store-info">
+                            <p><i class="far fa-clock"></i> Mon-Sat: 8AM-8PM, Sun: 10AM-6PM</p>
+                            <p><i class="fas fa-phone"></i> (+234) 8123 456789</p>
+                            <p><i class="fas fa-wrench"></i> Technical Support Available</p>
+                        </div>
+                        <button class="view-details-btn">View Details</button>
+                    </div>
+                    
+                    <div class="store-item">
+                        <h3>Autoparts Pro Abuja Outlet</h3>
+                        <p class="store-address">Central Business District, Abuja</p>
+                        <p class="store-distance">120 miles away</p>
+                        <div class="store-info">
+                            <p><i class="far fa-clock"></i> Mon-Fri: 9AM-6PM, Sat: 9AM-4PM</p>
+                            <p><i class="fas fa-phone"></i> (+234) 8098 765432</p>
+                            <p><i class="fas fa-wrench"></i> Performance Parts Specialists</p>
+                        </div>
+                        <button class="view-details-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="store-map-container">
+                <div id="map">
+                    <!-- Map will be rendered here -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.457428666805!2d7.033545273656367!3d5.49886509448103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104259876b8043cd%3A0x692da93e72b99c1c!2sAptech%20Computer%20Education%20Owerri!5e0!3m2!1sen!2sng!4v1744755051134!5m2!1sen!2sng"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="map-actions">
+                    <button id="get-directions-btn" disabled>
+                        <i class="fas fa-directions"></i> Get Directions
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <footer>
+        <div class="ft-container">
+            <div class="ft-content1">
+                <div class="ft-logo">
+                    <img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" width="150px" alt="Autoparts Pro Logo">
+                </div>
+                <div>
+                    <p>Shopping auto parts is easier with Autoparts Pro, <br> shopping across categories to help customers
+                        <br> maintain and upgrade their vehicles with quality parts.
+                    </p>
+                </div>
+
+                <div class="ft-icons">
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-youtube"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="ft-content2">
+                <h5>CONTACT</h5>
+                <p><i class="fa-solid fa-phone"></i>+234 9069 960720 <br> (+234) 8123 456789</p>
+
+                <p><i class="fa-solid fa-location"></i>43 Okigwe Road, <br> Owerri, Imo State <br>
+                    Nigeria</p>
+
+                <p><i class="fa-solid fa-envelope"></i>autopartspro@gmail.com <br> support@autopartspro.com</p>
+            </div>
+
+            <div class="ft-content3">
+                <ul>
+                    <h5>QUICK LINKS</h5>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Installation Guide</a></li>
+                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="">Terms of Sale</a></li>
+                    <li><a href="">Warranty Terms</a></li>
+                </ul>
+            </div>
+
+            <div class="ft-content4">
+                <form action="">
+                    <h6>Subscribe to our newsletter and <br> get the latest updates on auto parts</h6>
+                    <input class="inp1" type="email" placeholder="Enter your email" required>
+                    <input class="inp2" type="submit" value="SUBSCRIBE">
+                </form>
+            </div>
+        </div>
+
+        <hr style="
+         width: 98%;
+         margin:20px auto;
+        ">
+
+        <div class="last">
+            <P>&copy; 2025 Autoparts Pro. All right reserved</P>
+        </div>
+
+    </footer>
+
+
+    <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            const searchContainer = document.getElementById('search-container1');
+            const navIcons = document.getElementById('nav-icons');
+
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                searchContainer.classList.toggle('active');
+                navIcons.classList.toggle('active');
+            });
+
+            // Store location functionality
+            const searchBtn = document.getElementById('search-btn');
+            const useLocationBtn = document.getElementById('use-location-btn');
+            const distanceFilter = document.getElementById('distance-filter');
+            const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
+            const getDirectionsBtn = document.getElementById('get-directions-btn');
+
+            // Search button functionality
+            searchBtn.addEventListener('click', function() {
+                const locationInput = document.getElementById('location-search').value;
+                if (locationInput) {
+                    alert(`Searching for stores near: ${locationInput}`);
+                    getDirectionsBtn.disabled = false;
+                } else {
+                    alert('Please enter a location to search');
+                }
+            });
+
+            // Use location button functionality
+            useLocationBtn.addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        alert('Using your current location');
+                        getDirectionsBtn.disabled = false;
+                    }, function() {
+                        alert('Unable to get your location. Please enter it manually.');
+                    });
+                } else {
+                    alert('Geolocation is not supported by your browser');
+                }
+            });
+
+            // View details buttons
+            viewDetailsBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const storeName = this.closest('.store-item').querySelector('h3').textContent;
+                    alert(`Loading details for: ${storeName}`);
+                    getDirectionsBtn.disabled = false;
+                });
+            });
+
+            // Get directions button
+            getDirectionsBtn.addEventListener('click', function() {
+                if (!this.disabled) {
+                    window.open('https://www.google.com/maps/dir//43+Okigwe+Road,+Owerri', '_blank');
+                }
+            });
+
+            // Distance filter change
+            distanceFilter.addEventListener('change', function() {
+                const selectedDistance = this.value;
+                alert(`Filtering stores within ${selectedDistance} miles`);
+            });
+
+            // Enter key for search
+            document.getElementById('location-search').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoleCulture | AdminDashboard</title>
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.css">
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #1248f8;
+            --accent-color: #964b00;
+            --bg-color: #f3f3f3;
+            --sidebar-bg: white;
+            --text-color: #333;
+            --sidebar-width: 250px;
+            --sidebar-collapsed-width: 120px;
+            --header-height: 70px;
+            --transition-speed: 0.3s;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'joy', sans-serif;
+            transition: all var(--transition-speed) ease;
+        }
+
+        @font-face {
+            font-family: 'joy';
+            src: url(../font/InterTight-BlackItalic.ttf);
+        }
+
+        @font-face {
+            font-family: 'heroh1';
+            src: url(../font/Licorice-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'body';
+            src: url(../font/Michroma-Regular.ttf);
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--sidebar-bg);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+            transition: all var(--transition-speed) ease;
+            z-index: 1000;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
+
+        .sidebar-header {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #eee;
+            background-color: var(--primary-color);
+        }
+
+        .sidebar-header .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .sidebar.collapsed .logo-text {
+            display: none;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: black;
+            transition: color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border-left: 4px solid transparent;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(150, 75, 0, 0.1);
+            color: var(--accent-color);
+        }
+
+        .menu-item.active {
+            background-color: rgba(150, 75, 0, 0.2);
+            border-left: 4px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .menu-icon {
+            margin-right: 15px;
+            font-size: 1.1rem;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .menu-item:hover .menu-icon,
+        .menu-item.active .menu-icon {
+            color: var(--accent-color);
+        }
+
+        .sidebar.collapsed .menu-text {
+            display: none;
+        }
+
+        .sidebar.collapsed .menu-item {
+            justify-content: center;
+        }
+
+        .sidebar.collapsed .menu-icon {
+            margin-right: 0;
+            font-size: 1.3rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .main-content.collapsed {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        .header {
+            height: var(--header-height);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 20px;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        .mobile-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        .header-left h3 {
+            font-family: 'body', sans-serif;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            border: 2px solid var(--accent-color);
+        }
+
+        .user-name {
+            font-weight: 500;
+            font-family: 'joy', sans-serif;
+        }
+
+        .notification-icon {
+            position: relative;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .notification-icon:hover {
+            color: var(--accent-color);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #000;
+            font-family: 'body', sans-serif;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        /* Stats Cards */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .card-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #000;
+            font-family: 'body', sans-serif;
+        }
+
+        .card-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-change.positive {
+            color: #4caf50;
+        }
+
+        .card-change.negative {
+            color: #f44336;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .card:hover .card-icon {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Recent Orders */
+        .recent-orders {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #ddd;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #000;
+            font-family: 'body', sans-serif;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .section-title i {
+            color: var(--accent-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-family: 'joy', sans-serif;
+        }
+
+        th {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background-color: #f8f8f8;
+        }
+
+        td {
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: rgba(150, 75, 0, 0.05);
+        }
+
+        .status {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .status.pending {
+            background-color: #fff3e0;
+            color: #ff9800;
+            border: 1px solid #ff9800;
+        }
+
+        .status.completed {
+            background-color: #e8f5e9;
+            color: #4caf50;
+            border: 1px solid #4caf50;
+        }
+
+        .status.shipped {
+            background-color: #e3f2fd;
+            color: #2196f3;
+            border: 1px solid #2196f3;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-family: 'joy', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            background: none;
+            border: 1px solid #000;
+            color: #000;
+        }
+
+        .btn-outline:hover {
+            background-color: #000;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #000;
+            color: white;
+            border: 1px solid var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: white;
+            color: var(--accent-color);
+            box-shadow: inset 120px 0 0 white;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                left: -100%;
+                box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .stats-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .header-left h3 {
+                font-size: 1.3rem;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 12px 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .card-value {
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" width="70px" alt="SoleCulture Logo">
+                </div>
+                <button class="toggle-btn" id="sidebar-toggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active">
+                    <i class="fas fa-tachometer-alt menu-icon"></i>
+                    <span class="menu-text">Dashboard</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-shopping-bag menu-icon"></i>
+                    <span class="menu-text">Products</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-list-alt menu-icon"></i>
+                    <span class="menu-text">Categories</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-truck menu-icon"></i>
+                    <span class="menu-text">Orders</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-users menu-icon"></i>
+                    <span class="menu-text">Customers</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-chart-line menu-icon"></i>
+                    <span class="menu-text">Analytics</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-cog menu-icon"></i>
+                    <span class="menu-text">Settings</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h3>Admin Dashboard</h3>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">SC</div>
+                        <span class="user-name">Uzoma Prince</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <h1 class="page-title">Dashboard Overview</h1>
+
+                <!-- Stats Cards -->
+                <div class="stats-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Total Sales</div>
+                                <div class="card-value">$24,580</div>
+                                <div class="card-change positive">
+                                    <i class="fas fa-arrow-up"></i> 12% from last month
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Total Orders</div>
+                                <div class="card-value">1,245</div>
+                                <div class="card-change positive">
+                                    <i class="fas fa-arrow-up"></i> 8% from last month
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">New Customers</div>
+                                <div class="card-value">324</div>
+                                <div class="card-change negative">
+                                    <i class="fas fa-arrow-down"></i> 3% from last month
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Conversion Rate</div>
+                                <div class="card-value">3.2%</div>
+                                <div class="card-change positive">
+                                    <i class="fas fa-arrow-up"></i> 0.5% from last month
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="recent-orders">
+                    <h2 class="section-title">
+                        <i class="fas fa-list"></i>
+                        Recent Orders
+                    </h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#SC-1254</td>
+                                <td>Ibeson Uzoma Prince</td>
+                                <td>2025-04-25</td>
+                                <td>$545.00</td>
+                                <td><span class="status completed">Completed</span></td>
+                                <td><button class="btn btn-outline">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#SC-1253</td>
+                                <td>Obi Emmanuel</td>
+                                <td>2025-04-25</td>
+                                <td>$189.99</td>
+                                <td><span class="status shipped">Shipped</span></td>
+                                <td><button class="btn btn-outline">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#SC-1252</td>
+                                <td>Michael Brown</td>
+                                <td>2025-04-25</td>
+                                <td>$320.50</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td><button class="btn btn-outline">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#SC-1251</td>
+                                <td>Queen Davis</td>
+                                <td>2025-04-25</td>
+                                <td>$175.25</td>
+                                <td><span class="status completed">Completed</span></td>
+                                <td><button class="btn btn-outline">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#SC-1250</td>
+                                <td>Robert kosiso</td>
+                                <td>2025-04-25</td>
+                                <td>$210.00</td>
+                                <td><span class="status shipped">Shipped</span></td>
+                                <td><button class="btn btn-outline">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            // Toggle sidebar on desktop
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('collapsed');
+                
+                // Rotate the toggle button icon
+                const icon = this.querySelector('i');
+                if (sidebar.classList.contains('collapsed')) {
+                    icon.classList.remove('fa-chevron-left');
+                    icon.classList.add('fa-chevron-right');
+                } else {
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-chevron-left');
+                }
+            });
+            
+            // Toggle sidebar on mobile
+            mobileToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+            });
+            
+            // Set active menu item
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Close sidebar on mobile after selection
+                    if (window.innerWidth <= 992) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 992) {
+                    const isClickInsideSidebar = sidebar.contains(event.target);
+                    const isClickOnMobileToggle = mobileToggle.contains(event.target);
+                    
+                    if (!isClickInsideSidebar && !isClickOnMobileToggle && sidebar.classList.contains('open')) {
+                        sidebar.classList.remove('open');
+                    }
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992) {
+                    sidebar.classList.remove('open');
+                }
+            });
+            
+            // View button functionality
+            const viewButtons = document.querySelectorAll('.btn-outline');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const orderId = this.closest('tr').querySelector('td:first-child').textContent;
+                    alert(`Viewing order details for: ${orderId}\nThis would normally open a detailed order view.`);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

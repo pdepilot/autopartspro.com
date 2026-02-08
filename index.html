@@ -1,0 +1,2726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.css">
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <title>Autoparts Pro</title>
+    
+    <!-- Preloader CSS -->
+    <style>
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a1a3a 0%, #1248f8 50%, #0a1a3a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .brand-logo-preloader {
+            width: min(180px, 50vw);
+            height: auto;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        .preloader-title {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(18, 72, 248, 0.7);
+            font-family: 'Arial Black', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .preloader-subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #a8c6ff;
+            margin-bottom: 40px;
+            font-family: 'body';
+            padding: 0 10px;
+        }
+
+        /* Animated Gear System */
+        .gear-system {
+            position: relative;
+            width: min(300px, 90vw);
+            height: min(200px, 60vw);
+            margin: 0 auto 40px;
+        }
+
+        .gear {
+            position: absolute;
+            width: min(80px, 25vw);
+            height: min(80px, 25vw);
+            border-radius: 50%;
+            background: linear-gradient(45deg, #1248f8, #00a8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(18, 72, 248, 0.5);
+        }
+
+        .gear:before {
+            content: '';
+            position: absolute;
+            width: 75%;
+            height: 75%;
+            border-radius: 50%;
+            background: #0a1a3a;
+        }
+
+        .gear-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .gear-tooth {
+            position: absolute;
+            width: min(15px, 4vw);
+            height: min(40px, 12vw);
+            background: #1248f8;
+            top: -20%;
+            left: 50%;
+            margin-left: -50%;
+            border-radius: 5px;
+        }
+
+        .gear-tooth:nth-child(2) { transform: rotate(45deg); }
+        .gear-tooth:nth-child(3) { transform: rotate(90deg); }
+        .gear-tooth:nth-child(4) { transform: rotate(135deg); }
+        .gear-tooth:nth-child(5) { transform: rotate(180deg); }
+        .gear-tooth:nth-child(6) { transform: rotate(225deg); }
+        .gear-tooth:nth-child(7) { transform: rotate(270deg); }
+        .gear-tooth:nth-child(8) { transform: rotate(315deg); }
+
+        /* Gear Positions and Animations */
+        .gear-1 {
+            top: 10%;
+            left: 15%;
+            animation: rotateClockwise 4s linear infinite;
+        }
+
+        .gear-2 {
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(60px, 20vw);
+            height: min(60px, 20vw);
+            animation: rotateCounterClockwise 3s linear infinite;
+        }
+
+        .gear-3 {
+            top: 60%;
+            left: 25%;
+            width: min(100px, 30vw);
+            height: min(100px, 30vw);
+            animation: rotateClockwise 5s linear infinite;
+        }
+
+        /* Loading Progress */
+        .loading-container {
+            width: min(300px, 90vw);
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 30px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #1248f8, #00a8ff, #1248f8);
+            border-radius: 10px;
+            animation: loadingShimmer 2s infinite;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .loading-bar:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        .loading-text {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            color: #a8c6ff;
+            margin-top: 15px;
+            font-family: 'body';
+            padding: 0 10px;
+        }
+
+        .brand-tagline {
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: #7aa3ff;
+            margin-top: 30px;
+            font-style: italic;
+            opacity: 0.8;
+            padding: 0 10px;
+        }
+
+        /* Animations */
+        @keyframes rotateClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateCounterClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes loadingShimmer {
+            0% { background-position: -300px 0; }
+            100% { background-position: 300px 0; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+
+    <!-- Enhanced Offer Banner CSS -->
+    <style>
+        /* Offer Banner Styles */
+        .offer-banner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(10px);
+        }
+
+        .offer-banner-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .offer-banner {
+            background: linear-gradient(135deg, #1248f8 0%, #0a1a3a 100%);
+            border-radius: clamp(15px, 3vw, 25px);
+            padding: clamp(20px, 5vw, 40px);
+            max-width: min(900px, 95vw);
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            border: 3px solid #964b00;
+            transform: translateY(100px) scale(0.8);
+            opacity: 0;
+            animation: bannerEntrance 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes bannerEntrance {
+            0% {
+                transform: translateY(100px) scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-20px) scale(0.95);
+                opacity: 0.8;
+            }
+            70% {
+                transform: translateY(10px) scale(0.98);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .offer-banner-close {
+            position: absolute;
+            top: clamp(10px, 3vw, 20px);
+            right: clamp(10px, 3vw, 20px);
+            background: linear-gradient(45deg, #964b00, #ff6b00);
+            color: white;
+            border: none;
+            width: clamp(35px, 10vw, 45px);
+            height: clamp(35px, 10vw, 45px);
+            border-radius: 50%;
+            font-size: clamp(18px, 5vw, 22px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(150, 75, 0, 0.3);
+        }
+
+        .offer-banner-close:hover {
+            background: linear-gradient(45deg, #ff6b00, #964b00);
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .offer-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .offer-header h2 {
+            color: white;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            font-family: 'heroh1';
+            margin-bottom: 15px;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #ffc964, #ff9900);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 2s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 201, 100, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 201, 100, 0.8), 0 0 30px rgba(255, 153, 0, 0.6);
+            }
+        }
+
+        .offer-header p {
+            color: #a8c6ff;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-family: 'body';
+        }
+
+        .offer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 992px) {
+            .offer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        .offer-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .offer-image {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #964b00;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            height: clamp(150px, 40vw, 200px);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .offer-image:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: #ff6b00;
+        }
+
+        .offer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .offer-info {
+            color: white;
+        }
+
+        .offer-info h3 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 20px;
+            font-family: 'heads';
+            color: #ffc964;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .offer-info ul {
+            list-style: none;
+            margin-bottom: 25px;
+            padding: 0;
+        }
+
+        .offer-info li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            font-family: 'body';
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+
+        .offer-info li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .offer-price {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .original-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        .discounted-price {
+            color: #ffc964;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .discount-badge {
+            background: linear-gradient(45deg, #ff0000, #ff6b00);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            animation: badgePulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+            }
+        }
+
+        .countdown-timer {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 2px solid #964b00;
+        }
+
+        .countdown-title {
+            color: white;
+            margin-bottom: 20px;
+            font-family: 'body';
+            font-size: clamp(1rem, 3vw, 1.3rem);
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 2vw, 20px);
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: clamp(10px, 2vw, 15px);
+            min-width: clamp(60px, 15vw, 80px);
+            border: 1px solid #964b00;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-number {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: bold;
+            color: #ffc964;
+            font-family: 'joy';
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .time-label {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            color: #a8c6ff;
+            text-transform: uppercase;
+            margin-top: 8px;
+            font-family: 'body';
+            letter-spacing: 1px;
+        }
+
+        .offer-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 576px) {
+            .offer-actions {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+
+        .offer-btn {
+            padding: clamp(15px, 4vw, 18px) clamp(25px, 6vw, 35px);
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-family: 'body';
+            min-width: auto;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+
+        @media (min-width: 576px) {
+            .offer-btn {
+                width: auto;
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #964b00, #ff6b00);
+            color: white;
+            box-shadow: 0 10px 30px rgba(150, 75, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #ff6b00, #964b00);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid #964b00;
+            box-shadow: 0 10px 30px rgba(150, 75, 0, 0.2);
+        }
+
+        .offer-footer {
+            text-align: center;
+            color: #a8c6ff;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            margin-top: 25px;
+            font-family: 'body';
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .offer-footer i {
+            margin: 0 5px;
+        }
+    </style>
+
+    <!-- Main CSS Styles -->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fonts families */
+        @font-face {
+            font-family: 'joy';
+            src: url(../font/InterTight-BlackItalic.ttf);
+        }
+
+        @font-face {
+            font-family: 'heroh1';
+            src: url(../font/Licorice-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'h3s';
+            src: url(../font/Agbalumo-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'body';
+            src: url(../font/Michroma-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'heads';
+            src: url(../font/ElsieSwashCaps-Black.ttf);
+        }
+
+        /* Pre-navbar */
+        #prenav {
+            background-color: rgb(94, 176, 248);
+            padding: 7px 5%;
+        }
+
+        .prenavlink {
+            text-align: center;
+            padding: 5px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .prenavlink a {
+            text-decoration: none;
+            color: black;
+            font-family: 'joy';
+            font-size: clamp(10px, 2.5vw, 12px);
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .prenavlink a:hover {
+            color: gray;
+        }
+
+        .prenavlink i {
+            font-size: 5px;
+            color: black;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .prenavlink {
+                justify-content: flex-end;
+                text-align: end;
+                gap: 10px;
+            }
+            .prenavlink i {
+                display: inline;
+            }
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #1248f8;
+            padding: 10px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            gap: 15px;
+        }
+
+        .logo-container {
+            order: 1;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            max-width: 100%;
+        }
+
+        .menu-toggle {
+            order: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: black;
+            border-radius: 3px;
+        }
+
+        @media (min-width: 1024px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        .nav-links {
+            order: 3;
+            width: 100%;
+            display: none;
+            list-style: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links {
+                order: 2;
+                display: flex;
+                flex-direction: row;
+                width: auto;
+                margin: 0;
+                gap: 20px;
+            }
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            font-family: 'joy';
+            font-size: clamp(14px, 2vw, 16px);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #9a4500;
+        }
+
+        .search-container {
+            order: 4;
+            width: 100%;
+            display: none;
+            margin: 15px 0;
+        }
+
+        .search-container.active {
+            display: flex;
+        }
+
+        @media (min-width: 1024px) {
+            .search-container {
+                order: 3;
+                display: flex;
+                flex: 1;
+                max-width: 300px;
+                margin: 0;
+            }
+        }
+
+        .search-bar1 {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            background-color: rgb(223, 223, 223);
+            border: none;
+            outline: none;
+            font-family: 'joy';
+            font-size: 14px;
+        }
+
+        .nav-icons {
+            order: 5;
+            width: 100%;
+            display: none;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .nav-icons.active {
+            display: flex;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-icons {
+                order: 4;
+                display: flex;
+                width: auto;
+                margin: 0;
+                gap: 15px;
+            }
+        }
+
+        .nav-heart,
+        .cart-icon {
+            position: relative;
+        }
+
+        .favorites-count,
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .nav-icon {
+            color: black;
+            font-size: clamp(20px, 4vw, 23px);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #9a4500;
+        }
+
+        /* Hero Section */
+        .hero {
+            background:
+                linear-gradient(to bottom,
+                    rgba(243, 243, 243, 0) 80%,
+                    rgba(243, 243, 243, 1) 100%),
+                url('/img/hero imga 3.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 70vh;
+            padding: 40px 5%;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-height: 600px) {
+            .hero {
+                min-height: 80vh;
+            }
+        }
+
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 992px) {
+            .hero-container {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 12vw, 5rem);
+            font-family: 'heroh1';
+            font-weight: bold;
+            line-height: 1;
+            margin: 10px 0;
+        }
+
+        .hero-slogan {
+            font-family: 'heroh1';
+            font-weight: bold;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .hero-link {
+            padding: 20px 0;
+        }
+
+        .link-1 {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            background-color: #000000;
+            border-radius: 25px;
+            border: 1px solid #ff0404;
+            transition: all 0.5s ease;
+            font-size: clamp(14px, 2.5vw, 16px);
+        }
+
+        .link-1:hover {
+            box-shadow: inset 120px 0 0 white;
+            color: #885200;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .hero-image {
+                height: 400px;
+            }
+        }
+
+        .img-1 {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            z-index: 1;
+        }
+
+        .img-2, .img-3, .img-4 {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #964b00;
+            width: clamp(60px, 15vw, 90px);
+            height: clamp(50px, 12vw, 80px);
+            transition: all 0.5s ease;
+            object-fit: contain;
+            z-index: 2;
+        }
+
+        .img-2 {
+            bottom: 10%;
+            right: 5%;
+        }
+
+        .img-3 {
+            bottom: 10%;
+            left: 5%;
+        }
+
+        .img-4 {
+            bottom: 30%;
+            right: 10%;
+        }
+
+        .img-2:hover,
+        .img-3:hover,
+        .img-4:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Hero Band */
+        .hero-band {
+            background-color: #f3f3f3;
+            padding: 30px 5%;
+        }
+
+        .hb-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hb-content {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .hb-content i {
+            font-size: clamp(24px, 5vw, 28px);
+            color: #1248f8;
+            margin-bottom: 10px;
+        }
+
+        .hb-content h5 {
+            font-family: 'body';
+            font-size: clamp(16px, 3vw, 18px);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .hb-content p {
+            color: #626262;
+            font-size: clamp(14px, 2.5vw, 15px);
+        }
+
+        /* Featured Products */
+        .futured {
+            background-color: #f3f3f3;
+            padding: 50px 5%;
+        }
+
+        .fg-head {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .fg-head h3 {
+            font-family: 'body';
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+
+        .fg-head p {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            color: #666;
+        }
+
+        .fg-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 576px) {
+            .fg-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fg-content,
+        .fg-content1,
+        .fg-content2,
+        .fg-content3 {
+            height: 350px;
+            border: 1px solid black;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .fg-container .fa-heart {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            color: white;
+            z-index: 3;
+            cursor: pointer;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .fg-container .fa-heart:hover {
+            background: rgba(0,0,0,0.6);
+            transform: scale(1.1);
+        }
+
+        .fg-content { background-image: url(/img/engine-kits.jpg); }
+        .fg-content1 { background-image: url(/img/brakes.jpeg); }
+        .fg-content2 { background-image: url(/img/suspension.jpeg); }
+        .fg-content3 { background-image: url(/img/light-system1.jpg); }
+
+        .fg-content:hover,
+        .fg-content1:hover,
+        .fg-content2:hover,
+        .fg-content3:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .fg-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 20px;
+            border-top: 1px solid #964b00;
+        }
+
+        .fg-label h5 {
+            color: white;
+            font-size: clamp(16px, 3vw, 18px);
+            margin-bottom: 8px;
+        }
+
+        .fg-label i {
+            color: #ffc107;
+            font-size: 14px;
+            margin: 0 1px;
+        }
+
+        .fg-label p {
+            color: white;
+            font-size: clamp(14px, 2.5vw, 16px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .fg-label button {
+            background-color: #964b00;
+            border: none;
+            padding: 8px 20px;
+            color: white;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .fg-label button:hover {
+            background-color: #7a3c00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(150, 75, 0, 0.4);
+        }
+
+        .p-vm {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .p-vm a {
+            display: inline-block;
+            padding: 12px 40px;
+            border: 1px solid black;
+            border-radius: 25px;
+            background: black;
+            color: white;
+            text-decoration: none;
+            font-size: clamp(14px, 2.5vw, 16px);
+            transition: all 0.3s ease;
+        }
+
+        .p-vm a:hover {
+            box-shadow: inset 400px 0 0 white;
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        /* Brand Belt */
+        .bb {
+            padding: 30px 5%;
+            background: #1248f8;
+            overflow: hidden;
+        }
+
+        .bb-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bb-container img {
+            height: 40px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+
+        .bb-container img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Shop By Categories */
+        .sbc {
+            background-color: #f3f3f3;
+            padding: 50px 5%;
+        }
+
+        .sbc-head {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .sbc-head h3 {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            font-weight: bold;
+            font-family: 'body';
+            margin-bottom: 10px;
+        }
+
+        .sbc-head p {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            color: #666;
+        }
+
+        .sbc-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 576px) {
+            .sbc-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+
+        .sbc-content {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sbc-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .sbc-content img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .discount {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .sbc-label {
+            text-align: center;
+        }
+
+        .sbc-label .fa-heart {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .sbc-label .fa-heart:hover {
+            color: #ff4444;
+            transform: scale(1.2);
+        }
+
+        .sbc-label h6 {
+            font-size: clamp(14px, 2.5vw, 15px);
+            margin: 8px 0;
+            line-height: 1.4;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .sbc-label .fa-star {
+            color: #ffc107;
+            font-size: 12px;
+            margin: 0 1px;
+        }
+
+        .sbc-label p {
+            font-size: clamp(16px, 3vw, 18px);
+            font-weight: bold;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .sbc-label span {
+            display: block;
+            color: #666;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .sbc-label button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background-color: #000000;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .sbc-label button:hover {
+            background-color: #964b00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Shop Links */
+        .shops-links {
+            background-color: #f3f3f3;
+            padding: 50px 5%;
+        }
+
+        .sl-head h3 {
+            text-align: center;
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            font-family: 'body';
+            margin-bottom: 30px;
+        }
+
+        .sl-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sl-content1,
+        .sl-content2,
+        .sl-content3,
+        .sl-content4 {
+            height: 250px;
+            border-radius: 15px;
+            position: relative;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sl-content1:hover,
+        .sl-content2:hover,
+        .sl-content3:hover,
+        .sl-content4:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .sl-content1 { background-image: url(../img/suspension.jpeg); }
+        .sl-content2 { background-image: url(../img/download\ \(1\).jpg); }
+        .sl-content3 { background-image: url(../img/download\ \(2\).jpg); }
+        .sl-content4 { background-image: url(../img/download\ \(3\).jpg); }
+
+        .sl-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 20px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .shops-links a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .sl-label h4 {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-bottom: 8px;
+            font-family: 'body';
+        }
+
+        .sl-label p {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 5% 30px;
+            background: linear-gradient(to bottom, #1b1b1b, #1248f8 20%);
+        }
+
+        .ft-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ft-content1,
+        .ft-content2,
+        .ft-content3,
+        .ft-content4 {
+            color: white;
+        }
+
+        .ft-logo img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .ft-content1 p {
+            font-size: clamp(14px, 2.5vw, 15px);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .ft-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .ft-icons a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .ft-icons i {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .ft-icons i:hover {
+            background-color: white;
+            color: #1248f8;
+            transform: translateY(-5px);
+        }
+
+        .ft-content2 h5,
+        .ft-content3 h5 {
+            font-size: clamp(18px, 3vw, 20px);
+            margin-bottom: 20px;
+            font-family: 'body';
+        }
+
+        .ft-content2 p {
+            font-size: clamp(14px, 2.5vw, 15px);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.6;
+        }
+
+        .ft-content2 i {
+            min-width: 20px;
+        }
+
+        .ft-content3 ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ft-content3 li {
+            margin-bottom: 10px;
+        }
+
+        .ft-content3 a {
+            color: white;
+            text-decoration: none;
+            font-size: clamp(14px, 2.5vw, 15px);
+            transition: all 0.3s ease;
+        }
+
+        .ft-content3 a:hover {
+            color: #ffc964;
+            padding-left: 5px;
+        }
+
+        .ft-content4 h6 {
+            font-size: clamp(16px, 3vw, 18px);
+            margin-bottom: 15px;
+            font-family: 'body';
+        }
+
+        .ft-content4 .inp1 {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .ft-content4 .inp2 {
+            width: 100%;
+            padding: 12px 20px;
+            background: #000000;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ft-content4 .inp2:hover {
+            background: #964b00;
+            transform: translateY(-2px);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+
+        .last {
+            text-align: center;
+            color: white;
+            font-size: clamp(12px, 2.5vw, 14px);
+            opacity: 0.8;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Chat Us & Back to Top */
+        .chat-us i {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #964b00;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(150, 75, 0, 0.3);
+        }
+
+        .chat-us i:hover {
+            background: #7a3c00;
+            transform: scale(1.1);
+        }
+
+        .top-button i {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: #666;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-button i:hover {
+            background: #964b00;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 576px) {
+            .chat-us i {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .top-button i {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                bottom: 80px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" alt="Autoparts Pro Logo" class="brand-logo-preloader">
+            <h1 class="preloader-title">AUTOPARTS PRO</h1>
+            <p class="preloader-subtitle">Premium Auto Components & Performance Parts</p>
+            
+            <div class="gear-system">
+                <div class="gear gear-1">
+                    <div class="gear-inner">
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                    </div>
+                </div>
+                <div class="gear gear-2">
+                    <div class="gear-inner">
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                    </div>
+                </div>
+                <div class="gear gear-3">
+                    <div class="gear-inner">
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                        <div class="gear-tooth"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="loading-container">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            
+            <div class="loading-text" id="loadingText">Loading premium auto parts...</div>
+            <p class="brand-tagline">Driving Performance. Defining Excellence.</p>
+        </div>
+    </div>
+
+    <!-- Enhanced Offer Banner -->
+    <div class="offer-banner-overlay" id="offerBanner">
+        <div class="offer-banner">
+            <button class="offer-banner-close" id="closeOfferBanner">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="offer-header">
+                <h2>🚨 FLASH SALE! 🚨</h2>
+                <p>Limited Time Offer - Premium Auto Parts at Unbeatable Prices!</p>
+            </div>
+            
+            <div class="offer-content">
+                <div class="offer-images">
+                    <div class="offer-image">
+                        <img src="/img/engine-kits.jpg" alt="Performance Engine Kit" loading="lazy">
+                    </div>
+                    <div class="offer-image">
+                        <img src="/img/brakes.jpeg" alt="Premium Brake System" loading="lazy">
+                    </div>
+                    <div class="offer-image">
+                        <img src="/img/suspension.jpeg" alt="Suspension Upgrade" loading="lazy">
+                    </div>
+                    <div class="offer-image">
+                        <img src="/img/light-system1.jpg" alt="LED Lighting System" loading="lazy">
+                    </div>
+                </div>
+                
+                <div class="offer-info">
+                    <h3>🎯 Special Bundle Deal</h3>
+                    <ul>
+                        <li>Performance Engine Kit - Up to 40% Off</li>
+                        <li>Premium Brake System - 35% Discount</li>
+                        <li>Suspension Upgrade Kit - Limited Stock</li>
+                        <li>LED Lighting System - Buy 1 Get 1 Free</li>
+                        <li>Free Installation Guide Included</li>
+                        <li>24-Month Warranty on All Parts</li>
+                    </ul>
+                    
+                    <div class="offer-price">
+                        <div>
+                            <div class="original-price">₦350,000.00</div>
+                            <div class="discounted-price">₦199,999.00</div>
+                        </div>
+                        <div class="discount-badge">SAVE 43%</div>
+                    </div>
+                    
+                    <div class="countdown-timer">
+                        <div class="countdown-title">⏰ Offer Ends In:</div>
+                        <div class="timer" id="countdownTimer">
+                            <div class="time-unit">
+                                <div class="time-number" id="days">00</div>
+                                <div class="time-label">Days</div>
+                            </div>
+                            <div class="time-unit">
+                                <div class="time-number" id="hours">00</div>
+                                <div class="time-label">Hours</div>
+                            </div>
+                            <div class="time-unit">
+                                <div class="time-number" id="minutes">00</div>
+                                <div class="time-label">Minutes</div>
+                            </div>
+                            <div class="time-unit">
+                                <div class="time-number" id="seconds">00</div>
+                                <div class="time-label">Seconds</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="offer-actions">
+                        <button class="offer-btn btn-primary" id="shopNowBtn">
+                            <i class="fas fa-bolt"></i> GRAB THIS DEAL NOW
+                        </button>
+                        <button class="offer-btn btn-secondary" id="viewDetailsBtn">
+                            <i class="fas fa-info-circle"></i> VIEW DETAILS
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="offer-footer">
+                <i class="fas fa-shield-alt"></i> 100% Secure Payment | 
+                <i class="fas fa-truck"></i> Free Shipping | 
+                <i class="fas fa-undo"></i> 30-Day Return Policy
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <!-- pre-navbar -->
+    <header id="prenav">
+        <div class="prenavlink">
+            <a href="/fds.html">Find a store</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Help</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Join us</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="/signin.html">signin</a>
+        </div>
+    </header>
+
+    <!-- navbar -->
+    <nav>
+        <div class="logo-container">
+            <a href="/index.html"><img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" alt="Autoparts Pro Logo"
+                    class="logo"></a>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/index.html" class="navactive active">Home</a></li>
+            <li><a href="/new-arrivals.html">New Arrivals</a></li>
+            <li><a href="/engine-parts.html">Engine Parts</a></li>
+            <li><a href="/lighting.html">Lighting</a></li>
+            <li><a href="/brakes.html">Brakes</a></li>
+            <li><a href="/suspension.html">Suspension</a></li>
+        </ul>
+
+        <div class="search-container" id="search-container1">
+            <input type="text" placeholder="Search auto parts..." class="search-bar1">
+        </div>
+
+        <div class="nav-icons" id="nav-icons">
+            <div class="nav-heart">
+                <a href="/favourite.html"><i class="fa-regular fa-heart nav-icon"></i></a>
+                <span class="favorites-count">0</span>
+            </div>
+            <div class="cart-icon">
+                <a href="/checkout.html"><i class="fa-solid fa-bag-shopping nav-icon"></i></a>
+                <span class="cart-badge">0</span>
+            </div>
+            <a href="/user.html"><i class="fa-regular fa-circle-user nav-icon"></i></a>
+        </div>
+    </nav>
+
+    <!-- hero section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="hero-slogan">define the show now or never</p>
+                <h1>Autoparts pro</h1>
+                <p>Autoparts pro is a premium moto parts brand that celebrates the intersection of latest models, comfort, and self-experience.</p>
+                <div class="hero-link">
+                    <a class="link-1" href="/new-arrivals.html">Shop Now</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img class="img-1" src="./img/car1-removebg-preview.png" alt="Car Image" loading="lazy">
+                <img class="img-2" src="./img/light1.png" alt="Light Part" loading="lazy">
+                <img class="img-3" src="/img/aut1.png" alt="Auto Part" loading="lazy">
+                <img class="img-4" src="/img/kick1.png" alt="Kick Part" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- hero after belt -->
+    <section class="hero-band">
+        <div class="hb-container">
+            <div class="hb-content">
+                <i class="fa-regular fa-credit-card"></i>
+                <h5>Secure Payment</h5>
+                <p>Fast & Protected</p>
+            </div>
+
+            <div class="hb-content">
+                <i class="fa-solid fa-truck"></i>
+                <h5>Free Shipping</h5>
+                <p>For orders over ₦300,000.00</p>
+            </div>
+
+            <div class="hb-content">
+                <i class="fa-solid fa-shield"></i>
+                <h5>Quality Guaranteed</h5>
+                <p>Premium materials & durability.</p>
+            </div>
+
+            <div class="hb-content">
+                <i class="fa-solid fa-tools"></i>
+                <h5>Expert Support</h5>
+                <p>Technical assistance available.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- featured Products -->
+    <section class="futured">
+        <div class="fg-head">
+            <h3>Featured Auto Parts</h3>
+            <p>...Top quality components for your vehicle</p>
+        </div>
+
+        <div class="fg-container">
+            <div class="fg-content">
+                <i class="fa-solid fa-heart"></i>
+                <div class="fg-label">
+                    <h5>Performance Engine Kit</h5>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦85,000.00 <button>Shop</button></p>
+                </div>
+            </div>
+
+            <div class="fg-content1">
+                <i class="fa-solid fa-heart"></i>
+                <div class="fg-label">
+                    <h5>Premium Brake System</h5>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦120,000.00 <button>Shop</button></p>
+                </div>
+            </div>
+
+            <div class="fg-content2">
+                <i class="fa-solid fa-heart"></i>
+                <div class="fg-label">
+                    <h5>Suspension Upgrade Kit</h5>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦95,000.00 <button>Shop</button></p>
+                </div>
+            </div>
+
+            <div class="fg-content3">
+                <i class="fa-solid fa-heart"></i>
+                <div class="fg-label">
+                    <h5>LED Lighting System</h5>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦65,000.00 <button>Shop</button></p>
+                </div>
+            </div>
+        </div>
+        <div class="p-vm">
+            <a href="/new-arrivals.html">Load More Parts</a>
+        </div>
+    </section>
+
+    <!-- brand belt -->
+    <section class="bb">
+        <div class="bb-container">
+            <img src="/img/toyota-removebg-preview.png" alt="Toyota" loading="lazy">
+            <img src="/img/mazdda-removebg-preview.png" alt="Mazda" loading="lazy">
+            <img src="/img/mercedes-removebg-preview.png" alt="Mercedes" loading="lazy">
+            <img src="/img/lexus-removebg-preview.png" alt="Lexus" loading="lazy">
+            <img src="/img/honda-removebg-preview.png" alt="Honda" loading="lazy">
+            <img src="/img/tinywow_rolls_87800506.png" alt="Rolls Royce" loading="lazy">
+        </div>
+    </section>
+
+    <!-- Chat -->
+    <section class="chat-us">
+        <i class="fa-solid fa-headset">
+            <span class="badge position-absolute rounded-pill">3</span>
+        </i>
+    </section>
+
+    <!-- to top button -->
+    <a class="top-button" href="#prenav">
+        <i class="fa-regular fa-hand-pointer"></i>
+    </a>
+    
+    <!-- shop by categories -->
+    <section class="sbc">
+        <div class="sbc-head">
+            <h3>Most Popular Auto Parts</h3>
+            <p>Check out these trending components</p>
+        </div>
+        <div class="sbc-container">
+            <!-- Product 1 -->
+            <div class="sbc-content">
+                <img src="/img/spark-plug.png" alt="Spark Plug" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>NGK Premium Spark Plugs (Set of 4)</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦15,000</p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="sbc-content">
+                <img src="/img/air-filter.png" alt="Air Filter" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>K&N Performance Air Filter</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦25,000.00</p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="sbc-content">
+                <p class="discount">-20%</p>
+                <img src="/img//brake-pads.png" alt="Brake Pads" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>Brembo Ceramic Brake Pads</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦45,000.00 <span>₦56,000.00</span></p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="sbc-content">
+                <img src="/img/car-battery.png" alt="Car Battery" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>Exide Premium Car Battery 75Ah</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦85,000.00</p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="sbc-content">
+                <p class="discount">-20%</p>
+                <img src="/img/shock-absorber.png" alt="Shock Absorber" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>KYB Gas Shock Absorbers (Pair)</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦120,000.00 <span>₦150,000.00</span></p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="sbc-content">
+                <img src="/img/oil-filter.png" alt="Oil Filter" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>Bosch Premium Oil Filter</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦8,500.00</p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="sbc-content">
+                <p class="discount">-15%</p>
+                <img src="/img/alternator.png" alt="Alternator" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>Denso High Output Alternator</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦180,000.00 <span>₦212,000.00</span></p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="sbc-content">
+                <p class="discount">-20%</p>
+                <img src="/img/radiator.png" alt="Radiator" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>Aluminum Performance Radiator</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦95,000.00 <span>₦119,000.00</span></p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="sbc-content">
+                <p class="discount">-20%</p>
+                <img src="/img/headlight.png" alt="Headlight" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>LED Projector Headlight Assembly</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦75,000.00 <span>₦94,000.00</span></p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="sbc-content">
+                <p class="discount">-20%</p>
+                <img src="/img/timing-belt.png" alt="Timing Belt" loading="lazy">
+                <div class="sbc-label">
+                    <i class="fa-regular fa-heart"></i>
+                    <h6>Gates Racing Timing Belt Kit</h6>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>₦65,000.00 <span>₦81,000.00</span></p>
+                    <button class="add-to-cart">Add to cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-vm">
+            <a href="/new-arrivals.html">View All Parts</a>
+        </div>
+    </section>
+
+    <!-- shop links -->
+    <section class="shops-links">
+        <div class="sl-head">
+            <h3>Shop By Vehicle Systems</h3>
+        </div>
+
+        <div class="sl-container">
+            <div class="sl-content1">
+                <div class="sl-label">
+                    <a href="/engine-parts.html">
+                        <h4>Engine Components</h4>
+                    </a>
+                    <p>From spark plugs to complete engine kits - everything you need for optimal performance and reliability.</p>
+                </div>
+            </div>
+
+            <div class="sl-content2">
+                <div class="sl-label">
+                    <a href="/brakes.html">
+                        <h4>Braking Systems</h4>
+                    </a>
+                    <p>Premium brake pads, rotors, and complete braking systems for maximum safety and stopping power.</p>
+                </div>
+            </div>
+
+            <div class="sl-content3">
+                <div class="sl-label">
+                    <a href="/suspension.html">
+                        <h4>Suspension & Steering</h4>
+                    </a>
+                    <p>Shocks, struts, control arms and steering components for superior handling and comfort.</p>
+                </div>
+            </div>
+
+            <div class="sl-content4">
+                <div class="sl-label">
+                    <a href="/lighting.html">
+                        <h4>Lighting & Electrical</h4>
+                    </a>
+                    <p>LED lights, batteries, alternators and all electrical components for your vehicle's needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer section -->
+    <footer>
+        <div class="ft-container">
+            <div class="ft-content1">
+                <div class="ft-logo">
+                    <img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" alt="Autoparts Pro Logo" loading="lazy">
+                </div>
+                <div>
+                    <p>Shopping auto parts is easier with Autoparts Pro, shopping across categories to help customers maintain and upgrade their vehicles with quality parts.</p>
+                </div>
+
+                <div class="ft-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="ft-content2">
+                <h5>CONTACT</h5>
+                <p><i class="fa-solid fa-phone"></i>+234 9069 960720 <br> (+1) 501 350 4020</p>
+
+                <p><i class="fa-solid fa-location"></i>80 Okigwe Road, 2<sup>nd</sup> <br> Floor, Owerri Imo State <br> Nigeria</p>
+
+                <p><i class="fa-solid fa-envelope"></i>autopartspro@gmail.com <br> support@autopartspro.com</p>
+            </div>
+
+            <div class="ft-content3">
+                <ul>
+                    <h5>QUICK LINKS</h5>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Guide to buy</a></li>
+                    <li><a href="#">Policy</a></li>
+                    <li><a href="#">Terms of sale</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+
+            <div class="ft-content4">
+                <form action="#">
+                    <h6>Subscribe to our newsletter and get the latest news/update</h6>
+                    <input class="inp1" type="email" placeholder="Enter your email" required>
+                    <input class="inp2" type="submit" value="SUBSCRIBE">
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="last">
+            <p>&copy; 2025 Autoparts Pro. All rights reserved</p>
+        </div>
+    </footer>
+
+    <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+    <script>
+        // Preloader functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.getElementById('preloader');
+            const loadingBar = document.getElementById('loadingBar');
+            const loadingText = document.getElementById('loadingText');
+            
+            let progress = 0;
+            const loadingMessages = [
+                "Loading premium auto parts...",
+                "Initializing engine components...",
+                "Loading braking systems...",
+                "Preparing suspension parts...",
+                "Finalizing lighting systems...",
+                "Almost ready..."
+            ];
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                
+                loadingBar.style.width = progress + '%';
+                
+                if (progress < 20) loadingText.textContent = loadingMessages[0];
+                else if (progress < 40) loadingText.textContent = loadingMessages[1];
+                else if (progress < 60) loadingText.textContent = loadingMessages[2];
+                else if (progress < 80) loadingText.textContent = loadingMessages[3];
+                else if (progress < 95) loadingText.textContent = loadingMessages[4];
+                else loadingText.textContent = loadingMessages[5];
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.classList.add('fade-out');
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                            showOfferBanner();
+                        }, 500);
+                    }, 500);
+                }
+            }, 400);
+
+            // Mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            const searchContainer = document.getElementById('search-container1');
+            const navIcons = document.getElementById('nav-icons');
+
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                searchContainer.classList.toggle('active');
+                navIcons.classList.toggle('active');
+                this.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 1024) {
+                    if (!mobileMenu.contains(event.target) && 
+                        !navLinks.contains(event.target) && 
+                        !searchContainer.contains(event.target) && 
+                        !navIcons.contains(event.target)) {
+                        navLinks.classList.remove('active');
+                        searchContainer.classList.remove('active');
+                        navIcons.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    }
+                }
+            });
+
+            // Offer Banner Functionality
+            const offerBanner = document.getElementById('offerBanner');
+            const closeOfferBannerBtn = document.getElementById('closeOfferBanner');
+            const shopNowBtn = document.getElementById('shopNowBtn');
+            const viewDetailsBtn = document.getElementById('viewDetailsBtn');
+            
+            function showOfferBanner() {
+                setTimeout(() => {
+                    offerBanner.classList.add('active');
+                }, 800);
+            }
+            
+            function closeOfferBanner() {
+                offerBanner.classList.remove('active');
+            }
+            
+            closeOfferBannerBtn.addEventListener('click', closeOfferBanner);
+            
+            offerBanner.addEventListener('click', function(e) {
+                if (e.target === offerBanner) {
+                    closeOfferBanner();
+                }
+            });
+            
+            shopNowBtn.addEventListener('click', function() {
+                closeOfferBanner();
+                setTimeout(() => {
+                    window.location.href = '/new-arrivals.html';
+                }, 300);
+            });
+            
+            viewDetailsBtn.addEventListener('click', function() {
+                closeOfferBanner();
+                setTimeout(() => {
+                    document.querySelector('.futured').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                }, 300);
+            });
+            
+            // Countdown Timer
+            function updateCountdown() {
+                const endDate = new Date();
+                endDate.setDate(endDate.getDate() + 3);
+                endDate.setHours(23, 59, 59, 0);
+                
+                const now = new Date();
+                const timeRemaining = endDate - now;
+                
+                if (timeRemaining <= 0) return;
+                
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // Cart System
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            function updateCartDisplay() {
+                const cartBadge = document.querySelector('.cart-badge');
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartBadge.textContent = totalItems;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                cartBadge.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    cartBadge.style.transform = 'scale(1)';
+                }, 300);
+            }
+            
+            function addToCart(product) {
+                const existingItem = cart.find(item => item.id === product.id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        ...product,
+                        quantity: 1
+                    });
+                }
+                
+                updateCartDisplay();
+                showNotification(`${product.name} added to cart!`);
+            }
+            
+            function getProductData(button) {
+                const productCard = button.closest('.sbc-content');
+                const imgSrc = productCard.querySelector('img').src;
+                const name = productCard.querySelector('h6').textContent.trim();
+                const priceText = productCard.querySelector('p').textContent;
+                const priceMatch = priceText.match(/₦\s?([\d,]+(?:\.\d{2})?)/);
+                const price = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : 0;
+                
+                const discountSpan = productCard.querySelector('span');
+                const originalPrice = discountSpan ? 
+                    parseFloat(discountSpan.textContent.match(/₦\s?([\d,]+(?:\.\d{2})?)/)[1].replace(/,/g, '')) : 
+                    price;
+                
+                const id = 'product-' + name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                
+                return {
+                    id: id,
+                    name: name,
+                    price: price,
+                    originalPrice: originalPrice,
+                    image: imgSrc,
+                    category: 'Auto Parts'
+                };
+            }
+            
+            function getFeaturedProductData(button) {
+                const productCard = button.closest('.fg-content, .fg-content1, .fg-content2, .fg-content3');
+                const name = productCard.querySelector('h5').textContent.trim();
+                const priceText = productCard.querySelector('p').textContent;
+                const priceMatch = priceText.match(/₦\s?([\d,]+(?:\.\d{2})?)/);
+                const price = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : 0;
+                
+                const computedStyle = window.getComputedStyle(productCard);
+                const bgImage = computedStyle.backgroundImage;
+                const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                
+                const id = 'featured-' + name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                
+                return {
+                    id: id,
+                    name: name,
+                    price: price,
+                    image: imageUrl,
+                    category: 'Featured Parts'
+                };
+            }
+            
+            function setupCartButtons() {
+                // Shop by categories products
+                const sbcButtons = document.querySelectorAll('.sbc-content .add-to-cart');
+                sbcButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const product = getProductData(this);
+                        addToCart(product);
+                        
+                        this.style.transform = 'scale(0.95)';
+                        this.style.backgroundColor = '#964b00';
+                        this.textContent = 'Added!';
+                        
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                            this.style.backgroundColor = '';
+                            this.textContent = 'Add to cart';
+                        }, 1000);
+                    });
+                });
+                
+                // Featured products
+                const featuredButtons = document.querySelectorAll('.fg-label button');
+                featuredButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const product = getFeaturedProductData(this);
+                        addToCart(product);
+                        
+                        this.style.transform = 'scale(0.95)';
+                        this.style.backgroundColor = '#7a3c00';
+                        this.textContent = 'Added!';
+                        
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                            this.style.backgroundColor = '';
+                            this.textContent = 'Shop';
+                        }, 1000);
+                    });
+                });
+            }
+            
+            updateCartDisplay();
+            setupCartButtons();
+            
+            // Favorites functionality
+            const favoriteHearts = document.querySelectorAll('.fa-heart, .fa-regular.fa-heart');
+            const favoritesCount = document.querySelector('.favorites-count');
+            let favCount = JSON.parse(localStorage.getItem('favorites'))?.length || 0;
+            favoritesCount.textContent = favCount;
+
+            favoriteHearts.forEach(heart => {
+                heart.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    let productCard = this.closest('.sbc-content, .fg-content, .fg-content1, .fg-content2, .fg-content3');
+                    let productName = '';
+                    
+                    if (productCard) {
+                        const nameElement = productCard.querySelector('h6, h5');
+                        if (nameElement) {
+                            productName = nameElement.textContent.trim();
+                        }
+                    }
+                    
+                    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                    
+                    if (this.classList.contains('fa-regular')) {
+                        this.classList.remove('fa-regular');
+                        this.classList.add('fa-solid');
+                        this.style.color = '#ff4444';
+                        favCount++;
+                        
+                        if (productName) {
+                            favorites.push({
+                                name: productName,
+                                date: new Date().toISOString()
+                            });
+                            localStorage.setItem('favorites', JSON.stringify(favorites));
+                        }
+                    } else {
+                        this.classList.remove('fa-solid');
+                        this.classList.add('fa-regular');
+                        this.style.color = '';
+                        favCount--;
+                        
+                        if (productName) {
+                            favorites = favorites.filter(fav => fav.name !== productName);
+                            localStorage.setItem('favorites', JSON.stringify(favorites));
+                        }
+                    }
+                    
+                    favoritesCount.textContent = favCount;
+                    
+                    favoritesCount.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        favoritesCount.style.transform = 'scale(1)';
+                    }, 300);
+                    
+                    showNotification(this.classList.contains('fa-solid') ? 
+                        'Added to favorites!' : 'Removed from favorites!');
+                });
+            });
+
+            // Notification function
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: linear-gradient(45deg, #964b00, #ff6b00);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    z-index: 1000;
+                    animation: slideIn 0.3s ease;
+                    box-shadow: 0 10px 30px rgba(150, 75, 0, 0.4);
+                    font-weight: bold;
+                    border: 2px solid #ff6b00;
+                    max-width: 300px;
+                `;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                @keyframes slideOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Smooth scroll for back to top
+            const topButton = document.querySelector('.top-button');
+            topButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Make cart badge clickable
+            const cartBadge = document.querySelector('.cart-badge');
+            const cartIconLink = document.querySelector('.cart-icon a');
+            
+            cartBadge.addEventListener('click', function(e) {
+                e.stopPropagation();
+                window.location.href = '/checkout.html';
+            });
+
+            // Chat button functionality
+            const chatButton = document.querySelector('.chat-us i');
+            chatButton.addEventListener('click', function() {
+                showNotification('Customer support will contact you shortly!');
+            });
+        });
+
+        // Ensure preloader hides if page loads very fast
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader && !preloader.classList.contains('fade-out')) {
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                        showOfferBanner();
+                    }, 500);
+                }, 500);
+            }
+        });
+
+        // Window resize handler
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                const navLinks = document.getElementById('nav-links');
+                const searchContainer = document.getElementById('search-container1');
+                const navIcons = document.getElementById('nav-icons');
+                const mobileMenu = document.getElementById('mobile-menu');
+                
+                navLinks.classList.remove('active');
+                searchContainer.classList.remove('active');
+                navIcons.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/men.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.css">
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <title>New Arrivals | Autoparts Pro</title>
+    <style>
+        * {
+            padding: 0%;
+            margin: 0%;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f3f3f3;
+        }
+
+        /* fonts families - Matching index.html */
+        @font-face {
+            font-family: 'joy';
+            src: url(../font/InterTight-BlackItalic.ttf);
+        }
+
+        @font-face {
+            font-family: 'heroh1';
+            src: url(../font/Licorice-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'h3s';
+            src: url(../font/Agbalumo-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'body';
+            src: url(../font/Michroma-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'heads';
+            src: url(../font/ElsieSwashCaps-Black.ttf);
+        }
+
+        /* pre-navbar - Matching index.html */
+        #prenav {
+            background-color: rgb(94, 176, 248);
+            padding-right: 30px;
+        }
+
+        .prenavlink {
+            text-align: end;
+            padding: 7px;
+        }
+
+        .prenavlink a {
+            text-decoration: none;
+            color: black;
+            font-family: 'joy';
+            font-size: clamp(10px, 2.5vw, 12px);
+            transition: 0.3s;
+        }
+
+        .prenavlink .user {
+            font-size: 20px;
+        }
+
+        .prenavlink a:hover {
+            color: gray;
+        }
+
+        .prenavlink i {
+            font-size: 5px;
+            padding: 10px;
+            color: black;
+        }
+
+        /* navbar - Matching index.html */
+        .nav-heart,
+        .cart-icon {
+            position: relative;
+        }
+
+        .favorites-count,
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 20px;
+            padding: 0px 5px;
+            font-size: 10px;
+        }
+
+        nav {
+            background-color: #1248f8;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            gap: 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            max-width: 100px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: "joy";
+        }
+
+        .nav-links a:hover {
+            color: #9a4500;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            flex-grow: 1;
+            max-width: 300px;
+        }
+
+        .search-bar1 {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: rgb(223, 223, 223);
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-icon {
+            color: black;
+            font-size: clamp(18px, 2vw, 23px);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #9a4500;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            order: 3;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: black;
+            border-radius: 3px;
+        }
+
+        .navactive.active {
+            font-weight: bold;
+            color: #964b00;
+        }
+
+        /* Mobile Navigation - Matching index.html */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 10px 20px;
+            }
+            
+            .nav-links {
+                gap: 10px;
+            }
+            
+            .search-container {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+                order: 4;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .search-container {
+                display: none;
+                width: 100%;
+                margin: 15px 0;
+                max-width: 100%;
+                order: 5;
+            }
+
+            .search-container.active {
+                display: flex;
+            }
+
+            .nav-icons {
+                display: none;
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+                gap: 30px;
+                order: 6;
+            }
+
+            .nav-icons.active {
+                display: flex;
+            }
+
+            .logo-container {
+                order: 1;
+                flex-grow: 1;
+            }
+
+            .menu-toggle {
+                order: 2;
+            }
+        }
+
+        /* carousel */
+        .carousel-item {
+            height: 70vh;
+            text-align: center;
+        }
+
+        .carousel-inner::after {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.6);
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+        .carousel-inner {
+            position: relative;
+        }
+
+        .carousel-caption {
+            z-index: 2;
+            padding-bottom: 150px;
+        }
+
+        .carousel-item h5 {
+            font-size: 40px;
+            font-family: "body";
+            font-weight: bolder;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-item a {
+            margin: 10px;
+            font-family: "joy";
+            padding: 12px 40px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            background: #000000;
+            border: 1px solid #964b00;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .carousel-item a:hover {
+            box-shadow: inset 120px 0 0 white;
+            color: #885200;
+        }
+
+        /* New Arrivals Header - Updated colors */
+        .new-arrivals-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1248f8, #0a1a3a);
+            color: white;
+            margin: 0 auto 30px;
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .new-arrivals-header::before {
+            content: "NEW";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            font-weight: bold;
+            font-family: "body";
+            top: -30px;
+            left: -30px;
+            transform: rotate(-15deg);
+            color: #a8c6ff;
+        }
+
+        .new-arrivals-header h1 {
+            font-family: "body";
+            font-size: 48px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(18, 72, 248, 0.7);
+        }
+
+        .new-arrivals-header p {
+            font-family: "joy";
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            color: #a8c6ff;
+        }
+
+        /* Category Tabs - Updated colors */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background-color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: "joy";
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab.active {
+            background-color: #1248f8;
+            color: white;
+            border-color: #1248f8;
+        }
+
+        .tab i {
+            font-size: 18px;
+        }
+
+        /* New Arrival Badge - Updated colors */
+        .new-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #1248f8;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-family: "joy";
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Featured Section - Updated colors */
+        .featured-section {
+            padding: 40px 20px;
+            background-color: white;
+            margin: 30px auto;
+            border-radius: 15px;
+            max-width: 1200px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured-section h2 {
+            font-family: "body";
+            color: #1248f8;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 32px;
+        }
+
+        /* Countdown Timer - Updated colors */
+        .countdown-timer {
+            background: linear-gradient(135deg, #1248f8, #0a1a3a);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .countdown-timer h3 {
+            font-family: "body";
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-family: "joy";
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-unit span:first-child {
+            font-size: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            min-width: 70px;
+        }
+
+        .time-unit span:last-child {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* Products Grid - Updated colors */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: #1248f8;
+            font-family: "joy";
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            font-family: "body";
+            font-size: 16px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-family: "joy";
+            font-weight: bold;
+            font-size: 20px;
+            color: #1248f8;
+        }
+
+        .old-price {
+            font-family: "joy";
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background-color: #964b00;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .product-rating i {
+            color: #ffb400;
+            font-size: 14px;
+        }
+
+        .rating-count {
+            font-family: "joy";
+            font-size: 12px;
+            color: #666;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-cart {
+            flex: 1;
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: "joy";
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid #964b00;
+        }
+
+        .btn-cart:hover {
+            box-shadow: inset 120px 0 0 white;
+            color: #885200;
+        }
+
+        .btn-favorite {
+            width: 45px;
+            background-color: #f8f8f8;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-favorite:hover {
+            background-color: #ffebee;
+            color: red;
+        }
+
+        .btn-favorite.active {
+            color: red;
+        }
+
+        /* View All Button - Updated colors */
+        .view-all-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn-view-all {
+            background: linear-gradient(135deg, #1248f8, #0a1a3a);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-family: "joy";
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #964b00;
+        }
+
+        .btn-view-all:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(18, 72, 248, 0.3);
+            box-shadow: inset 120px 0 0 white;
+            color: #885200;
+        }
+
+        /* Newsletter Banner - Updated colors */
+        .newsletter-banner {
+            background: linear-gradient(135deg, #1248f8, #0a1a3a);
+            padding: 40px 20px;
+            margin: 50px auto;
+            border-radius: 15px;
+            max-width: 1200px;
+            text-align: center;
+            color: white;
+        }
+
+        .newsletter-banner h2 {
+            font-family: "body";
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-banner p {
+            font-family: "joy";
+            font-size: 16px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #a8c6ff;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: none;
+            font-family: "joy";
+            font-size: 16px;
+            background-color: rgb(223, 223, 223);
+        }
+
+        .newsletter-btn {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: "joy";
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #964b00;
+        }
+
+        .newsletter-btn:hover {
+            box-shadow: inset 120px 0 0 white;
+            color: #885200;
+        }
+
+        /* footer - Matching index.html */
+        footer {
+            padding: 50px 5% 30px;
+            background: linear-gradient(to bottom, #1b1b1b, #1248f8 20%);
+        }
+
+        .ft-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .ft-content1,
+        .ft-content2,
+        .ft-content3,
+        .ft-content4 {
+            margin-top: 20px;
+        }
+
+        .ft-logo img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .ft-content1 p {
+            font-size: clamp(13px, 1.2vw, 14px);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .ft-icons a {
+            color: black;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .ft-icons i {
+            font-size: 18px;
+            margin: 3px;
+            padding: 8px;
+            border: 2px solid black;
+            border-radius: 30px;
+            transition: 0.5s;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ft-icons i:hover {
+            transform: translateY(-5px);
+            background-color: #964b00;
+            color: white;
+        }
+
+        .ft-content2 i {
+            font-size: 18px;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
+        .ft-content2 p {
+            font-size: clamp(13px, 1.2vw, 14px);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .ft-content3 a {
+            text-decoration: none;
+            color: black;
+            font-size: clamp(13px, 1.2vw, 14px);
+            line-height: 1.8;
+        }
+
+        .ft-content3 a:hover {
+            color: #1248f8;
+            text-decoration: underline;
+        }
+
+        .ft-content3 ul {
+            list-style: none;
+        }
+
+        .ft-content3 h5,
+        .ft-content2 h5 {
+            font-size: clamp(16px, 1.5vw, 18px);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .ft-content4 h6 {
+            font-size: clamp(14px, 1.3vw, 16px);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .ft-content4 .inp1 {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 30px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+        .ft-content4 .inp2 {
+            width: 100%;
+            font-size: 14px;
+            height: 40px;
+            border-radius: 30px;
+            padding: 0 5px;
+            color: #f7f5f4;
+            border: 1px solid black;
+            background-color: rgba(0, 0, 0, 0.719);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .ft-content4 .inp2:hover {
+            background-color: #964b00;
+        }
+
+        hr {
+            width: 100%;
+            margin: 30px auto;
+            border: none;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .last {
+            text-align: center;
+            font-size: clamp(12px, 1.2vw, 14px);
+            color: #333;
+            padding-top: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+
+            .timer {
+                font-size: 20px;
+            }
+
+            .time-unit span:first-child {
+                font-size: 30px;
+                min-width: 60px;
+            }
+
+            .new-arrivals-header h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ft-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .ft-content2 p {
+                justify-content: center;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .category-tabs {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+
+            .tab {
+                flex-shrink: 0;
+                white-space: nowrap;
+            }
+
+            .timer {
+                flex-wrap: wrap;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input,
+            .newsletter-btn {
+                width: 100%;
+            }
+
+            .new-arrivals-header h1 {
+                font-size: 28px;
+            }
+
+            .carousel-item h5 {
+                font-size: 24px;
+            }
+
+            .carousel-item a {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .product-card {
+                max-width: 100%;
+            }
+
+            .timer {
+                gap: 10px;
+            }
+
+            .time-unit span:first-child {
+                font-size: 24px;
+                min-width: 50px;
+                padding: 8px 12px;
+            }
+
+            .category-tabs {
+                justify-content: center;
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            nav {
+                padding: 10px 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-caption {
+                padding-bottom: 100px;
+            }
+
+            .carousel-item {
+                height: 50vh;
+            }
+
+            .new-arrivals-header {
+                padding: 30px 15px;
+            }
+
+            .new-arrivals-header h1 {
+                font-size: 24px;
+            }
+
+            .new-arrivals-header p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: #f3f3f3;">
+    <!-- pre-navbar -->
+    <header id="prenav">
+        <div class="prenavlink">
+            <a href="/fds.html">Find a store</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Help</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Join us</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="/signin.html">signin</a>
+        </div>
+    </header>
+
+    <!-- navbar -->
+    <nav>
+        <div class="logo-container">
+            <a href="/index.html"><img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" width="100PX" alt="Autoparts Pro Logo" class="logo"></a>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/new-arrivals.html" class="navactive active">New Arrivals</a></li>
+            <li><a href="/engine-parts.html">Engine Parts</a></li>
+            <li><a href="/lighting.html">Lighting</a></li>
+            <li><a href="/brakes.html">Brakes</a></li>
+            <li><a href="/suspension.html">Suspension</a></li>
+        </ul>
+
+        <div class="search-container" id="search-container1">
+            <input type="text" placeholder="Search new arrivals..." class="search-bar1" id="searchInput">
+        </div>
+
+        <div class="nav-icons" id="nav-icons">
+            <div class="nav-heart">
+                <a href="/favourite.html"><i class="fa-regular fa-heart nav-icon"></i></a>
+                <span class="favorites-count">0</span>
+            </div>
+            <div class="cart-icon">
+                <a href="/checkout.html"><i class="fa-solid fa-bag-shopping nav-icon"></i></a>
+                <span class="cart-badge">0</span>
+            </div>
+            <a href="/user.html"><i class="fa-regular fa-circle-user nav-icon"></i></a>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- New Arrivals Header -->
+    <section class="new-arrivals-header">
+        <h1>NEW ARRIVALS</h1>
+        <p>Discover the latest automotive parts and accessories. Fresh inventory added weekly with exclusive early-bird discounts!</p>
+    </section>
+
+    <!-- Countdown Timer -->
+    <div class="countdown-timer">
+        <h3>FLASH SALE ENDS IN</h3>
+        <div class="timer" id="countdownTimer">
+            <div class="time-unit">
+                <span id="days">00</span>
+                <span>DAYS</span>
+            </div>
+            <div class="time-unit">
+                <span id="hours">00</span>
+                <span>HOURS</span>
+            </div>
+            <div class="time-unit">
+                <span id="minutes">00</span>
+                <span>MINS</span>
+            </div>
+            <div class="time-unit">
+                <span id="seconds">00</span>
+                <span>SECS</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs">
+        <div class="tab active" data-category="all">
+            <i class="fas fa-star"></i>
+            All New Arrivals
+        </div>
+        <div class="tab" data-category="engine">
+            <i class="fas fa-cogs"></i>
+            Engine Parts
+        </div>
+        <div class="tab" data-category="lighting">
+            <i class="fas fa-lightbulb"></i>
+            Lighting
+        </div>
+        <div class="tab" data-category="brakes">
+            <i class="fas fa-shield-alt"></i>
+            Brakes
+        </div>
+        <div class="tab" data-category="suspension">
+            <i class="fas fa-car-side"></i>
+            Suspension
+        </div>
+        <div class="tab" data-category="exclusive">
+            <i class="fas fa-crown"></i>
+            Exclusives
+        </div>
+    </div>
+
+    <!-- Featured Section -->
+    <section class="featured-section">
+        <h2>FEATURED NEW ARRIVALS</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be loaded here dynamically -->
+        </div>
+        
+        <div class="view-all-container">
+            <button class="btn-view-all" id="loadMoreBtn">
+                <i class="fas fa-sync-alt"></i>
+                Load More Products
+            </button>
+        </div>
+    </section>
+
+    <!-- Newsletter Banner -->
+    <div class="newsletter-banner">
+        <h2>BE THE FIRST TO KNOW</h2>
+        <p>Subscribe to our newsletter and get exclusive early access to new arrivals, special discounts, and insider deals.</p>
+        <div class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button class="newsletter-btn">SUBSCRIBE NOW</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="ft-container">
+            <div class="ft-content1">
+                <div class="ft-logo">
+                    <img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" width="150px" alt="Autoparts Pro Logo">
+                </div>
+                <div>
+                    <p>Shopping auto parts is easier with Autoparts Pro, <br> shopping across categories to help customers
+                        <br> maintain and upgrade their vehicles with quality parts.
+                    </p>
+                </div>
+
+                <div class="ft-icons">
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-youtube"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="ft-content2">
+                <h5>CONTACT</h5>
+                <p><i class="fa-solid fa-phone"></i>+234 9069 960720 <br> (+234) 8123 456789</p>
+
+                <p><i class="fa-solid fa-location"></i>43 Okigwe Road, <br> Owerri, Imo State <br>
+                    Nigeria</p>
+
+                <p><i class="fa-solid fa-envelope"></i>autopartspro@gmail.com <br> support@autopartspro.com</p>
+            </div>
+
+            <div class="ft-content3">
+                <ul>
+                    <h5>QUICK LINKS</h5>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Installation Guide</a></li>
+                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="">Terms of Sale</a></li>
+                    <li><a href="">Warranty Terms</a></li>
+                </ul>
+            </div>
+
+            <div class="ft-content4">
+                <form action="">
+                    <h6>Subscribe to our newsletter and <br> get the latest updates on auto parts</h6>
+                    <input class="inp1" type="email" placeholder="Enter your email" required>
+                    <input class="inp2" type="submit" value="SUBSCRIBE">
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="last">
+            <P>&copy; 2025 Autoparts Pro. All right reserved</P>
+        </div>
+
+    </footer>
+
+    <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+        <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+    <script>
+        // =================== CART SYSTEM ===================
+        // Initialize cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // New Arrivals Products Data - Enhanced with cart-ready data
+        const allProducts = [
+            // Engine Parts (New)
+            {
+                id: 'new-engine-001',
+                name: "TurboSmart Electronic Boost Controller",
+                category: "engine",
+                subCategory: "turbo",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-15",
+                discount: 25,
+                price: 185000,
+                oldPrice: 246000,
+                image: "/img/boost-controller.png",
+                rating: 4.8,
+                reviews: 12,
+                description: "Advanced electronic boost controller with smartphone connectivity"
+            },
+            {
+                id: 'new-engine-002',
+                name: "AEM Performance Air Intake System",
+                category: "engine",
+                subCategory: "intake",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-14",
+                discount: 20,
+                price: 95000,
+                oldPrice: 119000,
+                image: "/img/air-intake.png",
+                rating: 4.9,
+                reviews: 8,
+                description: "Cold air intake system for increased horsepower"
+            },
+            {
+                id: 'new-engine-003',
+                name: "Mishimoto Aluminum Radiator",
+                category: "engine",
+                subCategory: "cooling",
+                isNew: true,
+                arrivalDate: "2025-01-12",
+                discount: 30,
+                price: 145000,
+                oldPrice: 207000,
+                image: "/img/aluminum-radiator.png",
+                rating: 5,
+                reviews: 5,
+                description: "High-performance aluminum radiator with dual fans"
+            },
+            {
+                id: 'new-engine-004',
+                name: "NGK Laser Iridium Spark Plugs",
+                category: "engine",
+                subCategory: "ignition",
+                isNew: true,
+                arrivalDate: "2025-01-10",
+                discount: 15,
+                price: 38000,
+                oldPrice: 45000,
+                image: "/img/laser-spark-plugs.png",
+                rating: 4.7,
+                reviews: 15,
+                description: "Latest generation laser iridium spark plugs"
+            },
+
+            // Lighting (New)
+            {
+                id: 'new-lighting-001',
+                name: "Morimoto XB LED Headlights",
+                category: "lighting",
+                subCategory: "headlights",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-16",
+                discount: 22,
+                price: 285000,
+                oldPrice: 365000,
+                image: "/img/morimoto-headlights.png",
+                rating: 5,
+                reviews: 6,
+                description: "Next-generation LED headlights with adaptive lighting"
+            },
+            {
+                id: 'new-lighting-002',
+                name: "Oracle Color Shift LED Strips",
+                category: "lighting",
+                subCategory: "accents",
+                isNew: true,
+                arrivalDate: "2025-01-13",
+                discount: 35,
+                price: 45000,
+                oldPrice: 69000,
+                image: "/img/color-shift-led.png",
+                rating: 4.6,
+                reviews: 9,
+                description: "RGB color-changing LED accent lighting"
+            },
+            {
+                id: 'new-lighting-003',
+                name: "LASFIT Canbus LED Bulbs",
+                category: "lighting",
+                subCategory: "bulbs",
+                isNew: true,
+                arrivalDate: "2025-01-11",
+                discount: 18,
+                price: 32000,
+                oldPrice: 39000,
+                image: "/img/canbus-led.png",
+                rating: 4.8,
+                reviews: 11,
+                description: "Error-free LED bulbs with Canbus technology"
+            },
+            {
+                id: 'new-lighting-004',
+                name: "Diode Dynamics SS3 Fog Lights",
+                category: "lighting",
+                subCategory: "fog-lights",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-09",
+                discount: 25,
+                price: 125000,
+                oldPrice: 167000,
+                image: "/img/ss3-fog-lights.png",
+                rating: 4.9,
+                reviews: 7,
+                description: "Ultra-bright SS3 LED fog light pods"
+            },
+
+            // Brakes (New)
+            {
+                id: 'new-brakes-001',
+                name: "Brembo GT Big Brake Kit",
+                category: "brakes",
+                subCategory: "brake-kits",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-17",
+                discount: 15,
+                price: 850000,
+                oldPrice: 1000000,
+                image: "/img/brembo-gt-kit.png",
+                rating: 5,
+                reviews: 4,
+                description: "Complete big brake kit with 6-piston calipers"
+            },
+            {
+                id: 'new-brakes-002',
+                name: "StopTech Sport Slotted Rotors",
+                category: "brakes",
+                subCategory: "rotors",
+                isNew: true,
+                arrivalDate: "2025-01-15",
+                discount: 20,
+                price: 185000,
+                oldPrice: 231000,
+                image: "/img/slotted-rotors-new.png",
+                rating: 4.7,
+                reviews: 8,
+                description: "Sport slotted rotors for improved braking performance"
+            },
+            {
+                id: 'new-brakes-003',
+                name: "Project Mu Racing Brake Pads",
+                category: "brakes",
+                subCategory: "brake-pads",
+                isNew: true,
+                arrivalDate: "2025-01-12",
+                discount: 30,
+                price: 125000,
+                oldPrice: 179000,
+                image: "/img/project-mu-pads.png",
+                rating: 4.9,
+                reviews: 6,
+                description: "High-performance racing brake pads"
+            },
+            {
+                id: 'new-brakes-004',
+                name: "Goodridge Braided Brake Lines",
+                category: "brakes",
+                subCategory: "brake-lines",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-10",
+                discount: 25,
+                price: 75000,
+                oldPrice: 100000,
+                image: "/img/braided-brake-lines.png",
+                rating: 4.8,
+                reviews: 10,
+                description: "Stainless steel braided brake lines kit"
+            },
+
+            // Suspension (New)
+            {
+                id: 'new-suspension-001',
+                name: "KW Variant 3 Coilovers",
+                category: "suspension",
+                subCategory: "coilovers",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-18",
+                discount: 18,
+                price: 650000,
+                oldPrice: 793000,
+                image: "/img/kw-coilovers.png",
+                rating: 5,
+                reviews: 3,
+                description: "High-end coilovers with independent damping adjustment"
+            },
+            {
+                id: 'new-suspension-002',
+                name: "Whiteline Anti-Roll Bar Kit",
+                category: "suspension",
+                subCategory: "sway-bars",
+                isNew: true,
+                arrivalDate: "2025-01-16",
+                discount: 22,
+                price: 185000,
+                oldPrice: 237000,
+                image: "/img/anti-roll-bar.png",
+                rating: 4.8,
+                reviews: 7,
+                description: "Complete front and rear anti-roll bar kit"
+            },
+            {
+                id: 'new-suspension-003',
+                name: "Fortune Auto 500 Coilovers",
+                category: "suspension",
+                subCategory: "coilovers",
+                isNew: true,
+                arrivalDate: "2025-01-14",
+                discount: 20,
+                price: 450000,
+                oldPrice: 562000,
+                image: "/img/fortune-coilovers.png",
+                rating: 4.9,
+                reviews: 5,
+                description: "500 series coilovers with swift springs"
+            },
+            {
+                id: 'new-suspension-004',
+                name: "SPL Performance Control Arms",
+                category: "suspension",
+                subCategory: "control-arms",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-11",
+                discount: 25,
+                price: 285000,
+                oldPrice: 380000,
+                image: "/img/spl-control-arms.png",
+                rating: 5,
+                reviews: 4,
+                description: "Adjustable performance control arms"
+            },
+
+            // Exclusive Products
+            {
+                id: 'exclusive-001',
+                name: "Autoparts Pro Custom Tuning Kit",
+                category: "exclusive",
+                subCategory: "tuning",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-20",
+                discount: 0,
+                price: 550000,
+                oldPrice: 550000,
+                image: "/img/custom-tuning.png",
+                rating: 0,
+                reviews: 0,
+                description: "Exclusive custom tuning package with dyno tuning"
+            },
+            {
+                id: 'exclusive-002',
+                name: "Limited Edition Carbon Fiber Parts",
+                category: "exclusive",
+                subCategory: "body",
+                isNew: true,
+                arrivalDate: "2025-01-19",
+                discount: 10,
+                price: 325000,
+                oldPrice: 361000,
+                image: "/img/carbon-fiber.png",
+                rating: 4.9,
+                reviews: 2,
+                description: "Limited run carbon fiber hood and trunk"
+            },
+            {
+                id: 'exclusive-003',
+                name: "Autoparts Pro Tool Set",
+                category: "exclusive",
+                subCategory: "tools",
+                isNew: true,
+                arrivalDate: "2025-01-18",
+                discount: 30,
+                price: 185000,
+                oldPrice: 264000,
+                image: "/img/pro-tool-set.png",
+                rating: 5,
+                reviews: 3,
+                description: "Professional grade tool set with lifetime warranty"
+            },
+            {
+                id: 'exclusive-004',
+                name: "Wireless Diagnostic Scanner Pro",
+                category: "exclusive",
+                subCategory: "diagnostic",
+                isNew: true,
+                isFeatured: true,
+                arrivalDate: "2025-01-17",
+                discount: 25,
+                price: 125000,
+                oldPrice: 167000,
+                image: "/img/diagnostic-scanner.png",
+                rating: 4.7,
+                reviews: 6,
+                description: "Advanced wireless OBD2 scanner with tablet"
+            }
+        ];
+
+        // Configuration
+        let currentCategory = 'all';
+        let displayedProducts = 8;
+        const PRODUCTS_PER_LOAD = 4;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+            setupEventListeners();
+            renderProducts();
+            startCountdown();
+            updateCartDisplay();
+            updateFavoritesCount();
+        });
+
+        function initializePage() {
+            // Mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            const searchContainer = document.getElementById('search-container1');
+            const navIcons = document.getElementById('nav-icons');
+
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                searchContainer.classList.toggle('active');
+                navIcons.classList.toggle('active');
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', handleSearch);
+        }
+
+        function setupEventListeners() {
+            // Category tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Update current category
+                    currentCategory = this.dataset.category;
+                    displayedProducts = 8;
+                    renderProducts();
+                });
+            });
+
+            // Load more button
+            document.getElementById('loadMoreBtn').addEventListener('click', loadMoreProducts);
+
+            // Newsletter form
+            const newsletterForm = document.querySelector('.newsletter-form');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('.newsletter-input').value;
+                if (email) {
+                    showNotification('Thank you for subscribing to our newsletter!');
+                    this.querySelector('.newsletter-input').value = '';
+                }
+            });
+        }
+
+        function handleSearch(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm.length >= 2) {
+                const filteredProducts = filterProducts().filter(product =>
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.description.toLowerCase().includes(searchTerm) ||
+                    product.category.toLowerCase().includes(searchTerm)
+                );
+                renderFilteredProducts(filteredProducts);
+            } else {
+                renderProducts();
+            }
+        }
+
+        function filterProducts() {
+            if (currentCategory === 'all') {
+                return allProducts;
+            }
+            return allProducts.filter(product => product.category === currentCategory);
+        }
+
+        function renderProducts() {
+            const filteredProducts = filterProducts();
+            const productsToShow = filteredProducts.slice(0, displayedProducts);
+            
+            renderProductsGrid(productsToShow);
+            
+            // Show/hide load more button
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.style.display = filteredProducts.length > displayedProducts ? 'block' : 'none';
+        }
+
+        function renderFilteredProducts(filteredProducts) {
+            const productsToShow = filteredProducts.slice(0, displayedProducts);
+            renderProductsGrid(productsToShow);
+            
+            // Show/hide load more button
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.style.display = filteredProducts.length > displayedProducts ? 'block' : 'none';
+        }
+
+        function renderProductsGrid(products) {
+            const grid = document.getElementById('productsGrid');
+            
+            if (products.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+                        <i class="fas fa-search" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3 style="font-family: 'body'; color: #666;">No new arrivals found</h3>
+                        <p style="font-family: 'joy'; color: #999;">Try a different category or search term</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = products.map(product => {
+                const isInCart = cart.some(item => item.id === product.id);
+                const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                const isFavorite = favorites.includes(product.id);
+                
+                return `
+                <div class="product-card" data-id="${product.id}">
+                    <div class="new-badge">NEW</div>
+                    ${product.isFeatured ? '<div class="new-badge" style="top: 45px; background-color: #964b00;">FEATURED</div>' : ''}
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category.toUpperCase()}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        
+                        <div class="product-price">
+                            <span class="current-price">₦${product.price.toLocaleString()}</span>
+                            ${product.discount > 0 ? `
+                                <span class="old-price">₦${product.oldPrice.toLocaleString()}</span>
+                                <span class="discount-badge">-${product.discount}%</span>
+                            ` : ''}
+                        </div>
+                        
+                        ${product.rating > 0 ? `
+                            <div class="product-rating">
+                                ${generateStars(product.rating)}
+                                <span class="rating-count">(${product.reviews})</span>
+                            </div>
+                        ` : '<div class="product-rating">No reviews yet</div>'}
+                        
+                        <div class="product-actions">
+                            <button class="btn-cart ${isInCart ? 'in-cart' : ''}" onclick="addToCart('${product.id}')">
+                                <i class="fas ${isInCart ? 'fa-check' : 'fa-cart-plus'}"></i>
+                                ${isInCart ? 'In Cart' : 'Add to Cart'}
+                            </button>
+                            <button class="btn-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavorite('${product.id}')">
+                                <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function generateStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+
+            return stars;
+        }
+
+        function loadMoreProducts() {
+            displayedProducts += PRODUCTS_PER_LOAD;
+            renderProducts();
+            
+            // Scroll to newly loaded products
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // =================== CART FUNCTIONS ===================
+        window.addToCart = function(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Check if product already exists in cart
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    originalPrice: product.oldPrice || product.price,
+                    image: product.image,
+                    category: product.category,
+                    quantity: 1
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart display
+            updateCartDisplay();
+            
+            // Update button state
+            updateProductButtonState(productId);
+            
+            // Show notification
+            showNotification(`${product.name} added to cart!`);
+        };
+
+        function updateProductButtonState(productId) {
+            const productCard = document.querySelector(`.product-card[data-id="${productId}"]`);
+            if (productCard) {
+                const cartButton = productCard.querySelector('.btn-cart');
+                const isInCart = cart.some(item => item.id === productId);
+                
+                cartButton.classList.toggle('in-cart', isInCart);
+                cartButton.innerHTML = `
+                    <i class="fas ${isInCart ? 'fa-check' : 'fa-cart-plus'}"></i>
+                    ${isInCart ? 'In Cart' : 'Add to Cart'}
+                `;
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartBadge = document.querySelector('.cart-badge');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            if (cartBadge) {
+                cartBadge.textContent = totalItems;
+                cartBadge.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    cartBadge.style.transform = 'scale(1)';
+                }, 300);
+            }
+            
+            // Save cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // =================== FAVORITES FUNCTIONS ===================
+        window.toggleFavorite = function(productId) {
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const index = favorites.indexOf(productId);
+            
+            if (index === -1) {
+                favorites.push(productId);
+            } else {
+                favorites.splice(index, 1);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Update favorite button
+            updateFavoriteButtonState(productId, index === -1);
+            
+            // Update favorites count
+            updateFavoritesCount();
+            
+            // Show notification
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                showNotification(index === -1 ? 
+                    `${product.name} added to favorites!` : 
+                    `${product.name} removed from favorites!`);
+            }
+        };
+
+        function updateFavoriteButtonState(productId, isNowFavorite) {
+            const productCard = document.querySelector(`.product-card[data-id="${productId}"]`);
+            if (productCard) {
+                const favoriteBtn = productCard.querySelector('.btn-favorite');
+                const icon = favoriteBtn.querySelector('i');
+                
+                favoriteBtn.classList.toggle('active', isNowFavorite);
+                if (isNowFavorite) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                }
+            }
+        }
+
+        function updateFavoritesCount() {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const favoritesCount = document.querySelector('.favorites-count');
+            if (favoritesCount) {
+                favoritesCount.textContent = favorites.length;
+            }
+        }
+
+        // =================== COUNTDOWN TIMER ===================
+        function startCountdown() {
+            // Set end time (3 days from now)
+            const endTime = new Date();
+            endTime.setDate(endTime.getDate() + 3);
+            endTime.setHours(23, 59, 59, 999);
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const timeLeft = endTime - now;
+
+                if (timeLeft < 0) {
+                    // Sale has ended
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+
+            // Update timer immediately
+            updateTimer();
+            
+            // Update timer every second
+            setInterval(updateTimer, 1000);
+        }
+
+        // =================== NOTIFICATION SYSTEM ===================
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(135deg, #1248f8, #0a1a3a);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                font-weight: bold;
+                font-family: 'joy';
+                max-width: 300px;
+            `;
+
+            document.body.appendChild(notification);
+
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            /* Cart button styles */
+            .btn-cart.in-cart {
+                background-color: #28a745;
+                border-color: #28a745;
+            }
+            
+            .btn-cart.in-cart:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
+                box-shadow: inset 120px 0 0 white;
+                color: #218838;
+            }
+            
+            /* Favorite button active state */
+            .btn-favorite.active {
+                color: #dc3545;
+                background-color: #ffebee;
+            }
+            
+            .btn-favorite.active:hover {
+                background-color: #ffcdd2;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

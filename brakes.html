@@ -1,0 +1,2571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/men.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.css">
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <title>Brakes | Autoparts Pro</title>
+    <style>
+        * {
+            padding: 0%;
+            margin: 0%;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f3f3f3;
+        }
+
+        /* fonts families */
+        @font-face {
+            font-family: "joy";
+            src: url(../font/InterTight-BlackItalic.ttf);
+        }
+
+        @font-face {
+            font-family: "heroh1";
+            src: url(../font/Licorice-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: h3s;
+            src: url(../font/Agbalumo-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: "body";
+            src: url(../font/Michroma-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: "heads";
+            src: url(../font/ElsieSwashCaps-Black.ttf);
+        }
+
+        /* pre-navbar */
+        #prenav {
+            background-color: rgb(94, 176, 248);
+            padding-right: 30px;
+        }
+
+        .prenavlink {
+            text-align: end;
+            padding: 7px;
+        }
+
+        .prenavlink a {
+            text-decoration: none;
+            color: black;
+            font-family: "joy";
+            font-size: clamp(10px, 2.5vw, 12px);
+            transition: 0.3s;
+        }
+
+        .prenavlink .user {
+            font-size: 20px;
+        }
+
+        .prenavlink a:hover {
+            color: gray;
+        }
+
+        .prenavlink i {
+            font-size: 5px;
+            padding: 10px;
+            color: black;
+        }
+
+        /* navbar */
+        .nav-heart,
+        .cart-icon {
+            position: relative;
+        }
+
+        .favorites-count,
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 20px;
+            padding: 0px 5px;
+            font-size: 10px;
+        }
+
+        nav {
+            background-color: #1248f8;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            gap: 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            max-width: 100px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: "joy";
+        }
+
+        .nav-links a:hover {
+            color: #9a4500;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            flex-grow: 1;
+            max-width: 300px;
+        }
+
+        .search-bar1 {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: rgb(223, 223, 223);
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-icon {
+            color: black;
+            font-size: clamp(18px, 2vw, 23px);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #9a4500;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            order: 3;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: black;
+            border-radius: 3px;
+        }
+
+        .navactive.active {
+            font-weight: bold;
+            color: #964b00;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 10px 20px;
+            }
+            
+            .nav-links {
+                gap: 10px;
+            }
+            
+            .search-container {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+                order: 4;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .search-container {
+                display: none;
+                width: 100%;
+                margin: 15px 0;
+                max-width: 100%;
+                order: 5;
+            }
+
+            .search-container.active {
+                display: flex;
+            }
+
+            .nav-icons {
+                display: none;
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+                gap: 30px;
+                order: 6;
+            }
+
+            .nav-icons.active {
+                display: flex;
+            }
+
+            .logo-container {
+                order: 1;
+                flex-grow: 1;
+            }
+
+            .menu-toggle {
+                order: 2;
+            }
+        }
+
+        /* carousel */
+        .carousel-item {
+            height: 70vh;
+            text-align: center;
+        }
+
+        .carousel-inner::after {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.6);
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+        .carousel-inner {
+            position: relative;
+        }
+
+        .carousel-caption {
+            z-index: 2;
+            padding-bottom: 150px;
+        }
+
+        .carousel-item h5 {
+            font-size: 40px;
+            font-family: "body";
+            font-weight: bolder;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-item a {
+            margin: 10px;
+            font-family: "joy";
+            padding: 12px 40px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            background: #000000;
+            border: 1px solid #964b00;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .carousel-item a:hover {
+            box-shadow: inset 120px 0 0 white;
+            color: #964b00;
+        }
+
+        /* parts indicator */
+        .si {
+            margin-left: 20px;
+            padding: 20px 0;
+            font-family: "joy";
+        }
+
+        .si p {
+            font-size: 18px;
+        }
+
+        .mso-container {
+            display: flex;
+            width: 90%;
+            margin: auto;
+            gap: 30px;
+            justify-content: center;
+            padding: 15px 0;
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .mso-container ul li {
+            display: inline-block;
+            padding: 0px 10px;
+            list-style: none;
+        }
+
+        .mso-container a {
+            text-decoration: none;
+            color: black;
+            font-family: "joy";
+            transition: 0.3s;
+        }
+
+        .mso-container a:hover {
+            color: #964b00;
+        }
+
+        /* side bar */
+        .sidebar1-and-main {
+            width: 98%;
+            margin: 5px auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        .sidebar1 {
+            background-color: white;
+            width: 220px;
+            padding: 20px;
+            height: 90vh;
+            overflow-y: scroll;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 11%;
+            z-index: 100;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .sbb i {
+            background-color: #e0e0e0;
+            margin-left: 90px;
+            padding: 5px;
+            border-radius: 30px;
+            color: #4f4949;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sbb i:hover {
+            background-color: #964b00;
+            color: white;
+        }
+
+        .p-1 i {
+            font-size: 16px;
+        }
+
+        .poster {
+            width: 300px;
+            height: 50px;
+            background-color: #964b00;
+            text-align: center;
+            align-items: center;
+            transform: rotate(-90deg);
+            position: fixed;
+            right: -130px;
+            top: 300px;
+            border-radius: 10px 10px 0 0;
+            z-index: 99;
+            border: 1px solid black;
+        }
+
+        .poster a {
+            margin: auto 0px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-family: "joy";
+            display: block;
+            padding: 15px 0;
+            font-weight: bold;
+        }
+
+        .poster:hover {
+            background-color: #000000;
+        }
+
+        /* brakes main */
+        .sidebar1-and-main main {
+            width: 1000px;
+        }
+
+        /* brakes section */
+        .msc {
+            display: flex;
+            justify-content: space-around;
+            margin: 10px auto;
+            flex-wrap: wrap;
+            gap: 20px;
+            min-height: 400px;
+        }
+
+        .container1 {
+            background-color: white;
+            border-radius: 15px;
+            height: 380px;
+            width: 240px;
+            position: relative;
+            margin: 10px auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .container1:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            border-color: #964b00;
+        }
+
+        .cart {
+            display: flex;
+            justify-content: space-between;
+            margin: 0px 10px;
+        }
+
+        .container1 .brake1 {
+            margin: 10px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            height: 180px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .brake1 .fa-heart {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 20px;
+            padding: 8px;
+            border-radius: 30px;
+            background-color: white;
+            color: #ff6b00;
+            cursor: pointer;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .brake1 .fa-heart:hover {
+            color: red;
+            background-color: #fff5f5;
+        }
+
+        .brake1 .fa-circle-info {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            font-size: 20px;
+            padding: 8px;
+            color: black;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 30px;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .brake1 .fa-circle-info:hover {
+            background-color: #964b00;
+            color: white;
+        }
+
+        .brake1 img {
+            max-width: 100%;
+            height: 140px;
+            object-fit: contain;
+        }
+
+        .info {
+            margin: 10px;
+        }
+
+        .price-cart p {
+            font-family: "joy";
+            font-weight: bold;
+            font-size: 18px;
+            color: #964b00;
+        }
+
+        .stars i {
+            color: #ff7700;
+            font-size: 14px;
+        }
+
+        .stars span {
+            font-size: 12px;
+            color: #666;
+            font-family: "joy";
+        }
+
+        .container1 button {
+            border: 1px solid black;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            left: 10px;
+            border-radius: 10px;
+            height: 40px;
+            background-color: #000000;
+            transition: all 0.3s ease;
+            color: white;
+            font-family: "joy";
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .container1 button:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #964b00;
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar styling */
+        .sidebar1 h6 {
+            font-family: "body";
+            font-size: 16px;
+            margin: 15px 0 10px;
+            color: #000;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .p-1 {
+            font-size: 14px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            font-family: "joy";
+        }
+
+        .p-1 input[type="checkbox"],
+        .p-1 input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .p-1 label {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .p-1 label:hover {
+            color: #964b00;
+        }
+
+        .dropdown-menu {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .dropdown-item {
+            font-family: "joy";
+            transition: 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #964b00;
+            color: white;
+        }
+
+        /* Safety Features Banner - Updated colors */
+        .safety-features {
+            display: flex;
+            justify-content: space-around;
+            background: linear-gradient(135deg, #1248f8, #964b00);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 95%;
+            color: white;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .feature-item i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .feature-item p {
+            font-family: "joy";
+            font-size: 14px;
+        }
+
+        /* Filter Status - Updated colors */
+        .filter-status {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .filter-tag {
+            background-color: #964b00;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-family: "joy";
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-tag i {
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .clear-filters {
+            background-color: #964b00;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: "joy";
+            margin-left: auto;
+            transition: all 0.3s ease;
+        }
+
+        .clear-filters:hover {
+            background-color: #000000;
+        }
+
+        /* Pagination - Updated colors */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-item {
+            list-style: none;
+        }
+
+        .page-link {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            font-family: "joy";
+            transition: all 0.3s;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .page-link:hover {
+            background-color: #964b00;
+            color: white;
+            border-color: #964b00;
+        }
+
+        .page-item.active .page-link {
+            background-color: #964b00;
+            color: white;
+            border-color: #964b00;
+        }
+
+        .page-item.disabled .page-link {
+            color: #999;
+            cursor: not-allowed;
+            background-color: #f8f8f8;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            font-family: "body";
+            color: #666;
+        }
+
+        .no-results i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        /* Results Count */
+        .results-count {
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-family: "joy";
+            border: 1px solid #ddd;
+        }
+
+        /* Warning Banner - Updated colors */
+        .warning-banner {
+            background-color: #ffc964;
+            border: 1px solid #964b00;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px auto;
+            width: 95%;
+            text-align: center;
+        }
+
+        .warning-banner i {
+            color: #964b00;
+            margin-right: 10px;
+        }
+
+        .warning-banner p {
+            font-family: "joy";
+            color: #333;
+            margin: 0;
+        }
+
+        /* Chat Us - Updated to match index */
+        .chat-us i {
+            background-color: #964b00;
+            border-radius: 50px 10px 50px 50px;
+            padding: 15px;
+            color: black;
+            font-size: 20px;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .chat-us span {
+            background-color: red;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 10px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* To Top Button - Updated to match index */
+        .top-button i {
+            position: fixed;
+            font-size: 20px;
+            background-color: gray;
+            color: black;
+            padding: 12px;
+            border-radius: 300px;
+            bottom: 15px;
+            right: 30px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        .top-button i:hover {
+            background-color: #964b00;
+            color: white;
+        }
+
+        /* Footer section - Updated to match index exactly */
+        footer {
+            padding: 50px 5% 30px;
+            background: linear-gradient(to bottom, #1b1b1b, #1248f8 20%);
+        }
+
+        .ft-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .ft-content1,
+        .ft-content2,
+        .ft-content3,
+        .ft-content4 {
+            margin-top: 20px;
+        }
+
+        .ft-logo img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .ft-content1 p {
+            font-size: clamp(13px, 1.2vw, 14px);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-family: "joy";
+        }
+
+        .ft-icons a {
+            color: black;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .ft-icons i {
+            font-size: 18px;
+            margin: 3px;
+            padding: 8px;
+            border: 2px solid black;
+            border-radius: 30px;
+            transition: 0.5s;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ft-icons i:hover {
+            transform: translateY(-5px);
+            background-color: #964b00;
+            color: white;
+        }
+
+        .ft-content2 i {
+            font-size: 18px;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
+        .ft-content2 p {
+            font-size: clamp(13px, 1.2vw, 14px);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            font-family: "joy";
+        }
+
+        .ft-content3 a {
+            text-decoration: none;
+            color: black;
+            font-size: clamp(13px, 1.2vw, 14px);
+            line-height: 1.8;
+            font-family: "joy";
+        }
+
+        .ft-content3 a:hover {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .ft-content3 ul {
+            list-style: none;
+        }
+
+        .ft-content3 h5,
+        .ft-content2 h5 {
+            font-size: clamp(16px, 1.5vw, 18px);
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-family: "body";
+        }
+
+        .ft-content4 h6 {
+            font-size: clamp(14px, 1.3vw, 16px);
+            margin-bottom: 15px;
+            line-height: 1.4;
+            font-family: "joy";
+        }
+
+        .ft-content4 .inp1 {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 30px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            font-family: "joy";
+        }
+
+        .ft-content4 .inp2 {
+            width: 100%;
+            font-size: 14px;
+            height: 40px;
+            border-radius: 30px;
+            padding: 0 5px;
+            color: #f7f5f4;
+            border: 1px solid black;
+            background-color: rgba(0, 0, 0, 0.719);
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: "joy";
+        }
+
+        .ft-content4 .inp2:hover {
+            background-color: rgba(129, 26, 26, 0.9);
+        }
+
+        hr {
+            width: 100%;
+            margin: 30px auto;
+            border: none;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .last {
+            text-align: center;
+            font-size: clamp(12px, 1.2vw, 14px);
+            color: #333;
+            padding-top: 20px;
+            font-family: "joy";
+        }
+
+        /* responsiveness */
+        @media (max-width: 1200px) {
+            .sidebar1-and-main {
+                flex-direction: column;
+            }
+
+            .sidebar1 {
+                width: 100%;
+                height: auto;
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .sidebar1-and-main main {
+                width: 100%;
+            }
+
+            .poster {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ft-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .ft-content2 p {
+                justify-content: center;
+            }
+
+            .mso-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .mso-container ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .msc {
+                justify-content: center;
+            }
+
+            .container1 {
+                width: 220px;
+            }
+
+            .carousel-item h5 {
+                font-size: 24px;
+            }
+
+            .carousel-item a {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+
+            .filter-tags {
+                justify-content: center;
+            }
+
+            .clear-filters {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .safety-features {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .chat-us i {
+                bottom: 70px;
+                right: 15px;
+                padding: 12px;
+                font-size: 18px;
+            }
+            
+            .top-button i {
+                right: 15px;
+                bottom: 20px;
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container1 {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .carousel-caption {
+                padding-bottom: 100px;
+            }
+
+            .carousel-item {
+                height: 50vh;
+            }
+
+            nav {
+                padding: 10px 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .prenavlink {
+                padding: 7px 0;
+                text-align: center;
+            }
+            
+            .prenavlink i {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: #f3f3f3;">
+    <!-- pre-navbar -->
+    <header id="prenav">
+        <div class="prenavlink">
+            <a href="/fds.html">Find a store</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Help</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="">Join us</a>
+            <i class="fa-solid fa-star"></i>
+            <a href="/signin.html">signin</a>
+        </div>
+    </header>
+
+    <!-- navbar -->
+    <nav>
+        <div class="logo-container">
+            <a href="/index.html"><img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" width="100PX" alt="Autoparts Pro Logo" class="logo"></a>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/new-arrivals.html">New Arrivals</a></li>
+            <li><a href="/engine-parts.html">Engine Parts</a></li>
+            <li><a href="/lighting.html">Lighting</a></li>
+            <li><a href="/brakes.html" class="navactive active">Brakes</a></li>
+            <li><a href="/suspension.html">Suspension</a></li>
+        </ul>
+
+        <div class="search-container" id="search-container1">
+            <input type="text" placeholder="Search brake parts..." class="search-bar1" id="searchInput">
+        </div>
+
+        <div class="nav-icons" id="nav-icons">
+            <div class="nav-heart">
+                <a href="/favourite.html"><i class="fa-regular fa-heart nav-icon"></i></a>
+                <span class="favorites-count">0</span>
+            </div>
+            <div class="cart-icon">
+                <a href="/checkout.html"><i class="fa-solid fa-bag-shopping nav-icon"></i></a>
+                <span class="cart-badge">0</span>
+            </div>
+            <a href="/user.html"><i class="fa-regular fa-circle-user nav-icon"></i></a>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- carousel -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/img/brake-rotors-banner.jpg" class="d-block w-100" alt="Performance Brake Rotors">
+                <div class="carousel-caption d-md-block">
+                    <h5>PERFORMANCE BRAKE ROTORS</h5>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/img/brake-pads-banner.jpg" class="d-block w-100" alt="Premium Brake Pads">
+                <div class="carousel-caption d-md-block">
+                    <h5>PREMIUM BRAKE PADS</h5>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/img/brake-kits-banner.jpg" class="d-block w-100" alt="Complete Brake Kits">
+                <div class="carousel-caption d-md-block">
+                    <h5>COMPLETE BRAKE KITS</h5>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/img/brake-fluid-banner.jpg" class="d-block w-100" alt="Brake Fluid">
+                <div class="carousel-caption d-md-block">
+                    <h5>HIGH-QUALITY BRAKE FLUID</h5>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Safety Features Banner -->
+    <section class="safety-features">
+        <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <p>Safety Certified</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <p>OEM Quality</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <p>High Performance</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-temperature-high"></i>
+            <p>Heat Resistant</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-headset"></i>
+            <p>Expert Support</p>
+        </div>
+    </section>
+
+    <!-- Warning Banner -->
+    <div class="warning-banner">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Safety Notice:</strong> Brake components are critical safety parts. Professional installation is recommended. Always replace in axle sets.</p>
+    </div>
+
+    <!-- parts indicator -->
+    <section class="si">
+        <p><span style="font-weight: bolder; font-size: 20px;">BRAKE PARTS</span>- <span style="color: gray;" id="totalItems">1,142 items available</span> </p>
+    </section>
+
+    <!-- filter short cuts -->
+    <section class="mso">
+        <div class="mso-container">
+            <p style="font-weight: bolder; font-family: 'body';">FILTERS:</p>
+            <ul>
+                <li>
+                    <a class="nav-link dropdown-toggle" href="#" id="typedropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Part Type</a>
+                    <ul class="dropdown-menu" aria-labelledby="typedropdown">
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="category" data-value="brake-pads">Brake Pads</a></li>
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="category" data-value="brake-rotors">Brake Rotors</a></li>
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="category" data-value="brake-kits">Brake Kits</a></li>
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="category" data-value="brake-fluid">Brake Fluid</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="nav-link dropdown-toggle" href="#" id="branddropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Brand</a>
+                    <ul class="dropdown-menu" aria-labelledby="branddropdown">
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="brand" data-value="Brembo">Brembo</a></li>
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="brand" data-value="Bosch">Bosch</a></li>
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="brand" data-value="ATE">ATE</a></li>
+                        <li><a class="dropdown-item filter-dropdown" href="#" data-filter="brand" data-value="Akebono">Akebono</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="nav-link dropdown-toggle filter-dropdown" href="#" data-filter="vehicle" data-value="performance">Performance</a>
+                </li>
+                <li>
+                    <a class="nav-link dropdown-toggle filter-dropdown" href="#" data-filter="category" data-value="best-sellers">Best Sellers</a>
+                </li>
+                <li>
+                    <a class="nav-link dropdown-toggle filter-dropdown" href="#" data-filter="discount" data-value="sale">On Sale</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Active Filters Display -->
+    <section class="filter-status" id="filterStatus" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h6 style="margin: 0; font-family: 'body';">Active Filters:</h6>
+            <button class="clear-filters" id="clearAllFilters">Clear All</button>
+        </div>
+        <div class="filter-tags" id="activeFilters">
+            <!-- Active filters will appear here -->
+        </div>
+    </section>
+
+    <!-- Results Count -->
+    <div class="results-count" id="resultsCount">
+        Showing <span id="showingCount">16</span> of <span id="totalCount">1,142</span> products
+    </div>
+
+    <!-- side bar -->
+    <section class="sidebar1-and-main">
+        <div class="sidebar1">
+            <!-- Brake System Type -->
+            <h6>BRAKE SYSTEM TYPE</h6>
+            <div class="p-1">
+                <input type="radio" name="brakeType" value="all" id="brakeAll" checked>
+                <label for="brakeAll">All Systems</label>
+            </div>
+            <div class="p-1">
+                <input type="radio" name="brakeType" value="disc" id="brakeDisc">
+                <label for="brakeDisc">Disc Brakes</label>
+            </div>
+            <div class="p-1">
+                <input type="radio" name="brakeType" value="drum" id="brakeDrum">
+                <label for="brakeDrum">Drum Brakes</label>
+            </div>
+            <div class="p-1">
+                <input type="radio" name="brakeType" value="emergency" id="brakeEmergency">
+                <label for="brakeEmergency">Parking/Emergency</label>
+            </div>
+            <hr>
+
+            <!-- categories -->
+            <h6>CATEGORIES</h6>
+
+            <div class="p-1">
+                <input type="checkbox" id="brakePads" value="brake-pads">
+                <label for="brakePads">Brake Pads<span class="count"> (412)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brakeRotors" value="brake-rotors">
+                <label for="brakeRotors">Brake Rotors/Drums<span class="count"> (287)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brakeCalipers" value="brake-calipers">
+                <label for="brakeCalipers">Brake Calipers<span class="count"> (156)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brakeKits" value="brake-kits">
+                <label for="brakeKits">Brake Kits<span class="count"> (189)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brakeFluid" value="brake-fluid">
+                <label for="brakeFluid">Brake Fluid<span class="count"> (120)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brakeLines" value="brake-lines">
+                <label for="brakeLines">Brake Lines<span class="count"> (67)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brakeSensors" value="brake-sensors">
+                <label for="brakeSensors">Brake Sensors<span class="count"> (45)</span></label>
+            </div>
+
+            <hr>
+
+            <!-- brands -->
+            <h6 class="sbb">BRAND <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> </h6>
+
+            <div class="p-1">
+                <input type="checkbox" id="brandBrembo" value="Brembo">
+                <label for="brandBrembo">Brembo<span class="count"> (238)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brandBosch" value="Bosch">
+                <label for="brandBosch">Bosch<span class="count"> (187)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brandATE" value="ATE">
+                <label for="brandATE">ATE<span class="count"> (156)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brandAkebono" value="Akebono">
+                <label for="brandAkebono">Akebono<span class="count"> (89)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brandEBC" value="EBC">
+                <label for="brandEBC">EBC Brakes<span class="count"> (120)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brandRaybestos" value="Raybestos">
+                <label for="brandRaybestos">Raybestos<span class="count"> (67)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brandWagner" value="Wagner">
+                <label for="brandWagner">Wagner<span class="count"> (45)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="brandPowerStop" value="PowerStop">
+                <label for="brandPowerStop">PowerStop<span class="count"> (32)</span></label>
+            </div>
+
+            <hr>
+
+            <!-- Pad Material Type -->
+            <h6>PAD MATERIAL</h6>
+
+            <div class="p-1">
+                <input type="checkbox" id="materialCeramic" value="ceramic">
+                <i class="fa-solid fa-shield-alt" style="margin-left: 5px; color: #964b00;"></i>
+                <label for="materialCeramic">Ceramic<span class="count"> (312)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="materialSemiMetallic" value="semi-metallic">
+                <i class="fa-solid fa-fire" style="margin-left: 5px; color: #ff7700;"></i>
+                <label for="materialSemiMetallic">Semi-Metallic<span class="count"> (187)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="materialOrganic" value="organic">
+                <i class="fa-solid fa-leaf" style="margin-left: 5px; color: #00cc66;"></i>
+                <label for="materialOrganic">Organic/NAO<span class="count"> (156)</span></label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="materialCarbon" value="carbon">
+                <i class="fa-solid fa-car" style="margin-left: 5px; color: #333;"></i>
+                <label for="materialCarbon">Carbon-Ceramic<span class="count"> (89)</span></label>
+            </div>
+
+            <hr>
+
+            <!-- Vehicle Type -->
+            <h6>VEHICLE TYPE</h6>
+            <div class="p-1">
+                <input type="checkbox" id="vehicleCar" value="car">
+                <i class="fa-solid fa-car" style="margin-left: 5px; color: #1248f8;"></i>
+                <label for="vehicleCar">Passenger Cars</label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="vehicleSUV" value="suv">
+                <i class="fa-solid fa-truck" style="margin-left: 5px; color: #964b00;"></i>
+                <label for="vehicleSUV">SUV/Trucks</label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="vehiclePerformance" value="performance">
+                <i class="fa-solid fa-tachometer-alt" style="margin-left: 5px; color: #964b00;"></i>
+                <label for="vehiclePerformance">Performance Vehicles</label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="vehicleHeavyDuty" value="heavy-duty">
+                <i class="fa-solid fa-truck-monster" style="margin-left: 5px; color: #333;"></i>
+                <label for="vehicleHeavyDuty">Heavy Duty</label>
+            </div>
+
+            <hr>
+
+            <!-- discount -->
+            <h6>DISCOUNTS</h6>
+            <div class="p-1">
+                <input type="checkbox" id="discount10" value="10">
+                <label for="discount10">10% and Above</label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="discount20" value="20">
+                <label for="discount20">20% and Above</label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="discount30" value="30">
+                <label for="discount30">30% and Above</label>
+            </div>
+            <div class="p-1">
+                <input type="checkbox" id="discount40" value="40">
+                <label for="discount40">40% and Above</label>
+            </div>
+        </div>
+
+        <!-- brakes section -->
+        <main class="main">
+            <div class="msc" id="productsContainer">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <ul class="pagination" id="pagination">
+                    <!-- Pagination will be dynamically generated here -->
+                </ul>
+            </div>
+        </main>
+    </section>
+
+    <!-- Chat Us -->
+    <section class="chat-us">
+        <a href=""> <i class="fa-solid fa-headset">
+                <span class="badge   position-absolute top-0 rounded-pill relative-middle">3</span>
+            </i>
+        </a>
+    </section>
+
+    <!-- to top button -->
+    <a class="top-button" href="#prenav">
+        <i class="fa-regular fa-hand-pointer"></i>
+    </a>
+
+    <!-- poster right  -->
+    <div class="poster">
+        <a href="">Safety Sale: 35% OFF Brakes <i class="fa-solid fa-shield-alt"></i></a>
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        <div class="ft-container">
+            <div class="ft-content1">
+                <div class="ft-logo">
+                    <img src="/img/Gemini_Generated_Image_rwo7gkrwo7gkrwo7-removebg-preview.png" width="150px" alt="Autoparts Pro Logo">
+                </div>
+                <div>
+                    <p>Shopping auto parts is easier with Autoparts Pro, <br> shopping across categories to help customers
+                        <br> maintain and upgrade their vehicles with quality parts.
+                    </p>
+                </div>
+
+                <div class="ft-icons">
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-youtube"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="ft-content2">
+                <h5>CONTACT</h5>
+                <p><i class="fa-solid fa-phone"></i>+234 9069 960720 <br> (+234) 8123 456789</p>
+
+                <p><i class="fa-solid fa-location"></i>43 Okigwe Road, <br> Owerri, Imo State <br>
+                    Nigeria</p>
+
+                <p><i class="fa-solid fa-envelope"></i>autopartspro@gmail.com <br> support@autopartspro.com</p>
+            </div>
+
+            <div class="ft-content3">
+                <ul>
+                    <h5>QUICK LINKS</h5>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Installation Guide</a></li>
+                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="">Terms of Sale</a></li>
+                    <li><a href="">Warranty Terms</a></li>
+                </ul>
+            </div>
+
+            <div class="ft-content4">
+                <form action="">
+                    <h6>Subscribe to our newsletter and <br> get the latest updates on auto parts</h6>
+                    <input class="inp1" type="email" placeholder="Enter your email" required>
+                    <input class="inp2" type="submit" value="SUBSCRIBE">
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="last">
+            <P>&copy; 2025 Autoparts Pro. All right reserved</P>
+        </div>
+
+    </footer>
+
+    <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+<script>
+    // =================== CART SYSTEM ===================
+    // Initialize cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Brake Products Data with unique IDs and cart-ready data
+    const products = [
+        // Page 1 products
+        {
+            id: 'brakes-001',
+            name: "Brembo Ceramic Brake Pads (Front)",
+            category: "brake-pads",
+            brand: "Brembo",
+            material: "ceramic",
+            vehicleType: "car",
+            discount: 25,
+            price: 45000,
+            oldPrice: 60000,
+            image: "/img/brake-pads.png",
+            rating: 5,
+            reviews: 189,
+            description: "Premium ceramic brake pads for smooth, quiet braking"
+        },
+        {
+            id: 'brakes-002',
+            name: "Bosch Brake Rotors (Front Pair)",
+            category: "brake-rotors",
+            brand: "Bosch",
+            material: "cast-iron",
+            vehicleType: "car",
+            discount: 20,
+            price: 65000,
+            oldPrice: 82000,
+            image: "/img/brake-rotors.png",
+            rating: 4.5,
+            reviews: 142,
+            description: "Premium coated brake rotors for extended life"
+        },
+        {
+            id: 'brakes-003',
+            name: "PowerStop Complete Brake Kit",
+            category: "brake-kits",
+            brand: "PowerStop",
+            material: "ceramic",
+            vehicleType: "suv",
+            discount: 30,
+            price: 125000,
+            oldPrice: 180000,
+            image: "/img/brake-kit.png",
+            rating: 5,
+            reviews: 89,
+            description: "Complete brake kit with pads and rotors"
+        },
+        {
+            id: 'brakes-004',
+            name: "ATE DOT 4 Brake Fluid (1L)",
+            category: "brake-fluid",
+            brand: "ATE",
+            material: "synthetic",
+            vehicleType: "car",
+            discount: 15,
+            price: 8500,
+            oldPrice: 10000,
+            image: "/img/brake-fluid.png",
+            rating: 4.5,
+            reviews: 156,
+            description: "High-performance DOT 4 brake fluid"
+        },
+        {
+            id: 'brakes-005',
+            name: "Akebono Performance Brake Pads",
+            category: "brake-pads",
+            brand: "Akebono",
+            material: "ceramic",
+            vehicleType: "performance",
+            discount: 22,
+            price: 55000,
+            oldPrice: 70000,
+            image: "/img/performance-pads.png",
+            rating: 4.5,
+            reviews: 112,
+            description: "Ultra-premium ceramic performance pads"
+        },
+        {
+            id: 'brakes-006',
+            name: "EBC Slotted Brake Rotors",
+            category: "brake-rotors",
+            brand: "EBC",
+            material: "drilled-slotted",
+            vehicleType: "performance",
+            discount: 18,
+            price: 95000,
+            oldPrice: 116000,
+            image: "/img/slotted-rotors.png",
+            rating: 5,
+            reviews: 67,
+            description: "Slotted rotors for improved heat dissipation"
+        },
+        {
+            id: 'brakes-007',
+            name: "Wagner ThermoQuiet Brake Pads",
+            category: "brake-pads",
+            brand: "Wagner",
+            material: "semi-metallic",
+            vehicleType: "car",
+            discount: 35,
+            price: 32000,
+            oldPrice: 49000,
+            image: "/img/thermo-pads.png",
+            rating: 4,
+            reviews: 234,
+            description: "ThermoQuiet technology for reduced noise"
+        },
+        {
+            id: 'brakes-008',
+            name: "Brake Caliper (Front Left)",
+            category: "brake-calipers",
+            brand: "Bosch",
+            material: "aluminum",
+            vehicleType: "car",
+            discount: 28,
+            price: 45000,
+            oldPrice: 62000,
+            image: "/img/brake-caliper.png",
+            rating: 4.5,
+            reviews: 78,
+            description: "Remanufactured brake caliper with warranty"
+        },
+        // Page 2 products
+        {
+            id: 'brakes-009',
+            name: "Raybestos Drum Brake Set (Rear)",
+            category: "brake-rotors",
+            brand: "Raybestos",
+            material: "cast-iron",
+            vehicleType: "suv",
+            discount: 20,
+            price: 75000,
+            oldPrice: 94000,
+            image: "/img/drum-brakes.png",
+            rating: 4,
+            reviews: 56,
+            description: "Complete rear drum brake assembly"
+        },
+        {
+            id: 'brakes-010',
+            name: "Stainless Steel Brake Lines",
+            category: "brake-lines",
+            brand: "EBC",
+            material: "stainless-steel",
+            vehicleType: "performance",
+            discount: 25,
+            price: 38000,
+            oldPrice: 50000,
+            image: "/img/brake-lines.png",
+            rating: 5,
+            reviews: 45,
+            description: "Braided stainless steel brake lines"
+        },
+        {
+            id: 'brakes-011',
+            name: "Brembo Cross-Drilled Rotors",
+            category: "brake-rotors",
+            brand: "Brembo",
+            material: "drilled",
+            vehicleType: "performance",
+            discount: 22,
+            price: 120000,
+            oldPrice: 154000,
+            image: "/img/drilled-rotors.png",
+            rating: 5,
+            reviews: 92,
+            description: "Cross-drilled rotors for racing applications"
+        },
+        {
+            id: 'brakes-012',
+            name: "Brake Wear Sensor",
+            category: "brake-sensors",
+            brand: "Bosch",
+            material: "plastic",
+            vehicleType: "car",
+            discount: 40,
+            price: 9500,
+            oldPrice: 16000,
+            image: "/img/brake-sensor.png",
+            rating: 4.5,
+            reviews: 89,
+            description: "Brake pad wear sensor"
+        },
+        {
+            id: 'brakes-013',
+            name: "Heavy Duty Truck Brake Pads",
+            category: "brake-pads",
+            brand: "Wagner",
+            material: "semi-metallic",
+            vehicleType: "heavy-duty",
+            discount: 18,
+            price: 68000,
+            oldPrice: 83000,
+            image: "/img/truck-pads.png",
+            rating: 4,
+            reviews: 67,
+            description: "Heavy duty brake pads for trucks"
+        },
+        {
+            id: 'brakes-014',
+            name: "Emergency Brake Cable",
+            category: "brake-lines",
+            brand: "Raybestos",
+            material: "steel",
+            vehicleType: "car",
+            discount: 30,
+            price: 22000,
+            oldPrice: 31000,
+            image: "/img/brake-cable.png",
+            rating: 4,
+            reviews: 34,
+            description: "Parking/emergency brake cable"
+        },
+        {
+            id: 'brakes-015',
+            name: "Premium Brake Hardware Kit",
+            category: "brake-kits",
+            brand: "PowerStop",
+            material: "steel",
+            vehicleType: "car",
+            discount: 35,
+            price: 18500,
+            oldPrice: 28000,
+            image: "/img/brake-hardware.png",
+            rating: 4.5,
+            reviews: 112,
+            description: "Complete brake hardware and shim kit"
+        },
+        {
+            id: 'brakes-016',
+            name: "Performance Brake Fluid DOT 5.1",
+            category: "brake-fluid",
+            brand: "ATE",
+            material: "racing",
+            vehicleType: "performance",
+            discount: 20,
+            price: 12500,
+            oldPrice: 15600,
+            image: "/img/racing-fluid.png",
+            rating: 5,
+            reviews: 45,
+            description: "Racing brake fluid with high boiling point"
+        }
+    ];
+
+    // Configuration
+    const ITEMS_PER_PAGE = 8;
+    let currentPage = 1;
+    let activeFilters = {
+        brakeType: 'all',
+        categories: [],
+        brands: [],
+        materials: [],
+        vehicleTypes: [],
+        discounts: []
+    };
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        initializePage();
+        setupEventListeners();
+        renderProducts();
+        updatePagination();
+        updateResultsCount();
+        updateCartDisplay();
+        updateFavoritesCount();
+    });
+
+    function initializePage() {
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const searchContainer = document.getElementById('search-container1');
+        const navIcons = document.getElementById('nav-icons');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            searchContainer.classList.toggle('active');
+            navIcons.classList.toggle('active');
+        });
+
+        // Initialize carousel
+        const carousel = new bootstrap.Carousel(document.getElementById('carouselExampleCaptions'), {
+            interval: 5000,
+            wrap: true
+        });
+    }
+
+    function setupEventListeners() {
+        // Filter checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', handleFilterChange);
+        });
+
+        // Brake type radios
+        const brakeRadios = document.querySelectorAll('input[name="brakeType"]');
+        brakeRadios.forEach(radio => {
+            radio.addEventListener('change', handleBrakeTypeChange);
+        });
+
+        // Search input
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', handleSearch);
+
+        // Clear all filters
+        document.getElementById('clearAllFilters').addEventListener('click', clearAllFilters);
+
+        // Dropdown filters
+        const dropdownFilters = document.querySelectorAll('.filter-dropdown');
+        dropdownFilters.forEach(filter => {
+            filter.addEventListener('click', handleDropdownFilter);
+        });
+    }
+
+    function handleFilterChange(e) {
+        const checkbox = e.target;
+        const value = checkbox.value;
+        const filterType = getFilterType(checkbox.id);
+
+        if (checkbox.checked) {
+            activeFilters[filterType].push(value);
+        } else {
+            activeFilters[filterType] = activeFilters[filterType].filter(item => item !== value);
+        }
+
+        applyFilters();
+    }
+
+    function handleBrakeTypeChange(e) {
+        activeFilters.brakeType = e.target.value;
+        applyFilters();
+    }
+
+    function handleSearch(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        if (searchTerm.length >= 2) {
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.brand.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm) ||
+                product.material.toLowerCase().includes(searchTerm)
+            );
+            
+            // Render filtered products
+            const container = document.getElementById('productsContainer');
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No brake products found</h3>
+                        <p>Try a different search term</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Calculate pagination for search results
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = startIndex + ITEMS_PER_PAGE;
+            const productsToShow = filteredProducts.slice(startIndex, endIndex);
+            
+            container.innerHTML = productsToShow.map(product => {
+                const isInCart = cart.some(item => item.id === product.id);
+                const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                const isFavorite = favorites.includes(product.id);
+                
+                return `
+                <div class="container1" data-id="${product.id}">
+                    <div class="brake1">
+                        <i class="${isFavorite ? 'fas' : 'far'} fa-heart favorite-btn" onclick="toggleFavorite('${product.id}')"></i>
+                        <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                        <img src="${product.image}" width="160px" alt="${product.name}">
+                    </div>
+                    <div class="info">
+                        <div class="name">
+                            <h6>${product.name}</h6>
+                        </div>
+                        <div class="stars">
+                            ${generateStars(product.rating)}
+                            <span>(${product.reviews})</span>
+                        </div>
+                        <div class="price-cart">
+                            <p>₦${product.price.toLocaleString()} 
+                                ${product.discount > 0 ? 
+                                    `<span style="text-decoration: line-through; font-size: 12px; color: gray; margin-left: 10px;">
+                                        ₦${product.oldPrice.toLocaleString()}
+                                    </span>` : 
+                                    ''}
+                            </p>
+                            ${product.discount > 0 ? 
+                                `<span style="color: #964b00; font-size: 12px; font-weight: bold;">
+                                    -${product.discount}% OFF
+                                </span>` : 
+                                ''}
+                        </div>
+                    </div>
+                    <button class="add-to-cart ${isInCart ? 'in-cart' : ''}" onclick="addToCart('${product.id}')">
+                        <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}" style="margin-right: 10px;"></i>
+                        ${isInCart ? 'In Cart' : 'Add to Cart'}
+                    </button>
+                </div>
+                `;
+            }).join('');
+            
+            // Update search results count
+            const searchResultsCount = document.getElementById('searchResultsCount');
+            if (searchResultsCount) {
+                searchResultsCount.textContent = `Found ${filteredProducts.length} products`;
+                searchResultsCount.style.display = 'block';
+            }
+        } else {
+            // If search term is cleared, render normal products
+            renderProducts();
+            const searchResultsCount = document.getElementById('searchResultsCount');
+            if (searchResultsCount) {
+                searchResultsCount.style.display = 'none';
+            }
+        }
+    }
+
+    function handleDropdownFilter(e) {
+        e.preventDefault();
+        const filter = e.target.dataset.filter;
+        const value = e.target.dataset.value;
+
+        // Add filter
+        if (!activeFilters[filter].includes(value)) {
+            activeFilters[filter].push(value);
+            applyFilters();
+        }
+    }
+
+    function getFilterType(elementId) {
+        if (elementId.includes('brand')) return 'brands';
+        if (elementId.includes('material')) return 'materials';
+        if (elementId.includes('vehicle')) return 'vehicleTypes';
+        if (elementId.includes('discount')) return 'discounts';
+        return 'categories'; // Default for category checkboxes
+    }
+
+    function applyFilters() {
+        currentPage = 1; // Reset to first page when filters change
+        renderProducts();
+        updatePagination();
+        updateActiveFiltersDisplay();
+        updateResultsCount();
+    }
+
+    function clearAllFilters() {
+        activeFilters = {
+            brakeType: 'all',
+            categories: [],
+            brands: [],
+            materials: [],
+            vehicleTypes: [],
+            discounts: []
+        };
+
+        // Uncheck all checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+
+        // Reset brake type to all
+        document.getElementById('brakeAll').checked = true;
+
+        applyFilters();
+        document.getElementById('filterStatus').style.display = 'none';
+    }
+
+    function updateActiveFiltersDisplay() {
+        const activeFiltersContainer = document.getElementById('activeFilters');
+        const filterStatus = document.getElementById('filterStatus');
+        activeFiltersContainer.innerHTML = '';
+
+        let hasActiveFilters = false;
+
+        // Brake Type
+        if (activeFilters.brakeType !== 'all') {
+            hasActiveFilters = true;
+            const tag = createFilterTag('Type: ' + activeFilters.brakeType.charAt(0).toUpperCase() + activeFilters.brakeType.slice(1), 'brakeType');
+            activeFiltersContainer.appendChild(tag);
+        }
+
+        // Categories
+        activeFilters.categories.forEach(category => {
+            hasActiveFilters = true;
+            const tag = createFilterTag('Category: ' + formatFilterName(category), 'categories', category);
+            activeFiltersContainer.appendChild(tag);
+        });
+
+        // Brands
+        activeFilters.brands.forEach(brand => {
+            hasActiveFilters = true;
+            const tag = createFilterTag('Brand: ' + brand, 'brands', brand);
+            activeFiltersContainer.appendChild(tag);
+        });
+
+        // Materials
+        activeFilters.materials.forEach(material => {
+            hasActiveFilters = true;
+            const tag = createFilterTag('Material: ' + formatFilterName(material), 'materials', material);
+            activeFiltersContainer.appendChild(tag);
+        });
+
+        // Vehicle Types
+        activeFilters.vehicleTypes.forEach(vehicleType => {
+            hasActiveFilters = true;
+            const tag = createFilterTag('Vehicle: ' + formatFilterName(vehicleType), 'vehicleTypes', vehicleType);
+            activeFiltersContainer.appendChild(tag);
+        });
+
+        // Discounts
+        activeFilters.discounts.forEach(discount => {
+            hasActiveFilters = true;
+            const tag = createFilterTag('Discount: ' + discount + '%+', 'discounts', discount);
+            activeFiltersContainer.appendChild(tag);
+        });
+
+        filterStatus.style.display = hasActiveFilters ? 'block' : 'none';
+    }
+
+    function createFilterTag(text, filterType, value = '') {
+        const tag = document.createElement('div');
+        tag.className = 'filter-tag';
+        tag.innerHTML = `
+            ${text}
+            <i class="fas fa-times" data-filter="${filterType}" data-value="${value}"></i>
+        `;
+
+        tag.querySelector('i').addEventListener('click', function() {
+            removeFilter(filterType, value);
+        });
+
+        return tag;
+    }
+
+    function removeFilter(filterType, value) {
+        if (filterType === 'brakeType') {
+            activeFilters.brakeType = 'all';
+            document.getElementById('brakeAll').checked = true;
+        } else {
+            activeFilters[filterType] = activeFilters[filterType].filter(item => item !== value);
+            
+            // Uncheck corresponding checkbox
+            const checkboxId = getCheckboxId(filterType, value);
+            const checkbox = document.getElementById(checkboxId);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+        }
+
+        applyFilters();
+    }
+
+    function getCheckboxId(filterType, value) {
+        switch(filterType) {
+            case 'categories':
+                return value.toLowerCase().replace('-', '') + 's';
+            case 'brands':
+                return 'brand' + value;
+            case 'materials':
+                return 'material' + value.split('-')[0].charAt(0).toUpperCase() + value.split('-')[0].slice(1);
+            case 'vehicleTypes':
+                return 'vehicle' + value.split('-')[0].charAt(0).toUpperCase() + value.split('-')[0].slice(1);
+            case 'discounts':
+                return 'discount' + value;
+            default:
+                return '';
+        }
+    }
+
+    function formatFilterName(name) {
+        return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    }
+
+    function filterProducts() {
+        return products.filter(product => {
+            // Filter by brake type (simplified - all products are disc in this example)
+            if (activeFilters.brakeType !== 'all') {
+                // In real implementation, would check product.brakeType
+                return true; // Placeholder
+            }
+
+            // Filter by categories
+            if (activeFilters.categories.length > 0 && !activeFilters.categories.includes(product.category)) {
+                return false;
+            }
+
+            // Filter by brands
+            if (activeFilters.brands.length > 0 && !activeFilters.brands.includes(product.brand)) {
+                return false;
+            }
+
+            // Filter by materials
+            if (activeFilters.materials.length > 0 && !activeFilters.materials.includes(product.material)) {
+                return false;
+            }
+
+            // Filter by vehicle types
+            if (activeFilters.vehicleTypes.length > 0 && !activeFilters.vehicleTypes.includes(product.vehicleType)) {
+                return false;
+            }
+
+            // Filter by discounts
+            if (activeFilters.discounts.length > 0) {
+                const discountThreshold = Math.min(...activeFilters.discounts.map(d => parseInt(d)));
+                if (product.discount < discountThreshold) return false;
+            }
+
+            return true;
+        });
+    }
+
+    function renderProducts() {
+        const container = document.getElementById('productsContainer');
+        const filteredProducts = filterProducts();
+        
+        if (filteredProducts.length === 0) {
+            container.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <h3>No brake products found</h3>
+                    <p>Try adjusting your filters or search term</p>
+                    <button class="clear-filters" onclick="clearAllFilters()" style="margin-top: 20px;">Clear All Filters</button>
+                </div>
+            `;
+            return;
+        }
+
+        // Calculate pagination
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        const productsToShow = filteredProducts.slice(startIndex, endIndex);
+
+        container.innerHTML = productsToShow.map(product => {
+            const isInCart = cart.some(item => item.id === product.id);
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const isFavorite = favorites.includes(product.id);
+            
+            return `
+            <div class="container1" data-id="${product.id}">
+                <div class="brake1">
+                    <i class="${isFavorite ? 'fas' : 'far'} fa-heart favorite-btn" onclick="toggleFavorite('${product.id}')"></i>
+                    <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                    <img src="${product.image}" width="160px" alt="${product.name}">
+                </div>
+                <div class="info">
+                    <div class="name">
+                        <h6>${product.name}</h6>
+                    </div>
+                    <div class="stars">
+                        ${generateStars(product.rating)}
+                        <span>(${product.reviews})</span>
+                    </div>
+                    <div class="price-cart">
+                        <p>₦${product.price.toLocaleString()} 
+                            ${product.discount > 0 ? 
+                                `<span style="text-decoration: line-through; font-size: 12px; color: gray; margin-left: 10px;">
+                                    ₦${product.oldPrice.toLocaleString()}
+                                </span>` : 
+                                ''}
+                        </p>
+                        ${product.discount > 0 ? 
+                            `<span style="color: #964b00; font-size: 12px; font-weight: bold;">
+                                -${product.discount}% OFF
+                            </span>` : 
+                            ''}
+                    </div>
+                </div>
+                <button class="add-to-cart ${isInCart ? 'in-cart' : ''}" onclick="addToCart('${product.id}')">
+                    <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}" style="margin-right: 10px;"></i>
+                    ${isInCart ? 'In Cart' : 'Add to Cart'}
+                </button>
+            </div>
+            `;
+        }).join('');
+    }
+
+    function generateStars(rating) {
+        let stars = '';
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+
+        for (let i = 1; i <= 5; i++) {
+            if (i <= fullStars) {
+                stars += '<i class="fa-solid fa-star"></i>';
+            } else if (i === fullStars + 1 && hasHalfStar) {
+                stars += '<i class="fa-solid fa-star-half-stroke"></i>';
+            } else {
+                stars += '<i class="fa-regular fa-star"></i>';
+            }
+        }
+
+        return stars;
+    }
+
+    function updatePagination() {
+        const filteredProducts = filterProducts();
+        const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+        const paginationContainer = document.getElementById('pagination');
+
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '';
+
+        // Previous button
+        paginationHTML += `
+            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
+            </li>
+        `;
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                paginationHTML += `
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" data-page="${i}">${i}</a>
+                    </li>
+                `;
+            } else if (i === currentPage - 2 || i === currentPage + 2) {
+                paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+            }
+        }
+
+        // Next button
+        paginationHTML += `
+            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
+            </li>
+        `;
+
+        paginationContainer.innerHTML = paginationHTML;
+
+        // Add click events
+        paginationContainer.querySelectorAll('.page-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!this.closest('.page-item').classList.contains('disabled')) {
+                    const page = parseInt(this.dataset.page);
+                    if (page && page !== currentPage) {
+                        currentPage = page;
+                        renderProducts();
+                        updatePagination();
+                        updateResultsCount();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    }
+
+    function updateResultsCount() {
+        const filteredProducts = filterProducts();
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+        const endIndex = Math.min(startIndex + ITEMS_PER_PAGE - 1, filteredProducts.length);
+        
+        document.getElementById('showingCount').textContent = 
+            filteredProducts.length > 0 ? `${startIndex}-${endIndex}` : '0';
+        document.getElementById('totalCount').textContent = filteredProducts.length;
+        document.getElementById('totalItems').textContent = `${filteredProducts.length} items available`;
+    }
+
+    // =================== CART FUNCTIONS ===================
+    window.addToCart = function(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        // Check if product already exists in cart
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                originalPrice: product.oldPrice || product.price,
+                image: product.image,
+                category: 'Brakes',
+                subCategory: product.category,
+                material: product.material,
+                brand: product.brand,
+                quantity: 1
+            });
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Update cart display
+        updateCartDisplay();
+        
+        // Update button state
+        updateProductButtonState(productId);
+        
+        // Show notification
+        showNotification(`${product.name} added to cart!`);
+    };
+
+    function updateProductButtonState(productId) {
+        const productCard = document.querySelector(`.container1[data-id="${productId}"]`);
+        if (productCard) {
+            const cartButton = productCard.querySelector('.add-to-cart');
+            const isInCart = cart.some(item => item.id === productId);
+            
+            cartButton.classList.toggle('in-cart', isInCart);
+            cartButton.innerHTML = `
+                <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}" style="margin-right: 10px;"></i>
+                ${isInCart ? 'In Cart' : 'Add to Cart'}
+            `;
+        }
+    }
+
+    function updateCartDisplay() {
+        const cartBadge = document.querySelector('.cart-badge');
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        if (cartBadge) {
+            cartBadge.textContent = totalItems;
+            cartBadge.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                cartBadge.style.transform = 'scale(1)';
+            }, 300);
+        }
+        
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // =================== FAVORITES FUNCTIONS ===================
+    window.toggleFavorite = function(productId) {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const index = favorites.indexOf(productId);
+        
+        if (index === -1) {
+            favorites.push(productId);
+        } else {
+            favorites.splice(index, 1);
+        }
+        
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        
+        // Update favorite button
+        updateFavoriteButtonState(productId, index === -1);
+        
+        // Update favorites count
+        updateFavoritesCount();
+        
+        // Show notification
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            showNotification(index === -1 ? 
+                `${product.name} added to favorites!` : 
+                `${product.name} removed from favorites!`);
+        }
+    };
+
+    function updateFavoriteButtonState(productId, isNowFavorite) {
+        const productCard = document.querySelector(`.container1[data-id="${productId}"]`);
+        if (productCard) {
+            const favoriteBtn = productCard.querySelector('.favorite-btn');
+            
+            if (isNowFavorite) {
+                favoriteBtn.classList.remove('far');
+                favoriteBtn.classList.add('fas');
+                favoriteBtn.style.color = 'red';
+            } else {
+                favoriteBtn.classList.remove('fas');
+                favoriteBtn.classList.add('far');
+                favoriteBtn.style.color = '';
+            }
+        }
+    }
+
+    function updateFavoritesCount() {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const favoritesCount = document.querySelector('.favorites-count');
+        if (favoritesCount) {
+            favoritesCount.textContent = favorites.length;
+            favoritesCount.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                favoritesCount.style.transform = 'scale(1)';
+            }, 300);
+        }
+    }
+
+    // =================== NOTIFICATION SYSTEM ===================
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: #964b00;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-weight: bold;
+            font-family: 'joy';
+            max-width: 300px;
+        `;
+
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease-out';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // Add CSS for animations and cart styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        /* Cart button styles */
+        .add-to-cart.in-cart {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        
+        .add-to-cart.in-cart:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Favorite button styles */
+        .favorite-btn {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Cart badge animation */
+        .cart-badge, .favorites-count {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Search results count */
+        .search-results-count {
+            background-color: #964b00;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: none;
+            margin: 10px 0;
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+</body>
+</html>

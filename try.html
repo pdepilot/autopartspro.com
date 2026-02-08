@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/try.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="checkout-header">
+            <a href="/home.html" class="logo">Your Cart/Bag</a>
+            <div class="checkout-steps">
+                <div class="step">Cart</div>
+                <div class="step active">Information</div>
+                <div class="step">Shipping</div>
+            </div>
+        </div>
+
+        <!-- Checkout Form -->
+        <div class="checkout-form">
+            <h2 class="section-title">Contact Information</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="chk" type="email" id="email" placeholder="Enter your email">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="email-offers">
+                <label for="email-offers">Email me with news and offers</label>
+            </div>
+
+            <h2 class="section-title">Shipping Address</h2>
+            <div class="form-group form-row">
+                <div>
+                    <label for="first-name">First name</label>
+                    <input class="chk" type="text" id="first-name">
+                </div>
+                <div>
+                    <label for="last-name">Last name</label>
+                    <input class="chk" type="text" id="last-name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input class="chk" type="text" id="address" placeholder="Street address">
+            </div>
+
+            <div class="form-group">
+                <label for="apartment">Apartment, suite, etc. (optional)</label>
+                <input class="chk" type="text" id="apartment">
+            </div>
+
+            <div class="form-group form-row">
+                <div>
+                    <label for="country">Country/Region</label>
+                    <select id="country">
+                        <option>Nigeria</option>
+                        <option>Ghana</option>
+                        <option>South Africa</option>
+
+                    </select>
+                </div>
+                <div>
+                    <label for="city">City</label>
+                    <input class="chk" type="text" id="city">
+                </div>
+            </div>
+
+            <div class="form-group form-row">
+                <div>
+                    <label for="state">State</label>
+                    <select id="state">
+                        <option>Lagos</option>
+                        <option>Imo State</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="zip">ZIP code</label>
+                    <input class="chk" type="text" id="zip">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input class="chk" type="tel" id="phone" placeholder="+234 ___ _______">
+            </div>
+
+            <div class="payment-methods">
+                <h2 class="section-title">Payment Method</h2>
+                <div class="payment-tabs">
+                    <div class="payment-tab active">Credit Card</div>
+                    <div class="payment-tab">PayPal</div>
+                    <div class="payment-tab">Apple Pay</div>
+                </div>
+
+                <div class="payment-content active">
+                    <div class="card-icons">
+                        <img src="/img/c4ce1ce3-d2b1-429d-a63c-20add8fa8e49.jpg" class="card-icon" alt="Visa">
+                        <img src="/img/d5c77d08-50c8-44cf-a4b6-8be5333733e4.jpg" class="card-icon" alt="Mastercard">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+                            class="card-icon" alt="Apple Pay">
+                        <img src="/img/Mit PayPal Geld senden - so funktioniert's.jpg" class="card-icon"
+                            alt="Amazon Pay">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-number">Card number</label>
+                        <input class="chk" type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-name">Name on card</label>
+                        <input class="chk" type="text" id="card-name">
+                    </div>
+
+                    <div class="form-group form-row">
+                        <div>
+                            <label for="expiry">Expiration date</label>
+                            <input class="chk" type="text" id="expiry" placeholder="MM/YY">
+                        </div>
+                        <div>
+                            <label for="cvv">Security code</label>
+                            <input class="chk" type="text" id="cvv" placeholder="CVV">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-content">
+                    <p>You'll be redirected to PayPal to complete your purchase securely.</p>
+                    <button class="checkout-btn" style="background-color: #0070ba; margin-top: 20px;">
+                        Continue with PayPal
+                    </button>
+                </div>
+
+                <div class="payment-content">
+                    <p>Complete your purchase quickly and securely with Apple Pay.</p>
+                    <button class="checkout-btn" style="background-color: #000; margin-top: 20px; color: white;">
+                        <i class="fab fa-apple"></i> Pay with Apple Pay
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2 class="section-title">Order Summary</h2>
+
+            <div class="order-items">
+                <div class="order-item">
+                    <img src="/MS/mss__2_-removebg-preview.png" alt="Air Jordan 1" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">Air Jordan 1 Retro High OG</div>
+                        <div class="item-variant">White/Black/navy blue • Size 10Uk</div>
+                        <div class="item-price">$575.00</div>
+                    </div>
+                    <div class="item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <input type="text" class="quantity-input" value="1" readonly>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+
+                <div class="order-item">
+                    <img src="/MS/mss__1_-removebg-preview.png" alt="Nike Air Force 1" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">Nike Air Force 1 '07</div>
+                        <div class="item-variant">White • Size 9.5</div>
+                        <div class="item-price">$110.00</div>
+                    </div>
+                    <div class="item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <input type="text" class="quantity-input" value="1" readonly>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>$290.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>Free</span>
+            </div>
+            <div class="summary-row">
+                <span>Tax</span>
+                <span>$23.20</span>
+            </div>
+
+            <div class="summary-row summary-total">
+                <span>Total</span>
+                <span>$313.20</span>
+            </div>
+
+            <button class="checkout-btn">Complete Order</button>
+
+            <div class="secure-checkout">
+                <i class="fas fa-lock"></i>
+                <span>Secure checkout</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/try.js"></script>
+</html>
