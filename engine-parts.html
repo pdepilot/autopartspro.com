@@ -190,11 +190,6 @@
             border-radius: 3px;
         }
 
-        .navactive.active {
-            font-weight: bold;
-            color: #964b00;
-        }
-
         /* Mobile Navigation - Matching index.html */
         @media (max-width: 1024px) {
             nav {
@@ -293,7 +288,7 @@
         }
 
         .carousel-item h5 {
-            font-size: 40px;
+            font-size: clamp(24px, 4vw, 40px);
             font-family: "body";
             font-weight: bolder;
             color: white;
@@ -303,7 +298,7 @@
         .carousel-item a {
             margin: 10px;
             font-family: "joy";
-            padding: 12px 40px;
+            padding: clamp(8px, 2vw, 12px) clamp(20px, 4vw, 40px);
             border-radius: 25px;
             text-decoration: none;
             color: white;
@@ -311,11 +306,32 @@
             border: 1px solid #964b00;
             transition: all 0.3s ease;
             font-weight: 600;
+            font-size: clamp(14px, 1.8vw, 16px);
         }
 
         .carousel-item a:hover {
             box-shadow: inset 120px 0 0 white;
             color: #885200;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: 50vh;
+            }
+            
+            .carousel-caption {
+                padding-bottom: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                height: 40vh;
+            }
+            
+            .carousel-caption {
+                padding-bottom: 80px;
+            }
         }
 
         /* shoe indicator */
@@ -326,7 +342,7 @@
         }
 
         .si p {
-            font-size: 18px;
+            font-size: clamp(16px, 2vw, 18px);
         }
 
         .mso-container {
@@ -340,6 +356,16 @@
             border-radius: 10px;
             margin-bottom: 20px;
             border: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .mso-container ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 0;
+            margin: 0;
         }
 
         .mso-container ul li {
@@ -353,10 +379,31 @@
             color: black;
             font-family: "joy";
             transition: 0.3s;
+            font-size: clamp(14px, 1.5vw, 16px);
+            white-space: nowrap;
         }
 
         .mso-container a:hover {
             color: #964b00;
+        }
+
+        @media (max-width: 768px) {
+            .mso-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+                width: 95%;
+            }
+            
+            .mso-container ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .mso-container ul li {
+                padding: 5px 0;
+            }
         }
 
         /* side bar */
@@ -365,6 +412,7 @@
             margin: 5px auto;
             display: flex;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         .sidebar1 {
@@ -372,13 +420,14 @@
             width: 220px;
             padding: 20px;
             height: 90vh;
-            overflow-y: scroll;
+            overflow-y: auto;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 11%;
             z-index: 100;
             border-radius: 10px;
             border: 1px solid #ddd;
+            flex-shrink: 0;
         }
 
         .sbb i {
@@ -430,15 +479,22 @@
             background-color: #000000;
         }
 
-        /* engine parts main */
-        .sidebar1-and-main main {
-            width: 1000px;
+        @media (max-width: 1200px) {
+            .poster {
+                display: none;
+            }
         }
 
-        /* engine parts section */
+        /* engine parts main */
+        .sidebar1-and-main main {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        /* engine parts section - COMPLETELY UPDATED FOR IMAGE CONTAINMENT */
         .msc {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
             margin: 10px auto;
             flex-wrap: wrap;
             gap: 20px;
@@ -456,6 +512,9 @@
             border: 1px solid #ddd;
             transition: all 0.3s ease;
             overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .container1:hover {
@@ -470,22 +529,56 @@
             margin: 0px 10px;
         }
 
+        /* UPDATED: Image container fills entire top section */
         .container1 .shoe1 {
-            margin: 10px;
+            margin: 0;
             background-color: #f8f8f8;
-            border-radius: 10px;
-            height: 160px;
+            border-radius: 15px 15px 0 0;
+            height: 200px;
+            width: 100%;
             text-align: center;
-            padding: 20px;
+            padding: 0;
             position: relative;
-            border: 1px solid #eee;
+            border: none;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Image wrapper takes full space */
+        .shoe1 .image-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+
+        /* UPDATED: Image fills entire wrapper with proper padding */
+        .shoe1 img {
+            transform: rotate(18deg);
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+
+        .container1:hover .shoe1 img {
+            transform: rotate(18deg) scale(1.05);
         }
 
         .shoe1 .fa-heart {
             position: absolute;
             right: 10px;
-            top: 5px;
-            font-size: 20px;
+            top: 10px;
+            font-size: 18px;
             padding: 8px;
             border-radius: 30px;
             background-color: white;
@@ -493,6 +586,7 @@
             cursor: pointer;
             border: 1px solid #eee;
             transition: 0.3s;
+            z-index: 10;
         }
 
         .shoe1 .fa-heart:hover {
@@ -503,8 +597,8 @@
         .shoe1 .fa-circle-info {
             position: absolute;
             right: 10px;
-            bottom: 5px;
-            font-size: 20px;
+            bottom: 10px;
+            font-size: 18px;
             padding: 8px;
             color: black;
             cursor: pointer;
@@ -512,6 +606,7 @@
             border-radius: 30px;
             border: 1px solid #eee;
             transition: 0.3s;
+            z-index: 10;
         }
 
         .shoe1 .fa-circle-info:hover {
@@ -519,41 +614,45 @@
             color: white;
         }
 
-        .shoe1 img {
-            transform: rotate(18deg);
-            max-width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
-
         .info {
             margin: 10px;
+            padding-top: 5px;
+            flex-grow: 1;
+        }
+
+        .name h6 {
+            font-size: 14px;
+            line-height: 1.3;
+            margin-bottom: 5px;
+            font-family: "body";
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         .price-cart p {
             font-family: "joy";
             font-weight: bold;
-            font-size: 18px;
+            font-size: clamp(15px, 1.5vw, 17px);
             color: #1248f8;
+            margin-bottom: 5px;
         }
 
         .stars i {
             color: #ffb400;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .stars span {
-            font-size: 12px;
+            font-size: 11px;
             color: #666;
             font-family: "joy";
         }
 
         .container1 button {
             border: 1px solid #964b00;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            left: 10px;
             border-radius: 10px;
             height: 40px;
             background-color: #000000;
@@ -562,6 +661,9 @@
             font-family: "joy";
             font-weight: 600;
             cursor: pointer;
+            font-size: clamp(14px, 1.5vw, 16px);
+            margin: 10px;
+            margin-top: auto;
         }
 
         .container1 button:hover {
@@ -573,7 +675,7 @@
         /* Sidebar styling */
         .sidebar1 h6 {
             font-family: "body";
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             margin: 15px 0 10px;
             color: #000;
             padding-bottom: 5px;
@@ -581,7 +683,7 @@
         }
 
         .p-1 {
-            font-size: 14px;
+            font-size: clamp(13px, 1.5vw, 14px);
             margin: 8px 0;
             display: flex;
             align-items: center;
@@ -626,6 +728,7 @@
             margin-bottom: 20px;
             border-radius: 10px;
             border: 1px solid #ddd;
+            width: 100%;
         }
 
         .filter-tags {
@@ -663,6 +766,7 @@
             margin-left: auto;
             transition: all 0.3s ease;
             border: 1px solid #964b00;
+            font-size: clamp(14px, 1.5vw, 16px);
         }
 
         .clear-filters:hover {
@@ -675,11 +779,14 @@
             display: flex;
             justify-content: center;
             margin: 40px 0;
+            width: 100%;
         }
 
         .pagination {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .page-item {
@@ -696,6 +803,7 @@
             transition: all 0.3s;
             background-color: white;
             cursor: pointer;
+            font-size: clamp(14px, 1.5vw, 16px);
         }
 
         .page-link:hover {
@@ -722,6 +830,7 @@
             padding: 50px;
             font-family: "body";
             color: #666;
+            width: 100%;
         }
 
         .no-results i {
@@ -738,6 +847,8 @@
             margin-bottom: 20px;
             font-family: "joy";
             border: 1px solid #ddd;
+            width: 100%;
+            font-size: clamp(14px, 1.5vw, 16px);
         }
 
         /* footer - Matching index.html */
@@ -885,25 +996,101 @@
             padding-top: 20px;
         }
 
-        /* responsiveness */
+        /* Cart button styles */
+        .add-to-cart.in-cart {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        
+        .add-to-cart.in-cart:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Favorite button styles */
+        .favorite-btn {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Cart badge animation */
+        .cart-badge, .favorites-count {
+            transition: transform 0.3s ease;
+        }
+
+        /* Responsive updates for image containers */
         @media (max-width: 1200px) {
+            .sidebar1-and-main {
+                flex-direction: row;
+            }
+
+            .sidebar1 {
+                width: 250px;
+                height: auto;
+                max-height: 80vh;
+                position: sticky;
+                top: 80px;
+            }
+
+            .sidebar1-and-main main {
+                flex: 1;
+                min-width: 0;
+            }
+            
+            .msc {
+                justify-content: center;
+            }
+            
+            .container1 .shoe1 {
+                height: 190px;
+            }
+            
+            .shoe1 img {
+                padding: 18px;
+            }
+            
+            .name h6 {
+                font-size: 13.5px;
+                height: 38px;
+            }
+        }
+
+        @media (max-width: 992px) {
             .sidebar1-and-main {
                 flex-direction: column;
             }
-
+            
             .sidebar1 {
                 width: 100%;
                 height: auto;
                 position: static;
+                max-height: none;
                 margin-bottom: 20px;
             }
-
-            .sidebar1-and-main main {
-                width: 100%;
+            
+            .container1 {
+                width: calc(50% - 20px);
+                max-width: 300px;
             }
-
-            .poster {
-                display: none;
+            
+            .container1 .shoe1 {
+                height: 185px;
+            }
+            
+            .shoe1 img {
+                padding: 16px;
+            }
+            
+            .name h6 {
+                font-size: 13px;
+                height: 36px;
             }
         }
 
@@ -934,15 +1121,24 @@
             }
 
             .container1 {
-                width: 220px;
+                width: calc(50% - 15px);
+            }
+            
+            .container1 .shoe1 {
+                height: 180px;
+            }
+            
+            .shoe1 img {
+                padding: 15px;
+            }
+            
+            .name h6 {
+                font-size: 12.5px;
+                height: 35px;
             }
 
-            .carousel-item h5 {
-                font-size: 24px;
-            }
-
-            .carousel-item a {
-                padding: 10px 25px;
+            .container1 button {
+                height: 38px;
                 font-size: 14px;
             }
 
@@ -953,34 +1149,169 @@
             .clear-filters {
                 margin-left: 0;
                 margin-top: 10px;
+                width: 100%;
+            }
+            
+            .filter-status > div {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container1 {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .msc {
+                justify-content: center;
+            }
+            
+            .container1 .shoe1 {
+                height: 175px;
+            }
+            
+            .shoe1 img {
+                padding: 14px;
+            }
+            
+            .name h6 {
+                font-size: 12px;
+                height: 34px;
+            }
+            
+            .container1 button {
+                height: 36px;
+                font-size: 13.5px;
+            }
+            
+            .carousel-caption {
+                padding-bottom: 60px;
+            }
+            
+            nav {
+                padding: 10px 15px;
+            }
+            
+            .nav-links {
+                gap: 10px;
+            }
+            
+            .pagination {
+                gap: 5px;
+            }
+            
+            .page-link {
+                padding: 6px 12px;
+            }
+            
+            .si {
+                margin-left: 10px;
             }
         }
 
         @media (max-width: 480px) {
             .container1 {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
+                height: 340px;
             }
-
-            .carousel-caption {
-                padding-bottom: 100px;
+            
+            .container1 .shoe1 {
+                height: 170px !important;
             }
-
+            
+            .shoe1 img {
+                padding: 12px;
+            }
+            
+            .name h6 {
+                font-size: 11.5px;
+                height: 32px;
+            }
+            
+            .container1 button {
+                height: 35px;
+                font-size: 13px;
+            }
+            
             .carousel-item {
-                height: 50vh;
+                height: 40vh;
             }
-
-            nav {
-                padding: 10px 15px;
+            
+            .carousel-item h5 {
+                font-size: 20px;
             }
-
-            .nav-links {
-                gap: 10px;
+            
+            .carousel-item a {
+                padding: 8px 20px;
+                font-size: 14px;
             }
-
-            .pagination {
-                flex-wrap: wrap;
-                justify-content: center;
+            
+            .prenavlink {
+                padding: 5px;
+            }
+            
+            .prenavlink a {
+                font-size: 11px;
+            }
+            
+            .prenavlink i {
+                padding: 5px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .container1 {
+                width: 100%;
+                max-width: 260px;
+                height: 330px;
+            }
+            
+            .container1 .shoe1 {
+                height: 165px !important;
+            }
+            
+            .shoe1 img {
+                padding: 10px;
+            }
+            
+            .name h6 {
+                font-size: 11px;
+                height: 30px;
+            }
+            
+            .container1 button {
+                height: 34px;
+                font-size: 12.5px;
+            }
+            
+            .carousel-caption {
+                padding-bottom: 50px;
+            }
+        }
+        
+        /* Notification animations */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
             }
         }
     </style>
@@ -1104,7 +1435,7 @@
 
     <!-- parts indicator -->
     <section class="si">
-        <p><span style="font-weight: bolder; font-size: 20px;">ENGINE PARTS</span>- <span style="color: gray;" id="totalItems">1,238 items available</span> </p>
+        <p><span style="font-weight: bolder; font-size: clamp(18px, 2vw, 20px);">ENGINE PARTS</span>- <span style="color: gray;" id="totalItems">1,238 items available</span> </p>
     </section>
 
     <!-- filter short cuts -->
@@ -1390,443 +1721,322 @@
     </footer>
 
     <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
-<script>
-    // =================== CART SYSTEM ===================
-    // Initialize cart from localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Product Data with unique IDs and cart-ready data
-    const products = [
-        // Page 1 products
-        {
-            id: 'engine-001',
-            name: "NGK Iridium Spark Plugs (Set of 4)",
-            category: "spark-plugs",
-            brand: "NGK",
-            vehicleType: "car",
-            make: ["Toyota", "Honda"],
-            discount: 17,
-            price: 15000,
-            oldPrice: 18000,
-            image: "/img/spark-plug.png",
-            rating: 5,
-            reviews: 128,
-            description: "High-performance iridium spark plugs for improved combustion and fuel efficiency"
-        },
-        {
-            id: 'engine-002',
-            name: "K&N Performance Air Filter",
-            category: "air-filters",
-            brand: "K&N",
-            vehicleType: "car",
-            make: ["Ford", "Toyota"],
-            discount: 17,
-            price: 25000,
-            oldPrice: 30000,
-            image: "/img/air-filter.png",
-            rating: 5,
-            reviews: 89,
-            description: "Reusable performance air filter for increased horsepower"
-        },
-        {
-            id: 'engine-003',
-            name: "Bosch Premium Oil Filter",
-            category: "oil-filters",
-            brand: "Bosch",
-            vehicleType: "car",
-            make: ["Mercedes", "BMW"],
-            discount: 0,
-            price: 8500,
-            oldPrice: 8500,
-            image: "/img/oil-filter.png",
-            rating: 4.5,
-            reviews: 156,
-            description: "Premium oil filter for maximum engine protection"
-        },
-        {
-            id: 'engine-004',
-            name: "Denso High Pressure Fuel Pump",
-            category: "fuel-system",
-            brand: "Denso",
-            vehicleType: "car",
-            make: ["Toyota", "Honda"],
-            discount: 18,
-            price: 45000,
-            oldPrice: 55000,
-            image: "/img/fuel-pump.png",
-            rating: 5,
-            reviews: 67,
-            description: "High-pressure fuel pump for improved fuel delivery"
-        },
-        {
-            id: 'engine-005',
-            name: "Gates Racing Timing Belt Kit",
-            category: "timing-belts",
-            brand: "Gates",
-            vehicleType: "car",
-            make: ["Honda", "Toyota"],
-            discount: 20,
-            price: 65000,
-            oldPrice: 81000,
-            image: "/img/timing-belt.png",
-            rating: 4.5,
-            reviews: 92,
-            description: "Complete timing belt kit with tensioner and idler pulley"
-        },
-        {
-            id: 'engine-006',
-            name: "Aisin High Flow Water Pump",
-            category: "water-pumps",
-            brand: "ACDelco",
-            vehicleType: "truck",
-            make: ["Ford"],
-            discount: 16,
-            price: 38000,
-            oldPrice: 45000,
-            image: "/img/water-pump.png",
-            rating: 5,
-            reviews: 78,
-            description: "High-flow water pump for better engine cooling"
-        },
-        {
-            id: 'engine-007',
-            name: "Bosch Ignition Coil Pack (Set of 4)",
-            category: "spark-plugs",
-            brand: "Bosch",
-            vehicleType: "car",
-            make: ["BMW", "Mercedes"],
-            discount: 20,
-            price: 52000,
-            oldPrice: 65000,
-            image: "/img/ignition-coil.png",
-            rating: 4.5,
-            reviews: 112,
-            description: "Complete ignition coil pack for smooth engine performance"
-        },
-        {
-            id: 'engine-008',
-            name: "Aluminum Performance Radiator",
-            category: "engine-gaskets",
-            brand: "HKS",
-            vehicleType: "car",
-            make: ["Toyota", "Honda"],
-            discount: 20,
-            price: 95000,
-            oldPrice: 119000,
-            image: "/img/radiator.png",
-            rating: 5,
-            reviews: 45,
-            description: "Aluminum radiator for superior cooling performance"
-        },
-        // Page 2 products
-        {
-            id: 'engine-009',
-            name: "Denso High Output Alternator",
-            category: "fuel-system",
-            brand: "Denso",
-            vehicleType: "truck",
-            make: ["Ford"],
-            discount: 15,
-            price: 180000,
-            oldPrice: 212000,
-            image: "/img/alternator.png",
-            rating: 5,
-            reviews: 67,
-            description: "High-output alternator for additional electrical power"
-        },
-        {
-            id: 'engine-010',
-            name: "Bosch Premium Starter Motor",
-            category: "engine-gaskets",
-            brand: "Bosch",
-            vehicleType: "car",
-            make: ["Mercedes", "BMW"],
-            discount: 18,
-            price: 75000,
-            oldPrice: 92000,
-            image: "/img/starter-motor.png",
-            rating: 4.5,
-            reviews: 89,
-            description: "Premium starter motor for reliable engine starting"
-        },
-        {
-            id: 'engine-011',
-            name: "Engine Coolant Temperature Sensor",
-            category: "fuel-system",
-            brand: "Bosch",
-            vehicleType: "car",
-            make: ["Toyota", "Honda"],
-            discount: 0,
-            price: 12500,
-            oldPrice: 12500,
-            image: "/img/coolant-temperature-sensor.png",
-            rating: 5,
-            reviews: 56,
-            description: "Accurate coolant temperature sensor"
-        },
-        {
-            id: 'engine-012',
-            name: "Performance Engine Mount (Set of 4)",
-            category: "engine-gaskets",
-            brand: "HKS",
-            vehicleType: "car",
-            make: ["Honda"],
-            discount: 19,
-            price: 42000,
-            oldPrice: 52000,
-            image: "/img/engine-mount.png",
-            rating: 4.5,
-            reviews: 34,
-            description: "Performance engine mounts for reduced vibration"
-        },
-        {
-            id: 'engine-013',
-            name: "Performance Throttle Body 70mm",
-            category: "air-filters",
-            brand: "K&N",
-            vehicleType: "car",
-            make: ["Toyota"],
-            discount: 19,
-            price: 85000,
-            oldPrice: 105000,
-            image: "/img/throttle-body.png",
-            rating: 5,
-            reviews: 23,
-            description: "70mm performance throttle body for increased airflow"
-        },
-        {
-            id: 'engine-014',
-            name: "Aluminum Intake Manifold",
-            category: "air-filters",
-            brand: "HKS",
-            vehicleType: "motorcycle",
-            make: ["Honda"],
-            discount: 20,
-            price: 120000,
-            oldPrice: 150000,
-            image: "/img/intake-manifold.png",
-            rating: 4.5,
-            reviews: 18,
-            description: "Aluminum intake manifold for improved air distribution"
-        },
-        {
-            id: 'engine-015',
-            name: "Stainless Steel Exhaust Manifold",
-            category: "engine-gaskets",
-            brand: "Gates",
-            vehicleType: "car",
-            make: ["Toyota"],
-            discount: 21,
-            price: 95000,
-            oldPrice: 120000,
-            image: "/img/exhaust-manifold.png",
-            rating: 5,
-            reviews: 29,
-            description: "Stainless steel exhaust manifold for better exhaust flow"
-        },
-        {
-            id: 'engine-016',
-            name: "Crankshaft Position Sensor",
-            category: "fuel-system",
-            brand: "Bosch",
-            vehicleType: "car",
-            make: ["Ford", "Mercedes"],
-            discount: 20,
-            price: 18500,
-            oldPrice: 23000,
-            image: "/img/crankshaft-position-sensor.png",
-            rating: 4.5,
-            reviews: 42,
-            description: "Precise crankshaft position sensor"
-        },
-        // Additional products for pagination
-        {
-            id: 'engine-017',
-            name: "Mann Oil Filter Premium",
-            category: "oil-filters",
-            brand: "Mann",
-            vehicleType: "car",
-            make: ["BMW", "Mercedes"],
-            discount: 15,
-            price: 12000,
-            oldPrice: 14000,
-            image: "/img/oil-filter.png",
-            rating: 5,
-            reviews: 89,
-            description: "Premium oil filter for European vehicles"
-        },
-        {
-            id: 'engine-018',
-            name: "ACDelco Fuel Filter",
-            category: "fuel-filters",
-            brand: "ACDelco",
-            vehicleType: "truck",
-            make: ["Ford"],
-            discount: 10,
-            price: 15000,
-            oldPrice: 17000,
-            image: "/img/fuel-pump.png",
-            rating: 4,
-            reviews: 45,
-            description: "High-quality fuel filter"
-        },
-        {
-            id: 'engine-019',
-            name: "NGK Copper Spark Plugs",
-            category: "spark-plugs",
-            brand: "NGK",
-            vehicleType: "motorcycle",
-            make: ["Honda"],
-            discount: 25,
-            price: 8000,
-            oldPrice: 10000,
-            image: "/img/spark-plug.png",
-            rating: 4,
-            reviews: 67,
-            description: "Standard copper spark plugs"
-        },
-        {
-            id: 'engine-020',
-            name: "Denso Air Filter",
-            category: "air-filters",
-            brand: "Denso",
-            vehicleType: "car",
-            make: ["Toyota"],
-            discount: 10,
-            price: 18000,
-            oldPrice: 20000,
-            image: "/img/air-filter.png",
-            rating: 4.5,
-            reviews: 92,
-            description: "OEM quality air filter"
-        }
-    ];
+    <script>
+        // =================== CART SYSTEM ===================
+        // Initialize cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Product Data with unique IDs and cart-ready data
+        const products = [
+            // Page 1 products
+            {
+                id: 'engine-001',
+                name: "NGK Iridium Spark Plugs (Set of 4)",
+                category: "spark-plugs",
+                brand: "NGK",
+                vehicleType: "car",
+                make: ["Toyota", "Honda"],
+                discount: 17,
+                price: 15000,
+                oldPrice: 18000,
+                image: "img/IMG-20260203-WA0326.jpg",
+                rating: 5,
+                reviews: 128,
+                description: "High-performance iridium spark plugs for improved combustion and fuel efficiency"
+            },
+            {
+                id: 'engine-002',
+                name: "K&N Performance Air Filter",
+                category: "air-filters",
+                brand: "K&N",
+                vehicleType: "car",
+                make: ["Ford", "Toyota"],
+                discount: 17,
+                price: 25000,
+                oldPrice: 30000,
+                image: "img/IMG-20260203-WA0325.jpg",
+                rating: 5,
+                reviews: 89,
+                description: "Reusable performance air filter for increased horsepower"
+            },
+            {
+                id: 'engine-003',
+                name: "Bosch Premium Oil Filter",
+                category: "oil-filters",
+                brand: "Bosch",
+                vehicleType: "car",
+                make: ["Mercedes", "BMW"],
+                discount: 0,
+                price: 8500,
+                oldPrice: 8500,
+                image: "img/IMG-20260203-WA0324.jpg",
+                rating: 4.5,
+                reviews: 156,
+                description: "Premium oil filter for maximum engine protection"
+            },
+            {
+                id: 'engine-004',
+                name: "Denso High Pressure Fuel Pump",
+                category: "fuel-system",
+                brand: "Denso",
+                vehicleType: "car",
+                make: ["Toyota", "Honda"],
+                discount: 18,
+                price: 45000,
+                oldPrice: 55000,
+                image: "img/IMG-20260203-WA0322.jpg",
+                rating: 5,
+                reviews: 67,
+                description: "High-pressure fuel pump for improved fuel delivery"
+            },
+            {
+                id: 'engine-005',
+                name: "Gates Racing Timing Belt Kit",
+                category: "timing-belts",
+                brand: "Gates",
+                vehicleType: "car",
+                make: ["Honda", "Toyota"],
+                discount: 20,
+                price: 65000,
+                oldPrice: 81000,
+                image: "img/IMG-20260203-WA0318.jpg",
+                rating: 4.5,
+                reviews: 92,
+                description: "Complete timing belt kit with tensioner and idler pulley"
+            },
+            {
+                id: 'engine-006',
+                name: "Aisin High Flow Water Pump",
+                category: "water-pumps",
+                brand: "ACDelco",
+                vehicleType: "truck",
+                make: ["Ford"],
+                discount: 16,
+                price: 38000,
+                oldPrice: 45000,
+                image: "img/IMG-20260203-WA0315.jpg",
+                rating: 5,
+                reviews: 78,
+                description: "High-flow water pump for better engine cooling"
+            },
+            {
+                id: 'engine-007',
+                name: "Bosch Ignition Coil Pack (Set of 4)",
+                category: "spark-plugs",
+                brand: "Bosch",
+                vehicleType: "car",
+                make: ["BMW", "Mercedes"],
+                discount: 20,
+                price: 52000,
+                oldPrice: 65000,
+                image: "img/IMG-20260203-WA0310.jpg",
+                rating: 4.5,
+                reviews: 112,
+                description: "Complete ignition coil pack for smooth engine performance"
+            },
+            {
+                id: 'engine-008',
+                name: "Aluminum Performance Radiator",
+                category: "engine-gaskets",
+                brand: "HKS",
+                vehicleType: "car",
+                make: ["Toyota", "Honda"],
+                discount: 20,
+                price: 95000,
+                oldPrice: 119000,
+                image: "img/IMG-20260203-WA0309.jpg",
+                rating: 5,
+                reviews: 45,
+                description: "Aluminum radiator for superior cooling performance"
+            },
+            // Page 2 products
+            {
+                id: 'engine-009',
+                name: "Denso High Output Alternator",
+                category: "fuel-system",
+                brand: "Denso",
+                vehicleType: "truck",
+                make: ["Ford"],
+                discount: 15,
+                price: 180000,
+                oldPrice: 212000,
+                image: "img/IMG-20260203-WA0306.jpg",
+                rating: 5,
+                reviews: 67,
+                description: "High-output alternator for additional electrical power"
+            },
+            {
+                id: 'engine-010',
+                name: "Bosch Premium Starter Motor",
+                category: "engine-gaskets",
+                brand: "Bosch",
+                vehicleType: "car",
+                make: ["Mercedes", "BMW"],
+                discount: 18,
+                price: 75000,
+                oldPrice: 92000,
+                image: "img/IMG-20260203-WA0304.jpg",
+                rating: 4.5,
+                reviews: 89,
+                description: "Premium starter motor for reliable engine starting"
+            },
+            {
+                id: 'engine-011',
+                name: "Engine Coolant Temperature Sensor",
+                category: "fuel-system",
+                brand: "Bosch",
+                vehicleType: "car",
+                make: ["Toyota", "Honda"],
+                discount: 0,
+                price: 12500,
+                oldPrice: 12500,
+                image: "img/IMG-20260203-WA0304.jpg",
+                rating: 5,
+                reviews: 56,
+                description: "Accurate coolant temperature sensor"
+            },
+            {
+                id: 'engine-012',
+                name: "Performance Engine Mount (Set of 4)",
+                category: "engine-gaskets",
+                brand: "HKS",
+                vehicleType: "car",
+                make: ["Honda"],
+                discount: 19,
+                price: 42000,
+                oldPrice: 52000,
+                image: "img/IMG-20260203-WA0298.jpg",
+                rating: 4.5,
+                reviews: 34,
+                description: "Performance engine mounts for reduced vibration"
+            },
+            {
+                id: 'engine-013',
+                name: "Performance Throttle Body 70mm",
+                category: "air-filters",
+                brand: "K&N",
+                vehicleType: "car",
+                make: ["Toyota"],
+                discount: 19,
+                price: 85000,
+                oldPrice: 105000,
+                image: "img/IMG-20260203-WA0292.jpg",
+                rating: 5,
+                reviews: 23,
+                description: "70mm performance throttle body for increased airflow"
+            },
+            {
+                id: 'engine-014',
+                name: "Aluminum Intake Manifold",
+                category: "air-filters",
+                brand: "HKS",
+                vehicleType: "motorcycle",
+                make: ["Honda"],
+                discount: 20,
+                price: 120000,
+                oldPrice: 150000,
+                image: "img/IMG-20260203-WA0288.jpg",
+                rating: 4.5,
+                reviews: 18,
+                description: "Aluminum intake manifold for improved air distribution"
+            },
+            {
+                id: 'engine-015',
+                name: "Stainless Steel Exhaust Manifold",
+                category: "engine-gaskets",
+                brand: "Gates",
+                vehicleType: "car",
+                make: ["Toyota"],
+                discount: 21,
+                price: 95000,
+                oldPrice: 120000,
+                image: "img/IMG-20260203-WA0284.jpg",
+                rating: 5,
+                reviews: 29,
+                description: "Stainless steel exhaust manifold for better exhaust flow"
+            },
+            {
+                id: 'engine-016',
+                name: "Crankshaft Position Sensor",
+                category: "fuel-system",
+                brand: "Bosch",
+                vehicleType: "car",
+                make: ["Ford", "Mercedes"],
+                discount: 20,
+                price: 18500,
+                oldPrice: 23000,
+                image: "img/IMG-20260203-WA0280.jpg",
+                rating: 4.5,
+                reviews: 42,
+                description: "Precise crankshaft position sensor"
+            },
+            // Additional products for pagination
+            {
+                id: 'engine-017',
+                name: "Mann Oil Filter Premium",
+                category: "oil-filters",
+                brand: "Mann",
+                vehicleType: "car",
+                make: ["BMW", "Mercedes"],
+                discount: 15,
+                price: 12000,
+                oldPrice: 14000,
+                image: "img/IMG-20260203-WA0280.jpg",
+                rating: 5,
+                reviews: 89,
+                description: "Premium oil filter for European vehicles"
+            },
+            {
+                id: 'engine-018',
+                name: "ACDelco Fuel Filter",
+                category: "fuel-filters",
+                brand: "ACDelco",
+                vehicleType: "truck",
+                make: ["Ford"],
+                discount: 10,
+                price: 15000,
+                oldPrice: 17000,
+                image: "img/IMG-20260203-WA0274.jpg",
+                rating: 4,
+                reviews: 45,
+                description: "High-quality fuel filter"
+            },
+            {
+                id: 'engine-019',
+                name: "NGK Copper Spark Plugs",
+                category: "spark-plugs",
+                brand: "NGK",
+                vehicleType: "motorcycle",
+                make: ["Honda"],
+                discount: 25,
+                price: 8000,
+                oldPrice: 10000,
+                image: "img/IMG-20260203-WA0274.jpg",
+                rating: 4,
+                reviews: 67,
+                description: "Standard copper spark plugs"
+            },
+            {
+                id: 'engine-020',
+                name: "Denso Air Filter",
+                category: "air-filters",
+                brand: "Denso",
+                vehicleType: "car",
+                make: ["Toyota"],
+                discount: 10,
+                price: 18000,
+                oldPrice: 20000,
+                image: "img/IMG-20260203-WA0271.jpg",
+                rating: 4.5,
+                reviews: 92,
+                description: "OEM quality air filter"
+            }
+        ];
 
-    // Configuration
-    const ITEMS_PER_PAGE = 8;
-    let currentPage = 1;
-    let activeFilters = {
-        vehicleType: 'all',
-        categories: [],
-        brands: [],
-        makes: [],
-        discounts: []
-    };
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-        initializePage();
-        setupEventListeners();
-        renderProducts();
-        updatePagination();
-        updateResultsCount();
-        updateCartDisplay();
-        updateFavoritesCount();
-    });
-
-    function initializePage() {
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-        const searchContainer = document.getElementById('search-container1');
-        const navIcons = document.getElementById('nav-icons');
-
-        mobileMenu.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            searchContainer.classList.toggle('active');
-            navIcons.classList.toggle('active');
-        });
-
-        // Initialize carousel
-        const carousel = new bootstrap.Carousel(document.getElementById('carouselExampleCaptions'), {
-            interval: 5000,
-            wrap: true
-        });
-    }
-
-    function setupEventListeners() {
-        // Filter checkboxes
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', handleFilterChange);
-        });
-
-        // Vehicle type radios
-        const vehicleRadios = document.querySelectorAll('input[name="vehicleType"]');
-        vehicleRadios.forEach(radio => {
-            radio.addEventListener('change', handleVehicleTypeChange);
-        });
-
-        // Search input
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', handleSearch);
-
-        // Clear all filters
-        document.getElementById('clearAllFilters').addEventListener('click', clearAllFilters);
-
-        // Dropdown filters
-        const dropdownFilters = document.querySelectorAll('.filter-dropdown');
-        dropdownFilters.forEach(filter => {
-            filter.addEventListener('click', handleDropdownFilter);
-        });
-    }
-
-    function handleFilterChange(e) {
-        const checkbox = e.target;
-        const value = checkbox.value;
-        const filterType = getFilterType(checkbox.id);
-
-        if (checkbox.checked) {
-            activeFilters[filterType].push(value);
-        } else {
-            activeFilters[filterType] = activeFilters[filterType].filter(item => item !== value);
-        }
-
-        applyFilters();
-    }
-
-    function handleVehicleTypeChange(e) {
-        activeFilters.vehicleType = e.target.value;
-        applyFilters();
-    }
-
-    function handleSearch(e) {
-        const searchTerm = e.target.value.toLowerCase();
-        if (searchTerm.length >= 2) {
-            // In a real application, this would search through products
-            console.log('Searching for:', searchTerm);
-        }
-    }
-
-    function handleDropdownFilter(e) {
-        e.preventDefault();
-        const filter = e.target.dataset.filter;
-        const value = e.target.dataset.value;
-
-        // Add filter
-        if (!activeFilters[filter].includes(value)) {
-            activeFilters[filter].push(value);
-            applyFilters();
-        }
-    }
-
-    function getFilterType(elementId) {
-        if (elementId.includes('brand')) return 'brands';
-        if (elementId.includes('make')) return 'makes';
-        if (elementId.includes('discount')) return 'discounts';
-        return 'categories'; // Default for category checkboxes
-    }
-
-    function applyFilters() {
-        currentPage = 1; // Reset to first page when filters change
-        renderProducts();
-        updatePagination();
-        updateActiveFiltersDisplay();
-        updateResultsCount();
-    }
-
-    function clearAllFilters() {
-        activeFilters = {
+        // Configuration
+        const ITEMS_PER_PAGE = 8;
+        let currentPage = 1;
+        let activeFilters = {
             vehicleType: 'all',
             categories: [],
             brands: [],
@@ -1834,508 +2044,576 @@
             discounts: []
         };
 
-        // Uncheck all checkboxes
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.checked = false;
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+            setupEventListeners();
+            renderProducts();
+            updatePagination();
+            updateResultsCount();
+            updateCartDisplay();
+            updateFavoritesCount();
         });
 
-        // Reset vehicle type to all
-        document.getElementById('vehicleAll').checked = true;
+        function initializePage() {
+            // Mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            const searchContainer = document.getElementById('search-container1');
+            const navIcons = document.getElementById('nav-icons');
 
-        applyFilters();
-        document.getElementById('filterStatus').style.display = 'none';
-    }
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                searchContainer.classList.toggle('active');
+                navIcons.classList.toggle('active');
+            });
 
-    function updateActiveFiltersDisplay() {
-        const activeFiltersContainer = document.getElementById('activeFilters');
-        const filterStatus = document.getElementById('filterStatus');
-        activeFiltersContainer.innerHTML = '';
-
-        let hasActiveFilters = false;
-
-        // Vehicle Type
-        if (activeFilters.vehicleType !== 'all') {
-            hasActiveFilters = true;
-            const tag = createFilterTag('Vehicle Type: ' + activeFilters.vehicleType.charAt(0).toUpperCase() + activeFilters.vehicleType.slice(1), 'vehicleType');
-            activeFiltersContainer.appendChild(tag);
+            // Initialize carousel
+            const carousel = new bootstrap.Carousel(document.getElementById('carouselExampleCaptions'), {
+                interval: 5000,
+                wrap: true
+            });
         }
 
-        // Categories
-        activeFilters.categories.forEach(category => {
-            hasActiveFilters = true;
-            const tag = createFilterTag('Category: ' + formatFilterName(category), 'categories', category);
-            activeFiltersContainer.appendChild(tag);
-        });
+        function setupEventListeners() {
+            // Filter checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', handleFilterChange);
+            });
 
-        // Brands
-        activeFilters.brands.forEach(brand => {
-            hasActiveFilters = true;
-            const tag = createFilterTag('Brand: ' + brand, 'brands', brand);
-            activeFiltersContainer.appendChild(tag);
-        });
+            // Vehicle type radios
+            const vehicleRadios = document.querySelectorAll('input[name="vehicleType"]');
+            vehicleRadios.forEach(radio => {
+                radio.addEventListener('change', handleVehicleTypeChange);
+            });
 
-        // Makes
-        activeFilters.makes.forEach(make => {
-            hasActiveFilters = true;
-            const tag = createFilterTag('Make: ' + make, 'makes', make);
-            activeFiltersContainer.appendChild(tag);
-        });
+            // Search input
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', handleSearch);
 
-        // Discounts
-        activeFilters.discounts.forEach(discount => {
-            hasActiveFilters = true;
-            const tag = createFilterTag('Discount: ' + discount + '%+', 'discounts', discount);
-            activeFiltersContainer.appendChild(tag);
-        });
+            // Clear all filters
+            document.getElementById('clearAllFilters').addEventListener('click', clearAllFilters);
 
-        filterStatus.style.display = hasActiveFilters ? 'block' : 'none';
-    }
+            // Dropdown filters
+            const dropdownFilters = document.querySelectorAll('.filter-dropdown');
+            dropdownFilters.forEach(filter => {
+                filter.addEventListener('click', handleDropdownFilter);
+            });
+        }
 
-    function createFilterTag(text, filterType, value = '') {
-        const tag = document.createElement('div');
-        tag.className = 'filter-tag';
-        tag.innerHTML = `
-            ${text}
-            <i class="fas fa-times" data-filter="${filterType}" data-value="${value}"></i>
-        `;
+        function handleFilterChange(e) {
+            const checkbox = e.target;
+            const value = checkbox.value;
+            const filterType = getFilterType(checkbox.id);
 
-        tag.querySelector('i').addEventListener('click', function() {
-            removeFilter(filterType, value);
-        });
+            if (checkbox.checked) {
+                activeFilters[filterType].push(value);
+            } else {
+                activeFilters[filterType] = activeFilters[filterType].filter(item => item !== value);
+            }
 
-        return tag;
-    }
+            applyFilters();
+        }
 
-    function removeFilter(filterType, value) {
-        if (filterType === 'vehicleType') {
-            activeFilters.vehicleType = 'all';
-            document.getElementById('vehicleAll').checked = true;
-        } else {
-            activeFilters[filterType] = activeFilters[filterType].filter(item => item !== value);
-            
-            // Uncheck corresponding checkbox
-            const checkboxId = getCheckboxId(filterType, value);
-            const checkbox = document.getElementById(checkboxId);
-            if (checkbox) {
+        function handleVehicleTypeChange(e) {
+            activeFilters.vehicleType = e.target.value;
+            applyFilters();
+        }
+
+        function handleSearch(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm.length >= 2) {
+                // In a real application, this would search through products
+                console.log('Searching for:', searchTerm);
+            }
+        }
+
+        function handleDropdownFilter(e) {
+            e.preventDefault();
+            const filter = e.target.dataset.filter;
+            const value = e.target.dataset.value;
+
+            // Add filter
+            if (!activeFilters[filter].includes(value)) {
+                activeFilters[filter].push(value);
+                applyFilters();
+            }
+        }
+
+        function getFilterType(elementId) {
+            if (elementId.includes('brand')) return 'brands';
+            if (elementId.includes('make')) return 'makes';
+            if (elementId.includes('discount')) return 'discounts';
+            return 'categories'; // Default for category checkboxes
+        }
+
+        function applyFilters() {
+            currentPage = 1; // Reset to first page when filters change
+            renderProducts();
+            updatePagination();
+            updateActiveFiltersDisplay();
+            updateResultsCount();
+        }
+
+        function clearAllFilters() {
+            activeFilters = {
+                vehicleType: 'all',
+                categories: [],
+                brands: [],
+                makes: [],
+                discounts: []
+            };
+
+            // Uncheck all checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = false;
-            }
+            });
+
+            // Reset vehicle type to all
+            document.getElementById('vehicleAll').checked = true;
+
+            applyFilters();
+            document.getElementById('filterStatus').style.display = 'none';
         }
 
-        applyFilters();
-    }
+        function updateActiveFiltersDisplay() {
+            const activeFiltersContainer = document.getElementById('activeFilters');
+            const filterStatus = document.getElementById('filterStatus');
+            activeFiltersContainer.innerHTML = '';
 
-    function getCheckboxId(filterType, value) {
-        switch(filterType) {
-            case 'categories':
-                return value.toLowerCase().replace(' ', '') + 's';
-            case 'brands':
-                return 'brand' + value.replace('&', '');
-            case 'makes':
-                return 'make' + value;
-            case 'discounts':
-                return 'discount' + value;
-            default:
-                return '';
+            let hasActiveFilters = false;
+
+            // Vehicle Type
+            if (activeFilters.vehicleType !== 'all') {
+                hasActiveFilters = true;
+                const tag = createFilterTag('Vehicle Type: ' + activeFilters.vehicleType.charAt(0).toUpperCase() + activeFilters.vehicleType.slice(1), 'vehicleType');
+                activeFiltersContainer.appendChild(tag);
+            }
+
+            // Categories
+            activeFilters.categories.forEach(category => {
+                hasActiveFilters = true;
+                const tag = createFilterTag('Category: ' + formatFilterName(category), 'categories', category);
+                activeFiltersContainer.appendChild(tag);
+            });
+
+            // Brands
+            activeFilters.brands.forEach(brand => {
+                hasActiveFilters = true;
+                const tag = createFilterTag('Brand: ' + brand, 'brands', brand);
+                activeFiltersContainer.appendChild(tag);
+            });
+
+            // Makes
+            activeFilters.makes.forEach(make => {
+                hasActiveFilters = true;
+                const tag = createFilterTag('Make: ' + make, 'makes', make);
+                activeFiltersContainer.appendChild(tag);
+            });
+
+            // Discounts
+            activeFilters.discounts.forEach(discount => {
+                hasActiveFilters = true;
+                const tag = createFilterTag('Discount: ' + discount + '%+', 'discounts', discount);
+                activeFiltersContainer.appendChild(tag);
+            });
+
+            filterStatus.style.display = hasActiveFilters ? 'block' : 'none';
         }
-    }
 
-    function formatFilterName(name) {
-        return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    }
-
-    function filterProducts() {
-        return products.filter(product => {
-            // Filter by vehicle type
-            if (activeFilters.vehicleType !== 'all' && product.vehicleType !== activeFilters.vehicleType) {
-                return false;
-            }
-
-            // Filter by categories
-            if (activeFilters.categories.length > 0 && !activeFilters.categories.includes(product.category)) {
-                return false;
-            }
-
-            // Filter by brands
-            if (activeFilters.brands.length > 0 && !activeFilters.brands.includes(product.brand)) {
-                return false;
-            }
-
-            // Filter by makes
-            if (activeFilters.makes.length > 0) {
-                const hasMatchingMake = product.make.some(make => activeFilters.makes.includes(make));
-                if (!hasMatchingMake) return false;
-            }
-
-            // Filter by discounts
-            if (activeFilters.discounts.length > 0) {
-                const discountThreshold = Math.min(...activeFilters.discounts.map(d => parseInt(d)));
-                if (product.discount < discountThreshold) return false;
-            }
-
-            return true;
-        });
-    }
-
-    function renderProducts() {
-        const container = document.getElementById('productsContainer');
-        const filteredProducts = filterProducts();
-        
-        if (filteredProducts.length === 0) {
-            container.innerHTML = `
-                <div class="no-results">
-                    <i class="fas fa-search"></i>
-                    <h3>No products found</h3>
-                    <p>Try adjusting your filters or search term</p>
-                    <button class="clear-filters" onclick="clearAllFilters()" style="margin-top: 20px;">Clear All Filters</button>
-                </div>
+        function createFilterTag(text, filterType, value = '') {
+            const tag = document.createElement('div');
+            tag.className = 'filter-tag';
+            tag.innerHTML = `
+                ${text}
+                <i class="fas fa-times" data-filter="${filterType}" data-value="${value}"></i>
             `;
-            return;
+
+            tag.querySelector('i').addEventListener('click', function() {
+                removeFilter(filterType, value);
+            });
+
+            return tag;
         }
 
-        // Calculate pagination
-        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-        const endIndex = startIndex + ITEMS_PER_PAGE;
-        const productsToShow = filteredProducts.slice(startIndex, endIndex);
+        function removeFilter(filterType, value) {
+            if (filterType === 'vehicleType') {
+                activeFilters.vehicleType = 'all';
+                document.getElementById('vehicleAll').checked = true;
+            } else {
+                activeFilters[filterType] = activeFilters[filterType].filter(item => item !== value);
+                
+                // Uncheck corresponding checkbox
+                const checkboxId = getCheckboxId(filterType, value);
+                const checkbox = document.getElementById(checkboxId);
+                if (checkbox) {
+                    checkbox.checked = false;
+                }
+            }
 
-        container.innerHTML = productsToShow.map(product => {
-            const isInCart = cart.some(item => item.id === product.id);
-            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-            const isFavorite = favorites.includes(product.id);
+            applyFilters();
+        }
+
+        function getCheckboxId(filterType, value) {
+            switch(filterType) {
+                case 'categories':
+                    return value.toLowerCase().replace(' ', '') + 's';
+                case 'brands':
+                    return 'brand' + value.replace('&', '');
+                case 'makes':
+                    return 'make' + value;
+                case 'discounts':
+                    return 'discount' + value;
+                default:
+                    return '';
+            }
+        }
+
+        function formatFilterName(name) {
+            return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
+        function filterProducts() {
+            return products.filter(product => {
+                // Filter by vehicle type
+                if (activeFilters.vehicleType !== 'all' && product.vehicleType !== activeFilters.vehicleType) {
+                    return false;
+                }
+
+                // Filter by categories
+                if (activeFilters.categories.length > 0 && !activeFilters.categories.includes(product.category)) {
+                    return false;
+                }
+
+                // Filter by brands
+                if (activeFilters.brands.length > 0 && !activeFilters.brands.includes(product.brand)) {
+                    return false;
+                }
+
+                // Filter by makes
+                if (activeFilters.makes.length > 0) {
+                    const hasMatchingMake = product.make.some(make => activeFilters.makes.includes(make));
+                    if (!hasMatchingMake) return false;
+                }
+
+                // Filter by discounts
+                if (activeFilters.discounts.length > 0) {
+                    const discountThreshold = Math.min(...activeFilters.discounts.map(d => parseInt(d)));
+                    if (product.discount < discountThreshold) return false;
+                }
+
+                return true;
+            });
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            const filteredProducts = filterProducts();
             
-            return `
-            <div class="container1" data-id="${product.id}">
-                <div class="shoe1">
-                    <i class="${isFavorite ? 'fas' : 'far'} fa-heart favorite-btn" onclick="toggleFavorite('${product.id}')"></i>
-                    <a href="#"><i class="fa-solid fa-circle-info"></i></a>
-                    <img src="${product.image}" width="160px" alt="${product.name}">
-                </div>
-                <div class="info">
-                    <div class="name">
-                        <h6>${product.name}</h6>
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No products found</h3>
+                        <p>Try adjusting your filters or search term</p>
+                        <button class="clear-filters" onclick="clearAllFilters()" style="margin-top: 20px;">Clear All Filters</button>
                     </div>
-                    <div class="stars">
-                        ${generateStars(product.rating)}
-                        <span>(${product.reviews})</span>
+                `;
+                return;
+            }
+
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = startIndex + ITEMS_PER_PAGE;
+            const productsToShow = filteredProducts.slice(startIndex, endIndex);
+
+            container.innerHTML = productsToShow.map(product => {
+                const isInCart = cart.some(item => item.id === product.id);
+                const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                const isFavorite = favorites.includes(product.id);
+                
+                return `
+                <div class="container1" data-id="${product.id}">
+                    <div class="shoe1">
+                        <i class="${isFavorite ? 'fas' : 'far'} fa-heart favorite-btn" onclick="toggleFavorite('${product.id}')"></i>
+                        <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                        <div class="image-wrapper">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
                     </div>
-                    <div class="price-cart">
-                        <p>₦${product.price.toLocaleString()} 
+                    <div class="info">
+                        <div class="name">
+                            <h6>${product.name}</h6>
+                        </div>
+                        <div class="stars">
+                            ${generateStars(product.rating)}
+                            <span>(${product.reviews})</span>
+                        </div>
+                        <div class="price-cart">
+                            <p>₦${product.price.toLocaleString()} 
+                                ${product.discount > 0 ? 
+                                    `<span style="text-decoration: line-through; font-size: 12px; color: gray; margin-left: 10px;">
+                                        ₦${product.oldPrice.toLocaleString()}
+                                    </span>` : 
+                                    ''}
+                            </p>
                             ${product.discount > 0 ? 
-                                `<span style="text-decoration: line-through; font-size: 12px; color: gray; margin-left: 10px;">
-                                    ₦${product.oldPrice.toLocaleString()}
+                                `<span style="color: #1248f8; font-size: 12px; font-weight: bold;">
+                                    -${product.discount}% OFF
                                 </span>` : 
                                 ''}
-                        </p>
-                        ${product.discount > 0 ? 
-                            `<span style="color: #1248f8; font-size: 12px; font-weight: bold;">
-                                -${product.discount}% OFF
-                            </span>` : 
-                            ''}
+                        </div>
                     </div>
+                    <button class="add-to-cart ${isInCart ? 'in-cart' : ''}" onclick="addToCart('${product.id}')">
+                        <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}" style="margin-right: 10px;"></i>
+                        ${isInCart ? 'In Cart' : 'Add to Cart'}
+                    </button>
                 </div>
-                <button class="add-to-cart ${isInCart ? 'in-cart' : ''}" onclick="addToCart('${product.id}')">
+                `;
+            }).join('');
+        }
+
+        function generateStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fa-solid fa-star"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fa-solid fa-star-half-stroke"></i>';
+                } else {
+                    stars += '<i class="fa-regular fa-star"></i>';
+                }
+            }
+
+            return stars;
+        }
+
+        function updatePagination() {
+            const filteredProducts = filterProducts();
+            const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+            const paginationContainer = document.getElementById('pagination');
+
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+
+            let paginationHTML = '';
+
+            // Previous button
+            paginationHTML += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
+                </li>
+            `;
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    paginationHTML += `
+                        <li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" data-page="${i}">${i}</a>
+                        </li>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+                }
+            }
+
+            // Next button
+            paginationHTML += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
+                </li>
+            `;
+
+            paginationContainer.innerHTML = paginationHTML;
+
+            // Add click events
+            paginationContainer.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (!this.closest('.page-item').classList.contains('disabled')) {
+                        const page = parseInt(this.dataset.page);
+                        if (page && page !== currentPage) {
+                            currentPage = page;
+                            renderProducts();
+                            updatePagination();
+                            updateResultsCount();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+        }
+
+        function updateResultsCount() {
+            const filteredProducts = filterProducts();
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+            const endIndex = Math.min(startIndex + ITEMS_PER_PAGE - 1, filteredProducts.length);
+            
+            document.getElementById('showingCount').textContent = 
+                filteredProducts.length > 0 ? `${startIndex}-${endIndex}` : '0';
+            document.getElementById('totalCount').textContent = filteredProducts.length;
+            document.getElementById('totalItems').textContent = `${filteredProducts.length} items available`;
+        }
+
+        // =================== CART FUNCTIONS ===================
+        window.addToCart = function(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Check if product already exists in cart
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    originalPrice: product.oldPrice || product.price,
+                    image: product.image,
+                    category: product.category,
+                    quantity: 1
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart display
+            updateCartDisplay();
+            
+            // Update button state
+            updateProductButtonState(productId);
+            
+            // Show notification
+            showNotification(`${product.name} added to cart!`);
+        };
+
+        function updateProductButtonState(productId) {
+            const productCard = document.querySelector(`.container1[data-id="${productId}"]`);
+            if (productCard) {
+                const cartButton = productCard.querySelector('.add-to-cart');
+                const isInCart = cart.some(item => item.id === productId);
+                
+                cartButton.classList.toggle('in-cart', isInCart);
+                cartButton.innerHTML = `
                     <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}" style="margin-right: 10px;"></i>
                     ${isInCart ? 'In Cart' : 'Add to Cart'}
-                </button>
-            </div>
-            `;
-        }).join('');
-    }
-
-    function generateStars(rating) {
-        let stars = '';
-        const fullStars = Math.floor(rating);
-        const hasHalfStar = rating % 1 >= 0.5;
-
-        for (let i = 1; i <= 5; i++) {
-            if (i <= fullStars) {
-                stars += '<i class="fa-solid fa-star"></i>';
-            } else if (i === fullStars + 1 && hasHalfStar) {
-                stars += '<i class="fa-solid fa-star-half-stroke"></i>';
-            } else {
-                stars += '<i class="fa-regular fa-star"></i>';
-            }
-        }
-
-        return stars;
-    }
-
-    function updatePagination() {
-        const filteredProducts = filterProducts();
-        const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
-        const paginationContainer = document.getElementById('pagination');
-
-        if (totalPages <= 1) {
-            paginationContainer.innerHTML = '';
-            return;
-        }
-
-        let paginationHTML = '';
-
-        // Previous button
-        paginationHTML += `
-            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-                <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
-            </li>
-        `;
-
-        // Page numbers
-        for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-                paginationHTML += `
-                    <li class="page-item ${i === currentPage ? 'active' : ''}">
-                        <a class="page-link" href="#" data-page="${i}">${i}</a>
-                    </li>
                 `;
-            } else if (i === currentPage - 2 || i === currentPage + 2) {
-                paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
             }
         }
 
-        // Next button
-        paginationHTML += `
-            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-                <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
-            </li>
-        `;
-
-        paginationContainer.innerHTML = paginationHTML;
-
-        // Add click events
-        paginationContainer.querySelectorAll('.page-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (!this.closest('.page-item').classList.contains('disabled')) {
-                    const page = parseInt(this.dataset.page);
-                    if (page && page !== currentPage) {
-                        currentPage = page;
-                        renderProducts();
-                        updatePagination();
-                        updateResultsCount();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                }
-            });
-        });
-    }
-
-    function updateResultsCount() {
-        const filteredProducts = filterProducts();
-        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE + 1;
-        const endIndex = Math.min(startIndex + ITEMS_PER_PAGE - 1, filteredProducts.length);
-        
-        document.getElementById('showingCount').textContent = 
-            filteredProducts.length > 0 ? `${startIndex}-${endIndex}` : '0';
-        document.getElementById('totalCount').textContent = filteredProducts.length;
-        document.getElementById('totalItems').textContent = `${filteredProducts.length} items available`;
-    }
-
-    // =================== CART FUNCTIONS ===================
-    window.addToCart = function(productId) {
-        const product = products.find(p => p.id === productId);
-        if (!product) return;
-        
-        // Check if product already exists in cart
-        const existingItem = cart.find(item => item.id === productId);
-        
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                originalPrice: product.oldPrice || product.price,
-                image: product.image,
-                category: product.category,
-                quantity: 1
-            });
-        }
-        
-        // Save to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Update cart display
-        updateCartDisplay();
-        
-        // Update button state
-        updateProductButtonState(productId);
-        
-        // Show notification
-        showNotification(`${product.name} added to cart!`);
-    };
-
-    function updateProductButtonState(productId) {
-        const productCard = document.querySelector(`.container1[data-id="${productId}"]`);
-        if (productCard) {
-            const cartButton = productCard.querySelector('.add-to-cart');
-            const isInCart = cart.some(item => item.id === productId);
+        function updateCartDisplay() {
+            const cartBadge = document.querySelector('.cart-badge');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
             
-            cartButton.classList.toggle('in-cart', isInCart);
-            cartButton.innerHTML = `
-                <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}" style="margin-right: 10px;"></i>
-                ${isInCart ? 'In Cart' : 'Add to Cart'}
-            `;
-        }
-    }
-
-    function updateCartDisplay() {
-        const cartBadge = document.querySelector('.cart-badge');
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        
-        if (cartBadge) {
-            cartBadge.textContent = totalItems;
-            cartBadge.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                cartBadge.style.transform = 'scale(1)';
-            }, 300);
-        }
-        
-        // Save cart to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    // =================== FAVORITES FUNCTIONS ===================
-    window.toggleFavorite = function(productId) {
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        const index = favorites.indexOf(productId);
-        
-        if (index === -1) {
-            favorites.push(productId);
-        } else {
-            favorites.splice(index, 1);
-        }
-        
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        
-        // Update favorite button
-        updateFavoriteButtonState(productId, index === -1);
-        
-        // Update favorites count
-        updateFavoritesCount();
-        
-        // Show notification
-        const product = products.find(p => p.id === productId);
-        if (product) {
-            showNotification(index === -1 ? 
-                `${product.name} added to favorites!` : 
-                `${product.name} removed from favorites!`);
-        }
-    };
-
-    function updateFavoriteButtonState(productId, isNowFavorite) {
-        const productCard = document.querySelector(`.container1[data-id="${productId}"]`);
-        if (productCard) {
-            const favoriteBtn = productCard.querySelector('.favorite-btn');
+            if (cartBadge) {
+                cartBadge.textContent = totalItems;
+                cartBadge.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    cartBadge.style.transform = 'scale(1)';
+                }, 300);
+            }
             
-            if (isNowFavorite) {
-                favoriteBtn.classList.remove('far');
-                favoriteBtn.classList.add('fas');
-                favoriteBtn.style.color = 'red';
+            // Save cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // =================== FAVORITES FUNCTIONS ===================
+        window.toggleFavorite = function(productId) {
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const index = favorites.indexOf(productId);
+            
+            if (index === -1) {
+                favorites.push(productId);
             } else {
-                favoriteBtn.classList.remove('fas');
-                favoriteBtn.classList.add('far');
-                favoriteBtn.style.color = '';
+                favorites.splice(index, 1);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Update favorite button
+            updateFavoriteButtonState(productId, index === -1);
+            
+            // Update favorites count
+            updateFavoritesCount();
+            
+            // Show notification
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                showNotification(index === -1 ? 
+                    `${product.name} added to favorites!` : 
+                    `${product.name} removed from favorites!`);
+            }
+        };
+
+        function updateFavoriteButtonState(productId, isNowFavorite) {
+            const productCard = document.querySelector(`.container1[data-id="${productId}"]`);
+            if (productCard) {
+                const favoriteBtn = productCard.querySelector('.favorite-btn');
+                
+                if (isNowFavorite) {
+                    favoriteBtn.classList.remove('far');
+                    favoriteBtn.classList.add('fas');
+                    favoriteBtn.style.color = 'red';
+                } else {
+                    favoriteBtn.classList.remove('fas');
+                    favoriteBtn.classList.add('far');
+                    favoriteBtn.style.color = '';
+                }
             }
         }
-    }
 
-    function updateFavoritesCount() {
-        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        const favoritesCount = document.querySelector('.favorites-count');
-        if (favoritesCount) {
-            favoritesCount.textContent = favorites.length;
-            favoritesCount.style.transform = 'scale(1.3)';
+        function updateFavoritesCount() {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const favoritesCount = document.querySelector('.favorites-count');
+            if (favoritesCount) {
+                favoritesCount.textContent = favorites.length;
+                favoritesCount.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    favoritesCount.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        // =================== NOTIFICATION SYSTEM ===================
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(135deg, #1248f8, #0a1a3a);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                font-weight: bold;
+                font-family: 'joy';
+                max-width: 300px;
+            `;
+
+            document.body.appendChild(notification);
+
+            // Remove notification after 3 seconds
             setTimeout(() => {
-                favoritesCount.style.transform = 'scale(1)';
-            }, 300);
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
         }
-    }
-
-    // =================== NOTIFICATION SYSTEM ===================
-    function showNotification(message) {
-        const notification = document.createElement('div');
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: linear-gradient(135deg, #1248f8, #0a1a3a);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            z-index: 1000;
-            animation: slideIn 0.3s ease-out;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-weight: bold;
-            font-family: 'joy';
-            max-width: 300px;
-        `;
-
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease-out';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        }, 3000);
-    }
-
-    // Add CSS for animations and cart styles
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        /* Cart button styles */
-        .add-to-cart.in-cart {
-            background-color: #28a745;
-            border-color: #28a745;
-        }
-        
-        .add-to-cart.in-cart:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* Favorite button styles */
-        .favorite-btn {
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-        
-        .favorite-btn:hover {
-            transform: scale(1.2);
-        }
-        
-        /* Cart badge animation */
-        .cart-badge, .favorites-count {
-            transition: transform 0.3s ease;
-        }
-    `;
-    document.head.appendChild(style);
-</script>
+    </script>
 </body>
 </html>
