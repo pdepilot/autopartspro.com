@@ -691,7 +691,7 @@
             min-width: 300px;
         }
 
-        /* engine parts section - UPDATED: Fixed image alignment and button positioning */
+        /* engine parts section - IMPROVED: Fixed button visibility and spacing */
         .msc {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -704,7 +704,7 @@
         .container1 {
             background-color: white;
             border-radius: 15px;
-            height: 400px; /* Increased height to accommodate proper spacing */
+            height: 430px; /* Increased height to accommodate proper spacing */
             position: relative;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             border: 1px solid #ddd;
@@ -720,7 +720,7 @@
             border-color: #964b00;
         }
 
-        /* UPDATED: Image container - removed rotation, fixed containment */
+        /* Image container */
         .container1 .shoe1 {
             margin: 0;
             background-color: #f8f8f8;
@@ -750,9 +750,9 @@
             background-color: #f8f8f8;
         }
 
-        /* UPDATED: Image - removed rotation, straight alignment */
+        /* Image */
         .shoe1 img {
-            width: 80%; /* Adjusted for better fit */
+            width: 80%;
             height: auto;
             max-height: 90%;
             object-fit: contain;
@@ -810,6 +810,7 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            min-height: 150px; /* Ensures consistent height for content */
         }
 
         .name h6 {
@@ -822,6 +823,7 @@
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            min-height: 40px; /* Prevents collapsing */
         }
 
         .stars {
@@ -840,7 +842,8 @@
         }
 
         .price-cart {
-            margin-bottom: 15px; /* Added margin for spacing */
+            margin-bottom: 15px;
+            min-height: 45px; /* Prevents price from overlapping button */
         }
 
         .price-cart p {
@@ -867,11 +870,11 @@
             margin-top: 5px;
         }
 
-        /* UPDATED: Button with proper spacing, no overlap */
+        /* FIXED: Button with proper spacing and visibility */
         .container1 button {
-            border: 1px solid #964b00;
+            border: 2px solid #964b00;
             border-radius: 10px;
-            height: 40px;
+            height: 45px; /* Slightly taller for better click area */
             background-color: #000000;
             transition: all 0.3s ease;
             color: white;
@@ -879,8 +882,20 @@
             font-weight: 600;
             cursor: pointer;
             font-size: clamp(14px, 1.5vw, 16px);
-            margin: 0 10px 15px 10px;
-            margin-top: auto; /* Pushes button to bottom */
+            margin: 0 15px 15px 15px; /* Consistent margins */
+            padding: 0 15px; /* Internal padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100% - 30px); /* Full width minus margins */
+            min-height: 45px; /* Prevents button from collapsing */
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            white-space: nowrap; /* Prevents text wrapping */
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .container1 button:hover {
@@ -889,10 +904,11 @@
             transform: translateY(-2px);
         }
 
-        /* Cart button styles */
+        /* Cart button styles - FIXED for better visibility */
         .add-to-cart.in-cart {
             background-color: #28a745;
             border-color: #28a745;
+            color: white;
         }
         
         .add-to-cart.in-cart:hover {
@@ -984,7 +1000,7 @@
             color: #ddd;
         }
 
-        /* Responsive updates */
+        /* Responsive updates - FIXED for button visibility */
         @media (max-width: 1200px) {
             .sidebar1-and-main {
                 flex-direction: row;
@@ -1008,7 +1024,7 @@
             }
             
             .container1 {
-                height: 380px;
+                height: 420px;
             }
             
             .container1 .shoe1 {
@@ -1022,6 +1038,13 @@
             .name h6 {
                 font-size: 13.5px;
                 height: 38px;
+            }
+            
+            .container1 button {
+                height: 42px;
+                font-size: 15px;
+                margin: 0 12px 12px 12px;
+                width: calc(100% - 24px);
             }
         }
 
@@ -1044,7 +1067,7 @@
             }
             
             .container1 {
-                height: 360px;
+                height: 410px;
             }
             
             .container1 .shoe1 {
@@ -1061,8 +1084,10 @@
             }
             
             .container1 button {
-                height: 38px;
+                height: 40px;
                 font-size: 14px;
+                margin: 0 10px 10px 10px;
+                width: calc(100% - 20px);
             }
         }
 
@@ -1073,7 +1098,7 @@
             }
 
             .container1 {
-                height: 340px;
+                height: 400px;
             }
             
             .container1 .shoe1 {
@@ -1090,9 +1115,11 @@
             }
 
             .container1 button {
-                height: 36px;
+                height: 38px;
                 font-size: 13px;
                 padding: 0 10px;
+                margin: 0 8px 8px 8px;
+                width: calc(100% - 16px);
             }
             
             .carousel-item {
@@ -1133,7 +1160,7 @@
             }
             
             .container1 {
-                height: 320px;
+                height: 380px;
             }
             
             .container1 .shoe1 {
@@ -1151,9 +1178,11 @@
             }
             
             .container1 button {
-                height: 34px;
+                height: 36px;
                 font-size: 12px;
-                margin: 0 8px 10px 8px;
+                margin: 0 6px 6px 6px;
+                width: calc(100% - 12px);
+                padding: 0 8px;
             }
             
             .price-cart p {
@@ -1189,7 +1218,7 @@
             }
             
             .container1 {
-                height: 300px;
+                height: 370px;
             }
             
             .container1 .shoe1 {
@@ -1207,9 +1236,11 @@
             }
             
             .container1 button {
-                height: 32px;
+                height: 35px;
                 font-size: 11px;
-                margin: 0 6px 8px 6px;
+                margin: 0 5px 5px 5px;
+                width: calc(100% - 10px);
+                padding: 0 6px;
             }
             
             .price-cart p {
@@ -1259,7 +1290,7 @@
             }
             
             .container1 {
-                height: 340px;
+                height: 380px;
                 max-width: 280px;
                 margin: 0 auto;
             }
@@ -1278,8 +1309,11 @@
             }
             
             .container1 button {
-                height: 36px;
+                height: 38px;
                 font-size: 13px;
+                margin: 0 10px 10px 10px;
+                width: calc(100% - 20px);
+                padding: 0 10px;
             }
             
             .carousel-caption {
@@ -1647,12 +1681,12 @@
         </button>
     </div>
 
-    <!-- parts indicator -->
+    
     <section class="si">
         <p><span style="font-weight: bolder; font-size: clamp(18px, 2vw, 20px);">ENGINE PARTS</span>- <span style="color: gray;" id="totalItems">1,238 items available</span> </p>
     </section>
 
-    <!-- filter short cuts -->
+   
     <section class="mso">
         <div class="mso-container">
             <p style="font-weight: bolder; font-family: 'body';">FILTERS:</p>
@@ -1691,14 +1725,14 @@
         </div>
     </section>
 
-    <!-- Active Filters Display -->
+   
     <section class="filter-status" id="filterStatus" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h6 style="margin: 0; font-family: 'body';">Active Filters:</h6>
             <button class="clear-filters" id="clearAllFilters">Clear All</button>
         </div>
         <div class="filter-tags" id="activeFilters">
-            <!-- Active filters will appear here -->
+           
         </div>
     </section>
 
@@ -1762,7 +1796,7 @@
 
             <hr>
 
-            <!-- brands -->
+            
             <h6 class="sbb">BRAND <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> </h6>
 
             <div class="p-1">
@@ -1800,7 +1834,7 @@
 
             <hr>
 
-            <!-- vehicle make -->
+           
             <h6 class="sbb">VEHICLE MAKE</h6>
 
             <div class="p-1">
@@ -1831,7 +1865,7 @@
 
             <hr>
 
-            <!-- discount -->
+            
             <h6>DISCOUNTS</h6>
             <div class="p-1">
                 <input type="checkbox" id="discount10" value="10">
@@ -1855,34 +1889,33 @@
             </div>
         </div>
 
-        <!-- engine parts section -->
+       
         <main class="main">
             <div class="msc" id="productsContainer">
-                <!-- Products will be dynamically loaded here -->
             </div>
 
-            <!-- Pagination -->
+            
             <div class="pagination-container">
                 <ul class="pagination" id="pagination">
-                    <!-- Pagination will be dynamically generated here -->
+                  
                 </ul>
             </div>
         </main>
     </section>
 
-    <!-- poster right  -->
+   
     <div class="poster">
         <a href="">Up to 50% OFF on Engine Parts <i class="fa-solid fa-fire"></i></a>
     </div>
 
-    <!-- Chat Us & Back to Top -->
+    
     <section class="chat-us">
         <i class="fa-solid fa-headset">
             <span class="badge position-absolute rounded-pill">3</span>
         </i>
     </section>
 
-    <!-- to top button -->
+   
     <a class="top-button" href="#prenav">
         <i class="fa-regular fa-hand-pointer"></i>
     </a>
@@ -2825,6 +2858,12 @@
                     <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}" style="margin-right: 10px;"></i>
                     ${isInCart ? 'In Cart' : 'Add to Cart'}
                 `;
+                
+                // Add animation to button
+                cartButton.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    cartButton.style.transform = 'scale(1)';
+                }, 300);
             }
         }
 
@@ -2886,6 +2925,12 @@
                     favoriteBtn.classList.add('far');
                     favoriteBtn.style.color = '';
                 }
+                
+                // Add animation
+                favoriteBtn.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    favoriteBtn.style.transform = 'scale(1)';
+                }, 300);
             }
         }
 
